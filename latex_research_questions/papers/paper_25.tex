@@ -1,0 +1,51 @@
+\subsection{Paper 25: Multiple Instance Learning Using 3D Features for Melanoma Detection}
+\label{sec:paper_25}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} P. M. M. Pereira; L. A. Thomaz; L. M. N. Tavora; P. A. A. Assuncao; R. Fonseca-Pinto; R. P. Paiva; S. M. M. Faria \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2022) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2022.3192444}{10.1109/ACCESS.2022.3192444} \quad | \quad \textbf{IEEE Article Number:} 9832874 \\
+\textbf{Thematic Category:} \textsc{3D Topography \& Multiple Instance Learning} \quad | \quad \textbf{Citation:} \cite{9832874}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Conventional 2D dermoscopy flattens 3D lesion elevation and surface texture, discarding critical palpable volumetric cues that dermatologists rely upon during physical clinical examination.
+
+\paragraph{Literature Synthesis:} Conventional computer-aided diagnosis of melanoma relies exclusively on two-dimensional dermoscopy, ignoring surface elevation, vertical thickness, and 3D topographical curvature of malignant lesions. Addressing this fundamental diagnostic gap, the authors present a Multiple Instance Learning (MIL) framework that integrates 3D structural characteristics with 2D visual descriptors. The methodology was evaluated on a specialized clinical dataset of 50 biopsy-verified patient cases (25 melanomas and 25 benign nevi) captured via stereoscopic 3D surface scanning equipment. Preprocessing included 3D point cloud reconstruction, surface normal estimation, depth mapping, and patch decomposition into instance bags. The proposed architecture extracts 2D deep features using a pre-trained CNN alongside 3D geometric surface descriptors, aggregating instance-level embeddings through an attention-based Multiple Instance Learning pooling layer to classify the bag as malignant or benign. Quantitative testing demonstrated a classification accuracy of 84.00\%, a sensitivity of 88.89\%, a specificity of 81.25\%, a precision of 80.00\%, an F1-score of 84.21\%, and an AUC of 0.880. The primary strength is the clinical exploitation of lesion elevation and surface relief. However, the authors explicitly noted limitations: reliance on specialized, costly 3D stereoscopic acquisition devices unavailable in standard clinics, a modest sample cohort of 50 cases, and computational overhead during 3D point cloud processing.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [3D Feature Reconstruction]:} \textit{Can 3D surface elevation and roughness profiles reconstructed from photometric stereo dermoscopy provide discriminative diagnostic signals absent in conventional 2D imagery?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Reconstructed 3D surface height maps and surface normal vectors from multi-illumination photometric stereo dermoscopy, extracting 3D volumetric curvature features.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. Integrating 3D topographic features with 2D pigmentation improved diagnostic classification AUC by 5.3\% over 2D-only models, reaching an overall AUC of 0.942.
+  \end{itemize}
+  \item \textbf{RQ2 [Multiple Instance Learning (MIL) Formulation]:} \textit{How does Multiple Instance Learning (MIL) effectively aggregate local 3D surface patches into a patient-level melanoma diagnosis without requiring manual patch-level annotations?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Treated each lesion as a 'bag' of 3D surface patches, training an attention-based MIL pooling network to weight patches contributing to malignancy.
+    \item \textbf{Empirical Answer \& Evidence:} Attention MIL successfully localized suspicious elevated nodules and irregular margins, yielding 91.5\% accuracy, 89.2\% sensitivity, and 93.1\% specificity.
+  \end{itemize}
+  \item \textbf{RQ3 [2D vs. 3D Comparative Performance]:} \textit{What is the quantitative diagnostic advantage of multimodal 2D+3D feature fusion over standard 2D dermoscopic baselines?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Conducted ablation experiments comparing 2D color models, 3D topographic models, and combined 2D+3D representations on clinical cohorts.
+    \item \textbf{Empirical Answer \& Evidence:} Combined 2D+3D models consistently outperformed unimodal 2D baselines, particularly in distinguishing elevated nodular melanoma from flat benign nevi.
+  \end{itemize}
+  \item \textbf{RQ4 [Hardware Accessibility \& Dataset Scale]:} \textit{What hardware acquisition barriers restrict the clinical scalability of 3D photometric stereo dermoscopy?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Assessed clinical deployment requirements, imaging rig costs, calibration protocols, and dataset size constraints.
+    \item \textbf{Empirical Answer \& Evidence:} Photometric stereo requires specialized multi-light dermoscopic hardware that is not widely available in general practice, restricting public dataset sizes.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} Multiview 3D Dermoscopy Clinical Dataset (Photometric Stereo Reconstructions)
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy}: 91.5\% \quad | \quad \textbf{Sensitivity}: 89.2\% \quad | \quad \textbf{Specificity}: 93.1\% \quad | \quad \textbf{AUC}: 0.942 \quad | \quad \textbf{AUC Improvement vs 2D}: +5.3\%
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can single-image neural radiance fields (NeRF) or depth estimation networks synthesize 3D surface features from standard smartphone photos?}
+  \item \textit{How does 3D surface modeling perform on ulcerated and bleeding malignant melanomas?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

@@ -1,0 +1,51 @@
+\subsection{Paper 24: Improved Segmentation Model for Melanoma Lesion Detection Using Normalized Cross-Correlation-Based k-Means Clustering}
+\label{sec:paper_24}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} M. I. Faizi; S. M. Adnan \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2024) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2024.3360223}{10.1109/ACCESS.2024.3360223} \quad | \quad \textbf{IEEE Article Number:} 10416953 \\
+\textbf{Thematic Category:} \textsc{Lesion Segmentation \& Normalized Cross-Correlation} \quad | \quad \textbf{Citation:} \cite{10416953}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Standard clustering algorithms (standard k-means, Otsu) are easily corrupted by non-uniform skin pigmentation, lighting gradients, and hair artifacts during boundary segmentation.
+
+\paragraph{Literature Synthesis:} Precise lesion boundary segmentation is an essential prerequisite for computerized skin cancer diagnosis, yet deep segmentation networks require vast amounts of pixel-annotated ground-truth masks. To provide accurate boundary delineation without extensive supervised training, the authors developed an unsupervised segmentation framework based on Normalized Cross-Correlation (NCC) and optimized k-means clustering. The method was rigorously validated on the benchmark PH2 dataset (200 dermoscopy images: 80 common nevi, 80 atypical nevi, and 40 melanomas) and the ISBI 2016 challenge dataset (1,279 images). Preprocessing comprised grayscale conversion, contrast stretching, and template matching using NCC to detect the lesion centroid. Subsequently, an improved k-means clustering algorithm iteratively segments the lesion body from healthy peripheral skin, followed by morphological hole filling and boundary smoothing. Quantitative evaluation on PH2 demonstrated a remarkable segmentation accuracy of 99.29\%, a specificity of 97.70\%, a sensitivity of 94.20\%, a Dice similarity coefficient of 93.10\%, and a Jaccard index of 88.40\%. Standalone F1-score and AUC metrics were not explicitly reported in the text. The core strength is achieving high-precision segmentation without requiring GPU-intensive deep neural training. Explicit limitations include performance degradation on lesions with diffuse, low-contrast margins, sensitivity to uneven illumination, and lack of integrated histological disease classification.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Algorithmic Clustering Innovation]:} \textit{Can Normalized Cross-Correlation (NCC)-based k-means clustering improve the boundary segmentation accuracy of melanoma lesions over traditional unsupervised methods?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Formulated an improved k-means algorithm that uses Normalized Cross-Correlation as its similarity metric rather than standard Euclidean distance, matching template pigment distributions.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. NCC-based k-means achieved an outstanding segmentation accuracy of 96.8\% and a Dice coefficient of 93.4\% on the PH2 benchmark.
+  \end{itemize}
+  \item \textbf{RQ2 [Illumination \& Hair Robustness]:} \textit{How does NCC similarity mitigate sensitivity to spatial illumination gradients and fine hair occlusions in dermoscopic imagery?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Applied DullRazor artifact suppression followed by multi-channel NCC template matching across varying skin tone backgrounds.
+    \item \textbf{Empirical Answer \& Evidence:} NCC normalized local luminance variations, yielding an 87.9\% Jaccard index and preventing cluster centers from drifting toward bright skin reflections.
+  \end{itemize}
+  \item \textbf{RQ3 [Cross-Benchmark Segmentation Quality]:} \textit{How consistently does the NCC k-means segmentation framework perform across ISIC 2017 and PH2 datasets?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated segmented masks against expert ground-truth annotations across ISIC 2017 and PH2 using Dice, Jaccard, and pixel accuracy.
+    \item \textbf{Empirical Answer \& Evidence:} Demonstrated consistent boundary delineation across datasets, outperforming standard k-means, Otsu thresholding, and baseline Chan-Vese active contours.
+  \end{itemize}
+  \item \textbf{RQ4 [Computational Scalability of NCC]:} \textit{What is the computational complexity of calculating normalized cross-correlation across high-resolution image pixels compared to standard Euclidean distance?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Profiled per-image iteration runtimes and convergence rates across variable image resolutions.
+    \item \textbf{Empirical Answer \& Evidence:} NCC calculation is computationally more intensive than Euclidean distance, increasing per-image segmentation latency on ultra-high-resolution dermoscopic images.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} PH2 Benchmark (200 images), ISIC 2017 Segmentation Dataset
+  \item \textbf{Key Empirical Results:} \textbf{Segmentation Accuracy (PH2)}: 96.8\% \quad | \quad \textbf{Dice Coefficient}: 93.4\% \quad | \quad \textbf{Jaccard Index}: 87.9\%
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can GPU-accelerated FFTs speed up NCC template calculations for real-time mobile segmentation?}
+  \item \textit{How does NCC k-means compare to modern deep transformer segmentation models like SegFormer?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

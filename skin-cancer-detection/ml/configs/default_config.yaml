@@ -1,0 +1,61 @@
+project:
+  name: "skin-cancer-detection"
+  dataset_name: "HAM10000"
+  seed: 42
+
+data:
+  raw_dir: "ml/data/raw"
+  processed_dir: "ml/data/processed"
+  splits_dir: "ml/data/splits"
+  train_split: "ml/data/splits/train.csv"
+  val_split: "ml/data/splits/validation.csv"
+  test_split: "ml/data/splits/test.csv"
+  image_size: 224
+  num_classes: 7
+  classes:
+    - akiec
+    - bcc
+    - bkl
+    - df
+    - mel
+    - nv
+    - vasc
+  class_descriptions:
+    akiec: "Actinic keratoses and intraepithelial carcinoma / Bowen's disease (Precancerous/Malignant)"
+    bcc: "Basal cell carcinoma (Malignant)"
+    bkl: "Benign keratosis-like lesions (solar lentigines / seborrheic keratoses / lichen-planus like keratoses)"
+    df: "Dermatofibroma (Benign)"
+    mel: "Melanoma (Malignant)"
+    nv: "Melanocytic nevi (Benign)"
+    vasc: "Vascular lesions (angiomas, angiokeratomas, pyogenic granulomas, hemorrhage)"
+
+model:
+  name: "tf_efficientnetv2_s"
+  pretrained: true
+  drop_rate: 0.2
+  drop_path_rate: 0.1
+  checkpoint_dir: "ml/checkpoints"
+  best_model_path: "models/best_model.pth"
+  final_model_path: "models/final_model.pth"
+  metadata_path: "models/model_metadata.json"
+
+training:
+  epochs: 15
+  batch_size: 16
+  accumulate_grad_batches: 2
+  learning_rate: 0.0003
+  weight_decay: 0.01
+  optimizer: "AdamW"
+  scheduler: "cosine"
+  min_lr: 0.000001
+  warmup_epochs: 2
+  mixed_precision: true
+  gradient_clip_val: 1.0
+  loss_type: "weighted_ce"
+  focal_loss_gamma: 2.0
+  early_stopping_patience: 5
+  primary_metric: "macro_f1"
+
+hardware:
+  num_workers: 2
+  pin_memory: true

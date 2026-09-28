@@ -1,0 +1,39 @@
+{
+  "model_name": "tf_efficientnetv2_s",
+  "image_size": 224,
+  "num_classes": 7,
+  "classes": [
+    "akiec",
+    "bcc",
+    "bkl",
+    "df",
+    "mel",
+    "nv",
+    "vasc"
+  ],
+  "class_to_idx": {
+    "akiec": 0,
+    "bcc": 1,
+    "bkl": 2,
+    "df": 3,
+    "mel": 4,
+    "nv": 5,
+    "vasc": 6
+  },
+  "mean": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "std": [
+    0.229,
+    0.224,
+    0.225
+  ],
+  "best_macro_f1": 0.7640211353210891,
+  "test_macro_f1": 0.7759020620474307,
+  "test_balanced_accuracy": 0.7731304447180541,
+  "total_epochs": 10,
+  "total_train_time_sec": 960.669282913208,
+  "device": "cuda"
+}

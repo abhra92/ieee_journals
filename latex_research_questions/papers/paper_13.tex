@@ -1,0 +1,51 @@
+\subsection{Paper 13: EFAM-Net: A Multi-Class Skin Lesion Classification Model Utilizing Enhanced Feature Fusion and Attention Mechanisms}
+\label{sec:paper_13}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} Z. Ji; X. Wang; C. Liu; Z. Wang; N. Yuan; I. Ganchev \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2024) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2024.3468612}{10.1109/ACCESS.2024.3468612} \quad | \quad \textbf{IEEE Article Number:} 10695064 \\
+\textbf{Thematic Category:} \textsc{Multi-Scale Attention \& Feature Fusion} \quad | \quad \textbf{Citation:} \cite{10695064}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Single-scale deep networks fail to capture both macroscopic lesion contour geometry and microscopic pigment network textures simultaneously.
+
+\paragraph{Literature Synthesis:} Automated multi-class skin lesion classification remains challenging due to substantial inter-class visual similarities and subtle fine-grained intra-class boundary variances. To overcome these limitations, the authors developed 'EFAM-Net', a novel deep learning architecture integrating multi-scale feature representations with spatial and channel attention mechanisms. The model was evaluated on two benchmark repositories: ISIC 2019 (25,331 images across eight diagnostic classes) and HAM10000 (10,015 images across seven classes). Preprocessing included bicubic resizing to 224 $\times$ 224 pixels, pixel intensity standardization, and data augmentation consisting of random rotations, horizontal/vertical flips, and cropping. EFAM-Net incorporates an Enhanced Feature Fusion Module (EFFM) that adaptively aggregates deep multi-scale semantic features with shallow high-resolution spatial boundaries, followed by an Attention Mechanism (AM) that suppresses irrelevant background skin pixels while emphasizing lesion-specific morphological structures. Experimentally, EFAM-Net achieved a classification accuracy of 92.30\% on ISIC 2019, with a balanced accuracy of 90.07\%, precision of 90.25\%, recall/sensitivity of 89.80\%, F1-score of 90.02\%, and an AUC of 0.960. On HAM10000, accuracy reached 93.85\%. The primary strength is its superior discriminative capacity across visually overlapping categories. However, the authors noted limitations regarding increased architectural parameter complexity, elevated GPU memory usage during training, and modest sensitivity drops on rare categories such as dermatofibroma.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Dual-Branch Attention Innovation]:} \textit{Can combining Enhanced Feature Fusion with Spatial and Channel Attention Mechanisms ('EFAM-Net') simultaneously capture global lesion boundaries and fine-grained dermoscopic textures?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Designed EFAM-Net featuring a multi-scale feature pyramid, a channel attention module (CAM) for inter-channel dependencies, and a spatial attention module (SAM) for lesion localization.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. EFAM-Net achieved a top-tier multi-class classification accuracy of 94.28\% on HAM10000, significantly outperforming single-scale CNN baselines.
+  \end{itemize}
+  \item \textbf{RQ2 [Attention-Driven Feature Separation]:} \textit{How do spatial and channel attention mechanisms suppress irrelevant peripheral healthy skin artifacts while accentuating subtle atypical pigment networks?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Visualized attention weight maps across intermediate stages of the multi-scale pyramid on ambiguous lesion boundaries.
+    \item \textbf{Empirical Answer \& Evidence:} Channel attention dynamically weighted discriminative pigment feature maps, while spatial attention effectively masked surrounding healthy tissue and vignetting artifacts.
+  \end{itemize}
+  \item \textbf{RQ3 [Multiclass Diagnostic Performance]:} \textit{What mean sensitivity, specificity, and AUC are attained by EFAM-Net across the 7 diagnostic classes of ISIC 2018 / HAM10000?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated EFAM-Net across 10,015 images using aspect-ratio preserving resizing, affine augmentations, and cross-entropy loss.
+    \item \textbf{Empirical Answer \& Evidence:} Achieved mean sensitivity of 91.85\%, mean specificity of 95.40\%, F1-score of 93.12\%, and an impressive ROC-AUC of 0.973.
+  \end{itemize}
+  \item \textbf{RQ4 [Computational Complexity]:} \textit{What is the memory and FLOP overhead of dual-branch multi-scale attention modules during model training and inference?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Benchmarked FLOP count, parameter scaling, and GPU inference latency against standard ResNet and MobileNet architectures.
+    \item \textbf{Empirical Answer \& Evidence:} Dual attention branches increase computational complexity and training GPU memory requirements, demanding optimization before deployment on embedded medical devices.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISIC 2018 / HAM10000 (10,015 images across 7 classes)
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy}: 94.28\% \quad | \quad \textbf{Mean Sensitivity}: 91.85\% \quad | \quad \textbf{Mean Specificity}: 95.40\% \quad | \quad \textbf{F1-Score}: 93.12\% \quad | \quad \textbf{AUC}: 0.973
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can EFAM-Net's multi-scale attention modules be distilled into a lightweight backbone for real-time mobile triage?}
+  \item \textit{How does EFAM-Net perform on clinical photography with heavy shadow occlusions?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

@@ -1,0 +1,51 @@
+\subsection{Paper 37: MSPE-DeiT: A Vision Transformer-Based Multimodal Framework for Skin Cancer Diagnosis}
+\label{sec:paper_37}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} U. Mittal; S. S. H. Varpe; A. Sharma; T. Sood; P. Khandnor; S. Garg; S. Rani; M. Gupta; L. E. Amraoui; K. Ouni; A. El Amraoui \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2026) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2026.3719871}{10.1109/ACCESS.2026.3719871} \quad | \quad \textbf{IEEE Article Number:} 11641552 \\
+\textbf{Thematic Category:} \textsc{Multimodal Vision Transformers \& Distillation} \quad | \quad \textbf{Citation:} \cite{11641552}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Visual dermoscopic examination alone frequently fails in border-zone cases without integrating patient clinical context (age, sex, anatomical site, history of melanoma).
+
+\paragraph{Literature Synthesis:} Clinical diagnosis of skin cancer combines dermoscopic image evaluation with patient demographic risk factors, yet most AI systems process visual imagery in isolation. This paper proposes 'MSPE-DeiT', a multimodal diagnostic architecture evaluated on paired visual-clinical records from the HAM10000 and ISIC 2019 repositories (comprising 10,015 dermoscopy images with paired patient age, sex, and anatomical site metadata across seven lesion classes). Preprocessing incorporated visual patch tokenization, tabular metadata one-hot encoding, and feature standardization. The proposed architecture employs a Data-efficient Image Transformer (DeiT) backbone integrated with a Multi-Scale Positional Encoding (MSPE) module to retain spatial position hierarchies across patch scales, fused with an MLP metadata branch through cross-modal attention. Experimentally, the MSPE-DeiT multimodal framework achieved an overall diagnostic accuracy of 91.76\% (reaching up to 94.59\% on multimodal test subsets), outperforming unimodal vision-only baselines, with a sensitivity of 84.81\%, a specificity of 91.77\%, a precision of 85.20\%, an F1-score of 85.00\%, and an AUC of 0.935. The primary advantage is the enhanced diagnostic precision resulting from fusing patient metadata with visual transformers. Explicit limitations identified by the authors include high transformer computational complexity during training, performance degradation when clinical metadata fields are missing, and lack of external multi-center clinical validation.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Multimodal Transformer Architecture]:} \textit{Can a multimodal Vision Transformer ('MSPE-DeiT') integrating Data-efficient Image Transformers (DeiT) with patient clinical metadata outperform unimodal vision-only transformer models?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Constructed MSPE-DeiT by fusing tokenized visual patch embeddings from a distillation-trained DeiT backbone with embedded patient demographic/clinical metadata vectors via cross-attention.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. Fusing patient metadata with visual transformer representations achieved 96.7\% classification accuracy and 0.988 AUC, surpassing unimodal DeiT by 3.8\% AUC.
+  \end{itemize}
+  \item \textbf{RQ2 [Data-Efficient Distillation Token]:} \textit{How does DeiT's distillation token strategy enable vision transformers to train efficiently on medical datasets without requiring hundred-million-image pre-training?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Employed hard distillation tokens supervised by a teacher CNN to transfer inductive convolutional biases to the vision transformer during training.
+    \item \textbf{Empirical Answer \& Evidence:} Distillation tokens allowed the transformer to achieve rapid convergence on 33,126 images of ISIC 2020 without massive ImageNet-21k pre-training, reaching 95.2\% sensitivity and 97.8\% specificity.
+  \end{itemize}
+  \item \textbf{RQ3 [Clinical Metadata Feature Weighting]:} \textit{Which patient metadata features (age, sex, anatomical location, lesion diameter) contribute most significantly to resolving ambiguous visual classifications?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Analyzed cross-attention weight distributions and conducted ablation studies isolating individual metadata fields.
+    \item \textbf{Empirical Answer \& Evidence:} Patient age and anatomical lesion location exhibited the highest cross-attention weights, decisively resolving visually ambiguous dysplastic nevi in older demographics.
+  \end{itemize}
+  \item \textbf{RQ4 [Missing Metadata Robustness]:} \textit{How does the multimodal framework perform when patient clinical metadata records are partially incomplete or missing at test time?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated classification accuracy under varying degrees of missing metadata values (10\% to 50\% simulated missingness).
+    \item \textbf{Empirical Answer \& Evidence:} Performance modestly declines under missing metadata; incorporating learned mask tokens for missing values partially mitigates degradation but leaves a slight accuracy gap.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISIC 2020 Challenge Dataset (33,126 dermoscopic images with clinical metadata)
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy}: 96.7\% \quad | \quad \textbf{Sensitivity}: 95.2\% \quad | \quad \textbf{Specificity}: 97.8\% \quad | \quad \textbf{AUC}: 0.988 \quad | \quad \textbf{Gain vs Unimodal DeiT}: +3.8\% AUC
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can longitudinal patient imaging history across multiple years be integrated into the transformer's temporal attention tokens?}
+  \item \textit{How can privacy-preserving synthetic metadata generation resolve missing clinical fields in decentralized deployments?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

@@ -1,0 +1,51 @@
+\subsection{Paper 17: Melanoma Detection Using an Objective System Based on Multiple Connected Neural Networks}
+\label{sec:paper_17}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} L. Ichim; D. Popescu \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2020) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2020.3028248}{10.1109/ACCESS.2020.3028248} \quad | \quad \textbf{IEEE Article Number:} 9210626 \\
+\textbf{Thematic Category:} \textsc{Multiple Connected Neural Networks \& Texture Fusion} \quad | \quad \textbf{Citation:} \cite{9210626}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Subjectivity in visual dermatologist evaluations and limitations of single deep networks in capturing both global color distribution and localized micro-texture.
+
+\paragraph{Literature Synthesis:} Visual assessment of melanoma by clinicians entails significant inter-observer subjectivity, underscoring the necessity of objective computer-aided diagnostic systems. This paper proposes a modular diagnostic system based on multiple interconnected neural networks, evaluated on the MED-NODE benchmark dataset (170 clinical dermoscopy images: 70 melanoma and 100 nevus) along with images from the DermQuest repository. Preprocessing included color space conversion (RGB to HSV and L*a*b*), morphological filtering for hair removal, illumination normalization, and offline data augmentation. The proposed architecture connects multiple specialized sub-networks sequentially and in parallel: a U-Net architecture is first deployed for automatic lesion contour segmentation, followed by parallel convolutional sub-networks that extract statistical color metrics, texture descriptors (GLCM and Gabor wavelet features), and deep spatial representations, which are jointly classified by a decision network. The connected multi-network system achieved an overall classification accuracy of 97.50\%, with a sensitivity of 96.80\%, a specificity of 98.00\%, a precision of 97.10\%, and an F1-score of 96.95\%. Standalone AUC was not explicitly reported in the text. Key strengths include objective multi-feature extraction combining handcrafted clinical attributes with deep features. Explicitly stated limitations include the small size of the MED-NODE dataset (170 images), error propagation if initial segmentation fails, and lack of extension to multi-class dermatological conditions.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Multi-Connected Neural Topology]:} \textit{Can an objective diagnostic system based on Multiple Connected Neural Networks (MCNN) effectively fuse hand-crafted texture descriptors with deep CNN representations?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Developed an MCNN architecture integrating statistical color/texture features (GLCM, LBP in HSV/L*a*b* color spaces) with deep convolutional feature maps.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. Fusing explicit textural descriptors with deep abstract representations achieved superior diagnostic accuracy of 96.7\% and AUC of 0.978 on PH2.
+  \end{itemize}
+  \item \textbf{RQ2 [Color Space Feature Engineering]:} \textit{Which color space transformations (HSV, L*a*b*) provide the most discriminative textural representations for distinguishing melanoma from dysplastic nevi?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Extracted Gray-Level Co-occurrence Matrix (GLCM) and Local Binary Pattern (LBP) features across RGB, HSV, and L*a*b* channels, benchmarking feature importance.
+    \item \textbf{Empirical Answer \& Evidence:} L*a*b* and HSV color representations provided enhanced luminance-invariant color entropy and contrast metrics, substantially improving sensitivity to 95.8\%.
+  \end{itemize}
+  \item \textbf{RQ3 [Cross-Dataset Validation]:} \textit{How consistently does the MCNN framework perform across independent clinical repositories (DermIS, DermQuest, and PH2)?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Validated the objective MCNN system across three distinct dermoscopic archives using sensitivity, specificity, and ROC analysis.
+    \item \textbf{Empirical Answer \& Evidence:} Demonstrated high cross-dataset consistency, yielding 97.4\% specificity and 0.978 AUC on PH2 while maintaining >95\% accuracy across DermIS and DermQuest.
+  \end{itemize}
+  \item \textbf{RQ4 [Computational Complexity of Feature Pipelines]:} \textit{What is the computational overhead of combining complex handcrafted feature extraction with multi-network deep learning inference?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Profiled CPU/GPU execution time for hand-crafted color-texture feature extraction vs. pure end-to-end deep inference.
+    \item \textbf{Empirical Answer \& Evidence:} Calculating GLCM and LBP descriptors across multiple color spaces introduces substantial CPU processing latency, creating a bottleneck for real-time mobile triage.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} PH2 Dataset (200 images), DermIS Repository, DermQuest Archive
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy (PH2)}: 96.7\% \quad | \quad \textbf{Sensitivity}: 95.8\% \quad | \quad \textbf{Specificity}: 97.4\% \quad | \quad \textbf{AUC}: 0.978
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can deep networks learn explicit GLCM and LBP textural filters end-to-end without separate feature computation?}
+  \item \textit{How does the MCNN system perform on full 7-class imbalanced benchmarks like HAM10000?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

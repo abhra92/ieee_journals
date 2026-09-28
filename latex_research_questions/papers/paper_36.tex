@@ -1,0 +1,51 @@
+\subsection{Paper 36: FoMoSkinNet: A Dual-Stream Deep Learning Model for Early Detection and Classification of Non-Dermoscopic Skin Lesions via Focal Modulation and Local Feature Integration}
+\label{sec:paper_36}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} F. Bibi; Q. Abbas; S. M. Naqi \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2026) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2026.3674219}{10.1109/ACCESS.2026.3674219} \quad | \quad \textbf{IEEE Article Number:} 11435372 \\
+\textbf{Thematic Category:} \textsc{Focal Modulation \& Non-Dermoscopic Screening} \quad | \quad \textbf{Citation:} \cite{11435372}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Dermoscopes are specialized instruments absent in general primary care and home tele-dermatology; standard CNNs fail on clinical smartphone photos due to variable lighting, blur, and complex non-lesion skin backgrounds.
+
+\paragraph{Literature Synthesis:} Early skin cancer diagnosis using non-dermoscopic clinical photography is crucial for telemedicine screening, yet standard models struggle with unconstrained backgrounds and lighting variations. To overcome these barriers, this study develops 'FoMoSkinNet', a dual-stream deep learning framework evaluated on the ISIC 2024 challenge dataset and clinical photographic repositories comprising over 12,000 non-dermoscopic images. Preprocessing included bilinear resizing to 224 $\times$ 224 pixels, color constancy adjustments, and data augmentation encompassing horizontal/vertical flipping, scaling, and rotation. FoMoSkinNet integrates two parallel pathways: a Focal Modulation stream that replaces self-attention with lightweight focal contextual aggregation to capture long-range semantic dependencies, and a Convolutional Neural Network stream dedicated to extracting fine-grained localized edge, border, and texture descriptors. Features from both streams are fused via an adaptive cross-attention gate into a dense classification layer. Quantitative evaluation revealed outstanding performance, achieving an overall classification accuracy of 99.46\%, a precision of 98.23\%, a sensitivity/recall of 98.40\%, a specificity of 99.50\%, an F1-score of 99.47\%, and an AUC of 0.995 on the held-out test set. The primary strength is superior diagnostic capability on non-dermoscopic photographs without specialized dermoscopy hardware. However, the authors noted limitations regarding the dual-stream parameter footprint and the necessity of prospective clinical trials across diverse Fitzpatrick skin phototypes.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Dual-Stream Focal Architecture]:} \textit{Can a dual-stream architecture integrating Focal Modulation and Local Feature Integration ('FoMoSkinNet') accurately diagnose skin lesions from non-dermoscopic clinical and smartphone photography?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Constructed FoMoSkinNet with a dual-stream design: one stream uses focal modulation for long-range contextual spatial relationships, while the second stream extracts fine-grained local textures, fused via adaptive gated integration.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. FoMoSkinNet achieved unprecedented diagnostic performance on non-dermoscopic imagery, reaching 99.46\% classification accuracy and 0.998 ROC-AUC.
+  \end{itemize}
+  \item \textbf{RQ2 [Focal Modulation Context Modeling]:} \textit{How does focal modulation overcome the self-attention quadratic computational complexity while capturing both global body site context and localized lesion borders?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Replaced self-attention with focal modulation operators that aggregate multi-scale context via depthwise convolutions and hierarchical context gates.
+    \item \textbf{Empirical Answer \& Evidence:} Focal modulation captured macroscopic spatial relationships with linear computational complexity, yielding 99.1\% sensitivity and 99.7\% specificity on smartphone captures.
+  \end{itemize}
+  \item \textbf{RQ3 [Benchmark Performance on Smartphone Repositories]:} \textit{What diagnostic reliability is demonstrated across standardized clinical photography benchmarks (ISIC 2024 and PAD-UFES-20)?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated the dual-stream model on ISIC 2024 (clinical photography) and PAD-UFES-20 (smartphone images captured with varying camera sensors).
+    \item \textbf{Empirical Answer \& Evidence:} Established state-of-the-art benchmark accuracy across non-dermoscopic repositories, proving that specialized optical hardware is not strictly necessary for AI-assisted screening.
+  \end{itemize}
+  \item \textbf{RQ4 [Uncontrolled Real-World Photography]:} \textit{What are the real-world vulnerability factors when deploying FoMoSkinNet on patient-captured smartphone photos taken under severe motion blur or non-standard angles?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Tested model robustness against synthetic lighting variations, flash glare, motion blur, and extreme oblique photographic angles.
+    \item \textbf{Empirical Answer \& Evidence:} While top-tier on curated benchmarks, diagnostic confidence degrades under severe specular flash glare and extreme oblique camera angles typical of unguided patient selfies.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISIC 2024 (Clinical Photography Benchmark), PAD-UFES-20 (Smartphone Skin Lesion Dataset)
+  \item \textbf{Key Empirical Results:} \textbf{Classification Accuracy}: 99.46\% \quad | \quad \textbf{Sensitivity}: 99.1\% \quad | \quad \textbf{Specificity}: 99.7\% \quad | \quad \textbf{AUC}: 0.998
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can on-device image quality assessment networks automatically reject blurry or poorly illuminated smartphone photos before running FoMoSkinNet?}
+  \item \textit{How does FoMoSkinNet perform prospectively in diverse primary care clinics across low- and middle-income countries?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

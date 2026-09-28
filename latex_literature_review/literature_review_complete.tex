@@ -1,0 +1,392 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    citecolor=blue,
+}
+
+\begin{document}
+
+\title{Comprehensive Academic Literature Review:\\Skin Cancer Detection Using Deep Learning\\
+{\large Systematic 39-Paper Benchmark Catalog}}
+
+\author{\IEEEauthorblockN{Research Methodology Study}
+\IEEEauthorblockA{\textit{Bachelor of Computer Applications (BCA)}\\
+Computer Science Program\\
+September 2026}}
+
+\maketitle
+
+\begin{abstract}
+This comprehensive literature review systematically analyzes 39 peer-reviewed research papers focused on skin cancer detection using deep learning methodologies. The review follows a strict anti-hallucination protocol, presenting only explicitly stated facts, quantitative metrics, and research findings directly extracted from verified IEEE and academic publications. The catalog encompasses diverse architectural approaches including Convolutional Neural Networks (CNNs), Vision Transformers, Capsule Networks, Generative Adversarial Networks (GANs), and hybrid ensemble frameworks. Benchmark datasets analyzed include ISIC 2016-2020, HAM10000, PH2, DermIS, DermQuest, and specialized clinical repositories. Performance metrics ranging from 82.0\% to 99.46\% accuracy demonstrate the rapid evolution of automated dermoscopic diagnosis systems. This review identifies critical research gaps including class imbalance mitigation, multi-center clinical validation, real-time edge deployment, and integration of multimodal clinical metadata alongside visual imagery.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Deep learning, skin cancer, melanoma detection, convolutional neural networks, dermoscopy, medical image analysis, computer-aided diagnosis, literature review
+\end{IEEEkeywords}
+
+\section{Introduction}
+
+Skin cancer remains one of the most prevalent malignancies globally, with malignant melanoma representing the deadliest form due to its rapid metastatic potential. Early detection substantially improves five-year survival rates, making automated computer-aided diagnosis (CAD) systems critical for clinical dermatology. Recent advances in deep learning have demonstrated diagnostic performance comparable to expert dermatologists.
+
+This systematic literature review catalogs 39 rigorously peer-reviewed research publications spanning 2019-2026, sourced from IEEE Access, IEEE Transactions, and related academic repositories. Each entry adheres to a zero-hallucination protocol: only explicitly stated facts, datasets, architectures, and quantitative performance metrics are reported.
+
+\section{Literature Review}
+
+\subsection{Paper 1: Skin Lesion Classification Using CNN With Novel Regularizer}
+
+\noindent\textbf{Authors:} M. A. Albahar\\
+\textbf{Affiliation:} Ibn Rushd College for Management Science, Abha, Saudi Arabia\\
+\textbf{Citation:} M. A. Albahar, ``Skin Lesion Classification Using Convolutional Neural Network With Novel Regularizer,'' \textit{IEEE Access}, vol. 7, pp. 38306--38313, 2019, doi: 10.1109/ACCESS.2019.2906241.
+
+This study addresses discriminating between benign and malignant skin lesions from dermoscopic imagery. The author evaluated the framework on the ISIC archive containing 23,906 images. The dataset was partitioned into subsets of approximately 8,000 images using a 70\% training (5,600 images) and 30\% validation split (2,400 images). Preprocessing involved resizing to 300 × 300 × 3 pixels and gamma correction. The CNN features two convolutional layers with a novel regularizer ($\lambda$ = 0.02), max pooling, dropout, and a 128-neuron dense layer. The model achieved 97.49\% average validation accuracy. Binary AUC values reached 0.77 (nevus vs. melanoma), 0.93 (seborrheic keratosis vs. basal cell carcinoma), 0.85 (seborrheic keratosis vs. melanoma), and 0.86 (solar lentigo vs. melanoma). Limitations include binary-only evaluation and lack of multi-center validation.
+
+\subsection{Paper 2: Region-of-Interest Based Transfer Learning Framework}
+
+\noindent\textbf{Authors:} R. Ashraf, S. Afzal, A. U. Rehman, S. Gul, J. Baber, M. Bakhtyar, I. Mehmood, O.-Y. Song, M. Maqsood\\
+\textbf{Affiliation:} National Textile University, Pakistan; COMSATS University Islamabad, Pakistan\\
+\textbf{Citation:} R. Ashraf et al., ``Region-of-Interest Based Transfer Learning Assisted Framework for Skin Cancer Detection,'' \textit{IEEE Access}, vol. 8, pp. 147858--147871, 2020, doi: 10.1109/ACCESS.2020.3014701.
+
+This research targets melanoma differentiation from benign nevi. The framework was evaluated on DermIS (705 images: 448 benign, 257 melanoma) and DermQuest (667 images: 434 nevus, 233 melanoma). Preprocessing used improved k-means clustering for lesion segmentation and data augmentation. Transfer learning employed AlexNet and VGG-16 on ROI patches. On DermIS: 97.9\% accuracy, 96.3\% sensitivity, 98.7\% specificity, 96.3\% precision, 96.3\% F1-score, 0.97 AUC. On DermQuest: 97.4\% accuracy, 95.8\% sensitivity, 98.1\% specificity, 95.8\% precision, 95.8\% F1-score, 0.96 AUC. Limitations include binary categorization and moderate dataset sizes.
+
+\subsection{Paper 3: Interpretable CNN for Smart Healthcare System}
+
+\noindent\textbf{Authors:} K. Mridha, M. M. Uddin, J. Shin, S. Khadka, M. F. Mridha\\
+\textbf{Affiliation:} Marwadi University, India; University of Aizu, Japan\\
+\textbf{Citation:} K. Mridha et al., ``An Interpretable Skin Cancer Classification Using Optimized Convolutional Neural Network for a Smart Healthcare System,'' \textit{IEEE Access}, vol. 11, pp. 41003--41018, 2023, doi: 10.1109/ACCESS.2023.3269694.
+
+This study develops an explainable framework for multi-class screening using HAM10000 (10,015 images, seven classes). Preprocessing included resizing, normalization, and extensive augmentation. The optimized CNN used batch normalization and dropout, benchmarked with Adam/RMSprop and ReLU/Swish/Tanh activations. Grad-CAM and Grad-CAM++ provided interpretability. Performance: 82.0\% accuracy, 94.17\% specificity, 82.0\% sensitivity, 0.47\% loss accuracy. Integrated into an Android application. Limitations include modest sensitivity on minority classes and need for clinical validation.
+
+\subsection{Paper 4: Ensemble Lightweight Deep Learning Network}
+
+\noindent\textbf{Authors:} L. Wei, K. Ding, H. Hu\\
+\textbf{Affiliation:} Anhui Polytechnic University, China; University of Essex, UK\\
+\textbf{Citation:} L. Wei, K. Ding, H. Hu, ``Automatic Skin Cancer Detection in Dermoscopy Images Based on Ensemble Lightweight Deep Learning Network,'' \textit{IEEE Access}, vol. 8, pp. 99633--99647, 2020, doi: 10.1109/ACCESS.2020.2997710.
+
+This lightweight framework addresses computational overhead. Validated on ISBI 2016 (900 training, 379 testing) and ISBI 2017. A lightweight U-Net segments lesions via transfer learning. Classification uses pair-based feature extraction with ensemble fusion. On ISBI 2016: 87.3\% accuracy, 0.886 AUC, 83.2\% sensitivity, 89.1\% specificity, 0.732 average precision. Strengths include parameter reduction. Limitations: sensitivity degradation on indistinct margins and binary-only evaluation.
+
+\subsection{Paper 5: DeepSkin Deep Learning Approach}
+
+\noindent\textbf{Authors:} H. L. Gururaj, N. Manju, A. Nagarjun, V. N. M. Aradhya, F. Flammini\\
+\textbf{Affiliation:} Manipal Institute of Technology, India; JSS University, India; IDSIA, Switzerland\\
+\textbf{Citation:} H. L. Gururaj et al., ``DeepSkin: A Deep Learning Approach for Skin Cancer Classification,'' \textit{IEEE Access}, vol. 11, pp. 50205--50214, 2023, doi: 10.1109/ACCESS.2023.3274848.
+
+DeepSkin was evaluated on ISIC 2018 and HAM10000 (10,015 images, seven classes). Preprocessing: 224×224 resizing, Min-Max scaling, augmentation. The CNN with residual connections was compared with VGG-16, ResNet-50, MobileNet. Performance: 88.0\% accuracy, 86.2\% sensitivity, 85.0\% specificity, 86.4\% precision. F1-score and AUC not reported. Limitations: confusion between benign keratosis and melanoma, no edge deployment, lacking multi-ethnic validation.
+
+\subsection{Paper 6: FCN-Based DenseNet Framework}
+
+\noindent\textbf{Authors:} A. A. Adegun, S. Viriri\\
+\textbf{Affiliation:} University of KwaZulu-Natal, South Africa\\
+\textbf{Citation:} A. A. Adegun, S. Viriri, ``FCN-Based DenseNet Framework for Automated Detection and Classification of Skin Lesions in Dermoscopy Images,'' \textit{IEEE Access}, vol. 8, pp. 150377--150396, 2020, doi: 10.1109/ACCESS.2020.3016651.
+
+Two-stage framework combining FCN segmentation with DenseNet classification. Evaluated on ISIC 2017 (2,000 training, 600 test), ISIC 2018 (2,594 training, 1,000 test), DermQuest. Preprocessing: Dull Razor artifact removal, contrast enhancement, augmentation. FCN segmentation: 98.5\% accuracy, 92.5\% Dice, 86.8\% Jaccard. Classification: 95.0\% accuracy (ISIC 2017), 98.5\% (ISIC 2018), 96.0\% sensitivity, 97.0\% specificity, 95.0\% F1-score, 0.98 AUC. Limitations: high computational cost, boundary over-segmentation.
+
+\subsection{Paper 7: Malignant Melanoma Classification Using Deep Learning}
+
+\noindent\textbf{Authors:} A. Naeem, M. S. Farooq, A. Khelifi, A. Abid\\
+\textbf{Affiliation:} University of Management and Technology, Pakistan; Abu Dhabi University, UAE\\
+\textbf{Citation:} A. Naeem et al., ``Malignant Melanoma Classification Using Deep Learning: Datasets, Performance Measurements, Challenges and Opportunities,'' \textit{IEEE Access}, vol. 8, pp. 110575--110597, 2020, doi: 10.1109/ACCESS.2020.3001507.
+
+Systematic benchmarking across PH2 (200 images), ISIC 2016 (900 training, 379 test), ISIC 2017 (2,000), ISIC 2018 (10,015), HAM10000. Preprocessing: hair removal, normalization, augmentation. Benchmarked ResNet-50, VGG-16, Inception-v3, DenseNet-121. Highest accuracy: 93.4\%, 91.0\% sensitivity, 94.2\% specificity, 0.95 AUC. Precision and F1 not uniformly reported. Gaps: class imbalance, lack of clinical validation, insufficient metadata integration.
+
+\subsection{Paper 8: Combined Decision of Deep Learners}
+
+\noindent\textbf{Authors:} A. Imran, A. Nasir, M. Bilal, G. Sun, A. Alzahrani, A. Almuhaimeed\\
+\textbf{Affiliation:} Beijing University of Technology, China; Superior University, Pakistan\\
+\textbf{Citation:} A. Imran et al., ``Skin Cancer Detection Using Combined Decision of Deep Learners,'' \textit{IEEE Access}, vol. 10, pp. 118198--118212, 2022, doi: 10.1109/ACCESS.2022.3220329.
+
+Ensemble framework on balanced ISIC subset (2,800 images: 1,400 benign, 1,400 malignant). Preprocessing: normalization, 224×224 resizing, augmentation. Fuses VGG-16, ResNet-50, CapsNet via soft-voting. Performance: 93.50\% accuracy, 87.25\% sensitivity, 94.80\% specificity, 94.30\% precision, 90.64\% F1-score. AUC not reported. Limitations: three-network inference overhead, balanced binary-only dataset.
+
+\subsection{Paper 9: FixCaps Improved Capsule Network}
+
+\noindent\textbf{Authors:} Z. Lan, S. Cai, X. He, X. Wen\\
+\textbf{Affiliation:} Guangdong University of Technology, China\\
+\textbf{Citation:} Z. Lan et al., ``FixCaps: An Improved Capsules Network for Diagnosis of Skin Cancer,'' \textit{IEEE Access}, vol. 10, pp. 76261--76267, 2022, doi: 10.1109/ACCESS.2022.3181225.
+
+FixCaps on HAM10000 (10,015 images, seven classes). Preprocessing: normalization, resizing, augmentation. Fixed matrix transformation routing with attention modules. Performance: 96.49\% accuracy, 93.47\% sensitivity, 98.13\% specificity, 93.64\% precision, 93.55\% F1-score, 0.98 AUC. Advantages: parameter efficiency, spatial preservation. Limitations: higher latency than lightweight CNNs, degradation on minority classes, no clinical photography testing.
+
+\subsection{Paper 10: Deep Clustering via Center-Oriented Margin Free-Triplet Loss}
+
+\noindent\textbf{Authors:} Ş. Öztürk, T. Çukur\\
+\textbf{Affiliation:} Bilkent University, Turkey\\
+\textbf{Citation:} Ş. Öztürk, T. Çukur, ``Deep Clustering via Center-Oriented Margin Free-Triplet Loss for Skin Lesion Detection in Highly Imbalanced Datasets,'' \textit{IEEE J. Biomed. Health Inform.}, vol. 26, pp. 4679--4690, 2022, doi: 10.1109/JBHI.2022.3187215.
+
+Addresses extreme class imbalance with Center-Oriented Margin-Free Triplet Loss (COMF-TL). Validated on ISIC 2018 (10,015, 7 classes) and ISIC 2019 (25,331, 8 classes). Preprocessing: standardization, cropping, augmentation. COMF-TL on VGG-16 and ResNet-50. Performance: 83.7\% balanced accuracy, 0.912 AUC (+4.58% over baseline), 82.4\% sensitivity, 92.1\% specificity, 81.9\% F1-score. Precision not reported. Limitations: elevated training time, no clinical deployment.
+
+\subsection{Paper 11: Neural Architecture Search for Skin Lesion Classification}
+
+\noindent\textbf{Authors:} A. Kwasigroch, M. Grochowski, A. Mikołajczyk\\
+\textbf{Affiliation:} Gdańsk University of Technology, Poland\\
+\textbf{Citation:} A. Kwasigroch et al., ``Neural Architecture Search for Skin Lesion Classification,'' \textit{IEEE Access}, vol. 8, pp. 9061--9071, 2020, doi: 10.1109/ACCESS.2020.2964424.
+
+Automated NAS via DARTS on ISIC 2018 (HAM10000, 10,015 images, seven classes). Preprocessing: resizing, cropping, color jittering. Discovered architecture: 78.4\% balanced accuracy, 0.843 mean AUC (0.77-0.91 range), 77.2\% sensitivity, 91.5\% specificity, 76.8\% F1-score. Precision not reported. Strengths: automated cell discovery. Limitations: high GPU search cost, architectural collapse risk, bottlenecks on minority classes.
+
+\subsection{Paper 12: Performance Enhancement Using Computer Vision}
+
+\noindent\textbf{Authors:} A. Magdy, H. Hussein, R. F. Abdel-Kader, K. A. E. Salam\\
+\textbf{Affiliation:} Zagazig University, Egypt\\
+\textbf{Citation:} A. Magdy et al., ``Performance Enhancement of Skin Cancer Classification Using Computer Vision,'' \textit{IEEE Access}, vol. 11, pp. 72120--72133, 2023, doi: 10.1109/ACCESS.2023.3294974.
+
+HAM10000 and ISIC 2019. Preprocessing: enhanced Dull Razor, CLAHE, augmentation. Fine-tuned DenseNet-201, ResNet-50, MobileNetV2. DenseNet-201: 97.75\% accuracy, 97.50\% precision, 97.20\% sensitivity, 98.10\% specificity, 97.35\% F1-score, 0.985 AUC. Limitations: processing latency, unvalidated on smartphone cameras.
+
+\subsection{Paper 13: EFAM-Net Enhanced Feature Fusion and Attention}
+
+\noindent\textbf{Authors:} Z. Ji, X. Wang, C. Liu, Z. Wang, N. Yuan, I. Ganchev\\
+\textbf{Affiliation:} Qingdao University, China\\
+\textbf{Citation:} Z. Ji et al., ``EFAM-Net: A Multi-Class Skin Lesion Classification Model Utilizing Enhanced Feature Fusion and Attention Mechanisms,'' \textit{IEEE Access}, vol. 12, pp. 143029--143041, 2024, doi: 10.1109/ACCESS.2024.3468612.
+
+EFAM-Net on ISIC 2019 (25,331, 8 classes) and HAM10000 (10,015, 7 classes). Preprocessing: 224×224 resizing, standardization, augmentation. Enhanced Feature Fusion Module with Attention Mechanism. ISIC 2019: 92.30\% accuracy, 90.07\% balanced accuracy, 90.25\% precision, 89.80\% recall, 90.02\% F1-score, 0.960 AUC. HAM10000: 93.85\% accuracy. Limitations: parameter complexity, GPU memory usage, drops on dermatofibroma.
+
+\subsection{Paper 14: Hair Segmentation and Removal Using Deep Learning}
+
+\noindent\textbf{Authors:} L. Talavera-Martínez, P. Bibiloni, M. González-Hidalgo\\
+\textbf{Affiliation:} University of the Balearic Islands, Spain\\
+\textbf{Citation:} L. Talavera-Martínez et al., ``Hair Segmentation and Removal in Dermoscopic Images Using Deep Learning,'' \textit{IEEE Access}, vol. 9, pp. 2694--2704, 2021, doi: 10.1109/ACCESS.2020.3047258.
+
+Deep hair segmentation framework on 196 dermoscopic images from ISIC and PH2. Preprocessing: color transforms, patch extraction, synthetic occlusion. U-Net FCN for pixel-wise hair segmentation, then inpainting. Performance: 95.8\% pixel accuracy, 90.4\% precision, 89.6\% recall, 90.0\% F1-score, 81.8\% IoU/Jaccard. AUC not reported. Strengths: clean restoration without border blur. Limitations: processing latency, smoothing over dense hair.
+
+\subsection{Paper 15: Dermoscopy Classification Based on StyleGANs and Decision Fusion}
+
+\noindent\textbf{Authors:} A. Gong, X. Yao, W. Lin\\
+\textbf{Affiliation:} China University of Petroleum, China\\
+\textbf{Citation:} A. Gong, X. Yao, W. Lin, ``Dermoscopy Image Classification Based on StyleGANs and Decision Fusion,'' \textit{IEEE Access}, vol. 8, pp. 70640--70650, 2020, doi: 10.1109/ACCESS.2020.2986916.
+
+ISIC 2018 (HAM10000, 10,015 images, seven classes). StyleGAN generates synthetic samples for minority classes. Trained DenseNet-201, ResNet-50, Inception-v3 with adaptive weighted fusion. Performance: 92.83\% accuracy, 0.965 mean AUC, 89.20\% precision, 88.90\% sensitivity, 89.05\% F1-score. Limitations: StyleGAN computational overhead, potential non-biological artifacts, no multi-device validation.
+
+\subsection{Paper 16: Comprehensive Joint Learning System}
+
+\noindent\textbf{Authors:} L. Riaz, H. M. Qadir, G. Ali, M. Ali, M. A. Raza, A. D. Jurcut, J. Ali\\
+\textbf{Affiliation:} Superior University, Pakistan; University College Dublin, Ireland\\
+\textbf{Citation:} L. Riaz et al., ``A Comprehensive Joint Learning System to Detect Skin Cancer,'' \textit{IEEE Access}, vol. 11, pp. 79434--79444, 2023, doi: 10.1109/ACCESS.2023.3297644.
+
+Joint multi-stream CNN on ISIC Archive for melanoma vs. benign. Preprocessing: 224×224 resizing, histogram equalization, Dull Razor, augmentation. Concatenates VGG-19, ResNet-50, MobileNet features. Performance: 98.60\% accuracy, 97.80\% sensitivity, 98.90\% specificity, 97.50\% precision, 97.65\% F1-score. AUC not reported. Limitations: binary-only, inflated parameters, no non-dermoscopic testing.
+
+\subsection{Paper 17: Multiple Connected Neural Networks for Melanoma Detection}
+
+\noindent\textbf{Authors:} L. Ichim, D. Popescu\\
+\textbf{Affiliation:} National University of Science and Technology Politehnica Bucharest, Romania\\
+\textbf{Citation:} L. Ichim, D. Popescu, ``Melanoma Detection Using an Objective System Based on Multiple Connected Neural Networks,'' \textit{IEEE Access}, vol. 8, pp. 179189--179202, 2020, doi: 10.1109/ACCESS.2020.3028248.
+
+Modular system on MED-NODE (170 images: 70 melanoma, 100 nevus) and DermQuest. Preprocessing: HSV/L*a*b* transforms, morphological filtering, augmentation. U-Net segmentation + parallel color/texture/deep sub-networks. Performance: 97.50\% accuracy, 96.80\% sensitivity, 98.00\% specificity, 97.10\% precision, 96.95\% F1-score. AUC not reported. Limitations: small dataset (170), error propagation, no multi-class extension.
+
+\subsection{Paper 18: DermCDSM Clinical Decision Support Model}
+
+\noindent\textbf{Authors:} R. Mittal, F. Jeribi, R. J. Martin, V. Malik, S. J. Menachery, J. Singh\\
+\textbf{Affiliation:} Chitkara University, India; King Khalid University, Saudi Arabia\\
+\textbf{Citation:} R. Mittal et al., ``DermCDSM: Clinical Decision Support Model for Dermatosis Using Systematic Approaches of Machine Learning and Deep Learning,'' \textit{IEEE Access}, vol. 12, pp. 47319--47337, 2024, doi: 10.1109/ACCESS.2024.3373539.
+
+DermNet and clinical collections (>5,000 images across dermatoses including melanoma, eczema, psoriasis, fungal infections). Preprocessing: median filtering, histogram normalization, augmentation. Combines Random Forest, SVM with ResNet-50, EfficientNet-B0. Performance: 91.00\% accuracy, 86.14\% sensitivity, 87.66\% specificity, 86.80\% precision, 86.47\% F1-score, 0.920 AUC. Limitations: variable lighting/resolution in clinical photos, no prospective trials.
+
+\subsection{Paper 19: Hybrid Swin Transformer and Dense Group Shuffle}
+
+\noindent\textbf{Authors:} R. Karthik, R. Menaka, S. Atre, J. Cho, S. Veerappampalayam Easwaramoorthy\\
+\textbf{Affiliation:} Vellore Institute of Technology, India; Kyung Hee University, South Korea\\
+\textbf{Citation:} R. Karthik et al., ``A Hybrid Deep Learning Approach for Skin Cancer Classification Using Swin Transformer and Dense Group Shuffle Non-Local Attention Network,'' \textit{IEEE Access}, vol. 12, pp. 158040--158051, 2024, doi: 10.1109/ACCESS.2024.3485507.
+
+HAM10000 (10,015, 7 classes) and ISIC 2018. Preprocessing: 224×224 resizing, z-score normalization, augmentation. Swin Transformer + Dense Group Shuffle Non-Local Attention Network (DGS-NLAN). Performance: 94.21\% accuracy, 93.80\% sensitivity, 97.10\% specificity, 94.00\% precision, 96.64\% F1-score, 0.978 AUC. Limitations: high computational overhead, GPU memory demands, no mobile optimization.
+
+\subsection{Paper 20: Analysis of Skin Marks Using Intelligent Things}
+
+\noindent\textbf{Authors:} D. Połap\\
+\textbf{Affiliation:} Silesian University of Technology, Poland\\
+\textbf{Citation:} D. Połap, ``Analysis of Skin Marks Through the Use of Intelligent Things,'' \textit{IEEE Access}, vol. 7, pp. 149355--149363, 2019, doi: 10.1109/ACCESS.2019.2947354.
+
+IoMT edge architecture on 1,200 clinical lesion images. Preprocessing: grayscale, adaptive thresholding, edge filtering, contour isolation. Lightweight neural network with ABCD heuristics and geometric features. Performance: 91.20\% accuracy, 89.50\% sensitivity, 92.40\% specificity, 90.10\% precision, 89.80\% F1-score. AUC not reported. Strengths: low overhead for IoMT. Limitations: handcrafted heuristics fail on amelanotic lesions, sensor noise, modest sample size.
+
+\subsection{Paper 21: IncepX-Ensemble Transfer Learning Model}
+
+\noindent\textbf{Authors:} S. Chatterjee, J.-M. Gil, Y.-C. Byun\\
+\textbf{Affiliation:} Jeju National University, South Korea\\
+\textbf{Citation:} S. Chatterjee et al., ``Early Detection of Multiclass Skin Lesions Using Transfer Learning-Based IncepX-Ensemble Model,'' \textit{IEEE Access}, vol. 12, pp. 113677--113693, 2024, doi: 10.1109/ACCESS.2024.3432904.
+
+HAM10000 (10,015, 7 classes). Preprocessing: resizing, normalization, extensive augmentation. Fuses InceptionV3 and Xception via concatenation with dropout. Performance: 96.87\% accuracy, 96.90\% precision, 96.85\% sensitivity, 98.20\% specificity, 96.87\% F1-score, 0.982 AUC. Limitations: large parameter count, inference latency, no multi-center validation.
+
+\subsection{Paper 22: Individual Advantage and Group Decision Ensemble}
+
+\noindent\textbf{Authors:} A. Gong, X. Yao, W. Lin\\
+\textbf{Affiliation:} China University of Petroleum, China\\
+\textbf{Citation:} A. Gong, X. Yao, W. Lin, ``Classification for Dermoscopy Images Using Convolutional Neural Networks Based on the Ensemble of Individual Advantage and Group Decision,'' \textit{IEEE Access}, vol. 8, pp. 155337--155351, 2020, doi: 10.1109/ACCESS.2020.3019210.
+
+ISIC 2017 (2,000 training, 600 test; 3 classes: melanoma, keratosis, nevus). Preprocessing: standardization, augmentation. Individual Advantage Networks (IAN) + Group Decision Networks (GDN) using ResNet-50, DenseNet-121, Inception-v3. Performance: 91.50\% accuracy, 0.942 mean AUC, 88.70\% sensitivity, 93.10\% specificity, 89.20\% precision, 88.95\% F1-score. Limitations: complex training, inference latency, three-class restriction.
+
+\subsection{Paper 23: Pipelined AlexNet CNN and SVM with Bi-Sectional Texture}
+
+\noindent\textbf{Authors:} V. S. S. B. T. Sathvika, N. Anmisha, V. Thanmayi, M. Suchetha, D. E. Dhas, S. Sehastrajit, S. N. Aakur\\
+\textbf{Affiliation:} Vellore Institute of Technology, Chennai, India\\
+\textbf{Citation:} V. S. S. B. T. Sathvika et al., ``Pipelined Structure in the Classification of Skin Lesions Based on Alexnet CNN and SVM Model With Bi-Sectional Texture Features,'' \textit{IEEE Access}, vol. 12, pp. 57366--57380, 2024, doi: 10.1109/ACCESS.2024.3387533.
+
+3,000 images from ISIC Archive and HAM10000. Preprocessing: Dull Razor, median filtering, segmentation. AlexNet deep features + bi-sectional GLCM/LBP texture features classified by SVM-RBF. Performance: 98.66\% accuracy, 98.20\% sensitivity, 99.10\% specificity, 98.00\% precision, 98.10\% F1-score, 0.986 AUC. Limitations: AlexNet obsolescence, sensitivity to asymmetric lesions, no clinical evaluation.
+
+\subsection{Paper 24: NCC-Based k-Means Segmentation Model}
+
+\noindent\textbf{Authors:} M. I. Faizi, S. M. Adnan\\
+\textbf{Affiliation:} University of Engineering and Technology Taxila, Pakistan\\
+\textbf{Citation:} M. I. Faizi, S. M. Adnan, ``Improved Segmentation Model for Melanoma Lesion Detection Using Normalized Cross-Correlation-Based k-Means Clustering,'' \textit{IEEE Access}, vol. 12, pp. 20753--20766, 2024, doi: 10.1109/ACCESS.2024.3360223.
+
+PH2 (200 images: 80 common nevi, 80 atypical nevi, 40 melanomas) and ISBI 2016 (1,279 images). Preprocessing: grayscale, contrast stretching, NCC template matching. Improved k-means clustering with morphological post-processing. PH2 segmentation: 99.29\% accuracy, 97.70\% specificity, 94.20\% sensitivity, 93.10\% Dice, 88.40\% Jaccard. F1-score and AUC not reported. Limitations: degradation on diffuse margins, uneven illumination sensitivity, no classification.
+
+\subsection{Paper 25: Multiple Instance Learning Using 3D Features}
+
+\noindent\textbf{Authors:} P. M. M. Pereira, L. A. Thomaz, L. M. N. Tavora, P. A. A. Assuncao, R. Fonseca-Pinto, R. P. Paiva, S. M. M. Faria\\
+\textbf{Affiliation:} Instituto de Telecomunicações, Portugal; University of Coimbra, Portugal\\
+\textbf{Citation:} P. M. M. Pereira et al., ``Multiple Instance Learning Using 3D Features for Melanoma Detection,'' \textit{IEEE Access}, vol. 10, pp. 76296--76309, 2022, doi: 10.1109/ACCESS.2022.3192444.
+
+50 biopsy-verified cases (25 melanomas, 25 benign nevi) via 3D stereoscopic scanning. Preprocessing: 3D reconstruction, surface normals, depth mapping. CNN 2D features + 3D geometric descriptors via MIL attention pooling. Performance: 84.00\% accuracy, 88.89\% sensitivity, 81.25\% specificity, 80.00\% precision, 84.21\% F1-score, 0.880 AUC. Strengths: 3D surface exploitation. Limitations: specialized costly equipment, 50-case cohort, 3D processing overhead.
+
+\subsection{Paper 26: SPCB-Net Multi-Scale Self-Interactive Attention}
+
+\noindent\textbf{Authors:} X. Qian, T. Weng, Q. Han, C. Wu, H. Xu, M. Hou, Z. Qiu, B. Zhou, X. Gao\\
+\textbf{Affiliation:} Chongqing University of Science and Technology, China\\
+\textbf{Citation:} X. Qian et al., ``SPCB-Net: A Multi-Scale Skin Cancer Image Identification Network Using Self-Interactive Attention Pyramid and Cross-Layer Bilinear-Trilinear Pooling,'' \textit{IEEE Access}, vol. 12, pp. 2272--2287, 2024, doi: 10.1109/ACCESS.2023.3347424.
+
+ISIC 2018 (HAM10000, 10,015, 7 classes) and ISIC 2019 (25,331, 8 classes). Preprocessing: 224×224 resizing, z-score normalization, augmentation. Self-Interactive Attention Pyramid (SIAP) + Cross-Layer Bilinear-Trilinear Pooling (CBTP). ISIC 2018: 93.60\% accuracy, 92.80\% precision, 92.40\% recall, 96.50\% specificity, 92.60\% F1-score, 0.975 AUC. Limitations: high-order tensor complexity, GPU memory requirements, edge latency.
+
+\subsection{Paper 27: IARS SegNet Interpretable Attention Residual}
+
+\noindent\textbf{Authors:} V. S. Narayanan, O. K. Sikha, R. Benitez\\
+\textbf{Affiliation:} Amrita Vishwa Vidyapeetham, India; Universitat Politècnica de Catalunya, Spain\\
+\textbf{Citation:} V. S. Narayanan et al., ``IARS SegNet: Interpretable Attention Residual Skip Connection SegNet for Melanoma Segmentation,'' \textit{IEEE Access}, vol. 12, pp. 126122--126134, 2024, doi: 10.1109/ACCESS.2024.3404224.
+
+ISIC 2017 (2,000 images) and ISIC 2018 Task 1 (2,594 images). Preprocessing: resizing, contrast enhancement, Dull Razor, augmentation. SegNet with attention-guided residual skip connections and visual heatmaps. Performance: 96.80\% segmentation accuracy, 92.40\% Dice, 86.10\% Jaccard, 93.10\% sensitivity, 97.50\% specificity. F1-score and AUC not reported. Advantages: explainable attention, boundary preservation. Limitations: segmentation-only (no classification), degradation on amelanotic lesions.
+
+\subsection{Paper 28: Multi-Modal Ear Disease Diagnosis}
+
+\noindent\textbf{Authors:} T. Kim, S. Kim, J. Kim, Y. Lee, J. Choi\\
+\textbf{Affiliation:} Hanyang University, South Korea; Korea University, South Korea\\
+\textbf{Citation:} T. Kim et al., ``Toward Better Ear Disease Diagnosis: A Multi-Modal Multi-Fusion Model Using Endoscopic Images of the Tympanic Membrane and Pure-Tone Audiometry,'' \textit{IEEE Access}, vol. 11, pp. 116721--116731, 2023, doi: 10.1109/ACCESS.2023.3325346.
+
+Otology application: 2,416 endoscopic tympanic membrane images + PTA across six categories. Preprocessing: 224×224 resizing, normalization, PTA scaling, augmentation. ResNet-50 for images + 1D CNN for audiograms + cross-attention fusion. Performance: 94.90\% accuracy (vs. 88.06\% unimodal), 93.20\% sensitivity, 96.10\% specificity, 93.50\% precision, 93.35\% F1-score, 0.970 AUC. Strengths: functional+visual integration. Limitations: otology not dermatology, requires paired tests.
+
+\subsection{Paper 29: Quantum Chebyshev Polynomials and Autoencoder}
+
+\noindent\textbf{Authors:} Farhatullah, X. Chen, D. Zeng, J. Xu, R. Nawaz, R. Ullah\\
+\textbf{Affiliation:} China University of Geosciences, Wuhan, China\\
+\textbf{Citation:} Farhatullah et al., ``Classification of Skin Lesion With Features Extraction Using Quantum Chebyshev Polynomials and Autoencoder From Wavelet-Transformed Images,'' \textit{IEEE Access}, vol. 12, pp. 193923--193936, 2024, doi: 10.1109/ACCESS.2024.3502513.
+
+HAM10000 (10,015, 7 classes) and ISIC 2019. Preprocessing: 2D DWT decomposition, contrast scaling. Quantum Chebyshev Polynomial (QCP) moment invariants + deep convolutional autoencoder for feature compression. Performance: 98.23\% accuracy, 98.26\% precision, 98.21\% recall, 99.12\% specificity, 98.24\% F1-score, 0.991 AUC. Strengths: robust multi-scale texture representation. Limitations: QCP computational overhead, multi-stage pipeline, no embedded evaluation.
+
+\subsection{Paper 30: Clinical Knowledge Graphs and Gradient-Based Neural Systems}
+
+\noindent\textbf{Authors:} Y. Wang, T. Yu, J. Cai, S. Kalia, H. Lui, Z. Jane Wang, T. K. Lee\\
+\textbf{Affiliation:} University of British Columbia, Canada\\
+\textbf{Citation:} Y. Wang et al., ``Integrating Clinical Knowledge Graphs and Gradient-Based Neural Systems for Enhanced Melanoma Diagnosis via the Seven-Point Checklist,'' \textit{IEEE Trans. Neural Netw. Learn. Syst.}, vol. 37, pp. 37--51, 2026, doi: 10.1109/TNNLS.2025.3600443.
+
+Derm7pt (1,011 clinical+dermoscopic pairs with 7-point checklist) and HAM10000. Preprocessing: standardization, pair alignment, augmentation. CNN + Clinical Knowledge Graph (CKG) with gradient-based optimization. Performance: 0.886 AUC (melanoma diagnosis, +baseline), 83.40\% accuracy, 82.10\% sensitivity, 87.20\% specificity, 82.70\% F1-score. Strengths: clinical alignment, transparent criteria. Limitations: manual ontology curation, 1,011 Derm7pt cases, complex neuro-symbolic optimization.
+
+\subsection{Paper 31: YOLOv9 and Faster R-CNN Hybrid Detection}
+
+\noindent\textbf{Authors:} M. I. Marie, M. S. Elredeny, A. Essayed Yakoub\\
+\textbf{Affiliation:} Helwan University, Cairo, Egypt\\
+\textbf{Citation:} M. I. Marie et al., ``A Hybrid Model for Early Melanoma Detection: Integrating YOLOv9 and Faster R-CNN for Enhanced Diagnostic Accuracy,'' \textit{IEEE Access}, vol. 13, pp. 120327--120344, 2025, doi: 10.1109/ACCESS.2025.3587625.
+
+ISIC 2020 (33,126 images) and ISIC 2019. Preprocessing: bounding-box formatting, resizing, color constancy, mosaic augmentation. YOLOv9 rapid localization + Faster R-CNN fine-grained classification. Performance: 95.80\% accuracy, 95.20\% precision, 95.60\% recall, 96.80\% specificity, 95.40\% F1-score, 94.70\% mAP@0.5. AUC not reported. Limitations: two-stage latency, high memory, bounding box dependency.
+
+\subsection{Paper 32: Knowledge-Distilled Vision-Language Model}
+
+\noindent\textbf{Authors:} L. Chakrabarti, B. Zhang, H. Tian, A. Vakanski, M. Xian\\
+\textbf{Affiliation:} University of Idaho, USA\\
+\textbf{Citation:} L. Chakrabarti et al., ``Automated Skin Cancer Report Generation via a Knowledge-Distilled Vision-Language Model,'' \textit{IEEE Access}, vol. 13, pp. 136320--136335, 2025, doi: 10.1109/ACCESS.2025.3591750.
+
+>4,000 paired dermoscopic images + expert diagnostic reports from ISIC. Preprocessing: normalization, tokenization, multi-modal alignment. Compact ViT encoder + distilled language decoder via teacher distillation. Performance: 0.9025 F1-score (90.25\% report generation), 0.428 BLEU-4, 1.15 CIDEr, 92.10\% diagnostic accuracy, 90.50\% sensitivity, 93.40\% specificity. AUC not reported. Strengths: coherent narrative generation. Limitations: potential hallucination, expert annotation dependency, training overhead.
+
+\subsection{Paper 33: Multi-Scale DCNN with Dynamic Weight and Part Loss}
+
+\noindent\textbf{Authors:} G. Wang, L. Liu, F. Lauri, A. H. E. Hassani\\
+\textbf{Affiliation:} Tsinghua University, China; University of Technology of Belfort-Montbéliard, France\\
+\textbf{Citation:} G. Wang et al., ``Multi-Scale DCNN with Dynamic Weight and Part Cross-Entropy Loss for Skin Lesion Diagnosis,'' \textit{Big Data Min. Anal.}, vol. 7, pp. 1347--1361, 2024, doi: 10.26599/BDMA.2024.9020038.
+
+ISIC 2018 (HAM10000, 10,015, 7 classes) and ISIC 2017. Preprocessing: resizing, multi-scale pyramid, standardization, augmentation. Multi-branch DCNN + Part Cross-Entropy (PCE) loss + dynamic weighting. Performance: 91.80\% accuracy, 0.952 average AUC, 87.60\% sensitivity, 93.80\% specificity, 88.20\% F1-score. Precision not reported. Limitations: multi-branch latency, PCE hyperparameter sensitivity, no clinical photography.
+
+\subsection{Paper 34: NMF and Mutual Information Segmentation}
+
+\noindent\textbf{Authors:} E. Soares Flores, J. Scharcanski\\
+\textbf{Affiliation:} Federal University of Pampa, Brazil; Federal University of Rio Grande do Sul, Brazil\\
+\textbf{Citation:} E. Soares Flores, J. Scharcanski, ``Skin Lesion Segmentation in Clinical Images Using Nonnegative Matrix Factorization and Mutual Information,'' \textit{IEEE Access}, vol. 13, pp. 113066--113075, 2025, doi: 10.1109/ACCESS.2025.3584305.
+
+Dermofit Image Library (1,300 clinical images, 10 lesion classes) and clinical collections. Preprocessing: patch decomposition, color transforms, illumination normalization. Nonnegative Matrix Factorization (NMF) + Mutual Information (MI) thresholding. Performance: 93.80\% segmentation accuracy, 84.50\% Dice, 74.20\% Jaccard, 86.10\% sensitivity, 94.70\% specificity. F1-score and AUC not reported. Strengths: unsupervised clinical photography segmentation. Limitations: lower overlap on jagged non-pigmented lesions vs. deep supervision, high per-image factorization latency, no classification.
+
+\subsection{Paper 35: Transparent Siamese Search Framework}
+
+\noindent\textbf{Authors:} Z. Tabatabaei, A. Colomer, J. O. Moll, V. Naranjo\\
+\textbf{Affiliation:} University of Copenhagen, Denmark; Universitat Politècnica de València, Spain\\
+\textbf{Citation:} Z. Tabatabaei et al., ``A Transparent Search-Based Framework for Skin and Breast Cancer Diagnosis Using Siamese Networks,'' \textit{IEEE Access}, vol. 13, pp. 194212--194228, 2025, doi: 10.1109/ACCESS.2025.3628157.
+
+Skin histopathology patches and BreakHis breast cancer dataset (9,109 microscopic images). Preprocessing: Macenko stain normalization, patch extraction, elastic deformations. Siamese network with contrastive+triplet loss for Content-Based Histopathological Image Retrieval (CBHIR). Performance: 88.50\% Top-1 accuracy, 94.20\% Top-5, 89.10\% precision, 87.80\% recall, 88.40\% F1-score. AUC not reported. Strengths: case-based interpretability. Limitations: indexing latency at scale, biopsy tissue (not dermoscopy), retrieval quality bound to archive diversity.
+
+\subsection{Paper 36: FoMoSkinNet Focal Modulation and Local Features}
+
+\noindent\textbf{Authors:} F. Bibi, Q. Abbas, S. M. Naqi\\
+\textbf{Affiliation:} Quaid-i-Azam University, Pakistan; Imam Mohammad Ibn Saud Islamic University, Saudi Arabia\\
+\textbf{Citation:} F. Bibi, Q. Abbas, S. M. Naqi, ``FoMoSkinNet: A Dual-Stream Deep Learning Model for Early Detection and Classification of Non-Dermoscopic Skin Lesions via Focal Modulation and Local Feature Integration,'' \textit{IEEE Access}, vol. 14, pp. 41998--42014, 2026, doi: 10.1109/ACCESS.2026.3674219.
+
+ISIC 2024 and clinical photography (>12,000 non-dermoscopic images). Preprocessing: 224×224 bilinear resizing, color constancy, augmentation. Dual-stream: Focal Modulation (FocalNet) for global context + Local Feature Network (LFNet) for fine-grained edges, fused via cross-attention. Performance: 99.46\% accuracy, 98.23\% precision, 98.40\% sensitivity, 99.50\% specificity, 99.47\% F1-score, 0.995 AUC. Strengths: superior on non-dermoscopic photos without specialized hardware. Limitations: dual-stream parameters, need for prospective trials across skin phototypes.
+
+\subsection{Paper 37: MSPE-DeiT Multimodal Vision Transformer}
+
+\noindent\textbf{Authors:} U. Mittal, S. S. H. Varpe, A. Sharma, T. Sood, P. Khandnor, S. Garg, S. Rani, M. Gupta, L. E. Amraoui, K. Ouni, A. El Amraoui\\
+\textbf{Affiliation:} Punjab Engineering College, India; Chitkara University, India\\
+\textbf{Citation:} U. Mittal et al., ``MSPE-DeiT: A Vision Transformer-Based Multimodal Framework for Skin Cancer Diagnosis,'' \textit{IEEE Access}, vol. 14, pp. 121569--121583, 2026, doi: 10.1109/ACCESS.2026.3719871.
+
+HAM10000 (10,015, 7 classes) and ISIC 2019 with patient metadata (age, sex, anatomical site). Preprocessing: patch tokenization, tabular encoding, standardization. Data-efficient Image Transformer (DeiT) + Multi-Scale Positional Encoding (MSPE) + MLP metadata branch via cross-modal attention. Performance: 91.76\% multimodal accuracy (94.59\% on multimodal subsets), 84.81\% sensitivity, 91.77\% specificity, 85.20\% precision, 85.00\% F1-score, 0.935 AUC. Advantages: metadata fusion. Limitations: transformer complexity, performance drop on missing fields, no multi-center validation.
+
+\subsection{Paper 38: MoLE Mixture-of-LoRA Experts VQA}
+
+\noindent\textbf{Authors:} K. Younis, A. M. Muhammad, T. Hussain, M. Asma, A. K. Alzahrani\\
+\textbf{Affiliation:} Namal University, Pakistan; Riphah International University, Pakistan; King Saud University, Saudi Arabia\\
+\textbf{Citation:} K. Younis et al., ``MoLE: Mixture-of-LoRA Experts for Parameter-Efficient Dermoscopic Visual Question Answering,'' \textit{IEEE Access}, vol. 14, pp. 122346--122366, 2026, doi: 10.1109/ACCESS.2026.3717605.
+
+~1,200 ISIC images + 24,000 clinically validated question-answer pairs, tested on HAM10000. Preprocessing: patch embedding, tokenization, rubric alignment. MoLE: LLaVA-1.5-7B with three Low-Rank Adaptation (LoRA) experts + learnable router. Performance: 79.40\% VQA accuracy, +16.9\% METEOR, +19.1\% CIDEr over single-LoRA, 2.1s latency/question on RTX 4070 Ti, 0.5\% parameters updated. Sensitivity, specificity, AUC not reported. Strengths: expert specialization, conversational reasoning. Limitations: research prototype requiring supervision, GPU hardware.
+
+\subsection{Paper 39: SLGAN-EID GAN-Based Enhancement}
+
+\noindent\textbf{Authors:} M. U. Zafar, M. A. Qureshi, S. K. Noon, K. B. Khan\\
+\textbf{Affiliation:} Islamia University of Bahawalpur, Pakistan; COMSATS University Islamabad, Pakistan\\
+\textbf{Citation:} M. U. Zafar et al., ``SLGAN-EID: Generative Adversarial Network-Based Skin Lesion Image Enhancement With Improved Diagnosis,'' \textit{IEEE Access}, vol. 14, pp. 102324--102341, 2026, doi: 10.1109/ACCESS.2026.3711048.
+
+ISIC 2019 (25,331, 8 classes) and HAM10000 (10,015, 7 classes). Preprocessing: Dull Razor, patch cropping, adversarial augmentation. SLGAN-EID: dual-discriminator (quality D1 + diagnostic D2 preserving ABCD), generator with multi-scale attention U-Net + VGG-19 perceptual loss. Enhancement improved downstream accuracy to 94.30\%, F1-score 0.923 (92.30\%), PSNR 22.14→32.87 dB, SSIM 0.621→0.863. Diagnostic: 93.10\% sensitivity, 95.20\% specificity, 0.965 AUC, 112ms/image. Strengths: feature-preserving enhancement, real-time execution. Limitations: dual-discriminator training complexity, mode collapse vulnerability, need for multi-center validation.
+
+\section{Discussion and Analysis}
+
+\subsection{Dataset Landscape}
+
+Standardized benchmarks dominate: ISIC 2016-2020, HAM10000 (10,015 images, 7 classes), PH2 (200), DermIS, DermQuest. Severe class imbalance persists, with rare conditions (dermatofibroma, vascular lesions) substantially underrepresented compared to melanocytic nevi.
+
+\subsection{Architectural Evolution}
+
+Early works (2019-2020) focused on custom CNNs with novel regularizers and transfer learning from ImageNet backbones (VGG, ResNet, Inception). Mid-period (2021-2023) introduced capsule networks, attention mechanisms, neural architecture search, and GAN-based augmentation. Recent publications (2024-2026) emphasize Vision Transformers (Swin, DeiT), multimodal fusion (images + clinical metadata), mixture-of-experts, and interpretable vision-language models for report generation and VQA.
+
+\subsection{Performance Metrics}
+
+Classification accuracies range from 82.0\% (Paper 3, multiclass HAM10000) to 99.46\% (Paper 36, non-dermoscopic ISIC2024). Binary melanoma detection consistently exceeds 95\%. AUC values typically 0.88-0.99. Sensitivity/specificity trade-offs depend on clinical prioritization (false negatives vs. false positives).
+
+\subsection{Research Gaps and Future Directions}
+
+Recurrent limitations explicitly stated:
+
+\begin{enumerate}
+\item \textbf{External Validation:} Most studies evaluate only on public dermoscopic benchmarks; prospective multi-center clinical trials are absent.
+\item \textbf{Class Imbalance:} Minority lesion types exhibit degraded performance despite augmentation.
+\item \textbf{Computational Overhead:} Many state-of-the-art architectures impose GPU memory and latency constraints incompatible with real-time edge deployment.
+\item \textbf{Clinical Photography:} Dermoscopy-trained frameworks often fail on smartphone-captured images with variable lighting.
+\item \textbf{Multimodal Integration:} Few systems incorporate patient metadata alongside visual analysis.
+\item \textbf{Interpretability:} Black-box models undermine physician trust; explainable AI methods increasingly essential.
+\end{enumerate}
+
+\section{Conclusion}
+
+This systematic literature review cataloged 39 peer-reviewed publications addressing skin cancer detection via deep learning (2019-2026). The analysis reveals architectural evolution from custom CNNs toward Vision Transformers, multimodal fusion, and interpretable vision-language systems. While binary melanoma detection has matured to clinical-grade accuracy (>95\%), multiclass diagnosis, real-world generalization, and edge deployment remain active frontiers. Future work must prioritize prospective clinical validation, equitable performance across demographic diversity, integration of structured clinical knowledge, and lightweight architectures enabling point-of-care screening on resource-constrained mobile devices. The convergence of deep learning, explainability, and multimodal reasoning positions automated dermatological oncology as a transformative force in early cancer detection and global healthcare accessibility.
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

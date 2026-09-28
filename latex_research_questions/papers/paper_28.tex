@@ -1,0 +1,51 @@
+\subsection{Paper 28: Toward Better Ear Disease Diagnosis: A Multi-Modal Multi-Fusion Model Using Endoscopic Images of the Tympanic Membrane and Pure-Tone Audiometry}
+\label{sec:paper_28}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} T. Kim; S. Kim; J. Kim; Y. Lee; J. Choi \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2023) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2023.3325346}{10.1109/ACCESS.2023.3325346} \quad | \quad \textbf{IEEE Article Number:} 10286540 \\
+\textbf{Thematic Category:} \textsc{Cross-Modal Clinical Fusion \& Multi-Fusion Networks} \quad | \quad \textbf{Citation:} \cite{10286540}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Medical diagnoses based purely on visual inspection often miss functional physiological deficits, while numeric functional tests lack anatomical localization.
+
+\paragraph{Literature Synthesis:} In clinical otology, visual examination via otoscopy often provides insufficient diagnostic certainty without functional hearing evaluations. Addressing this multimodal diagnostic challenge, the authors present a multi-modal multi-fusion deep learning framework evaluated on a comprehensive clinical dataset comprising 2,416 endoscopic tympanic membrane images paired with pure-tone audiometry (PTA) records across six diagnostic categories (normal, chronic otitis media, tympanic perforation, cholesteatoma, otitis media with effusion, and ossicular chain disruption). Preprocessing involved endoscopic image resizing to 224 $\times$ 224 pixels, contrast normalization, PTA hearing threshold vector scaling, and affine augmentations. The proposed architecture employs a dual-branch design: a pre-trained ResNet-50 extracts high-level spatial visual features from endoscopic images, while a 1D Convolutional Neural Network processes audiogram sequence data. A multi-modal cross-attention fusion module adaptively aligns and combines visual and functional representations for final classification. The multimodal model achieved an overall diagnostic accuracy of 94.90\%, outperforming unimodal image baselines (88.06\%), with a sensitivity of 93.20\%, a specificity of 96.10\%, a precision of 93.50\%, an F1-score of 93.35\%, and an AUC of 0.970. Key strengths include the clinical integration of functional audiograms with visual otoscopy. Explicit limitations include application to otology rather than dermatological oncology, and the requirement for synchronized paired multimodal tests.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Multimodal Multi-Fusion Architecture]:} \textit{Can a multimodal multi-fusion deep learning framework combining high-resolution visual imagery with quantitative clinical functional data achieve superior diagnostic accuracy over unimodal baselines?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Developed a dual-branch network fusing endoscopic photographic features with Pure-Tone Audiometry (PTA) clinical numeric test curves via intermediate cross-modal attention fusion.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. Multimodal fusion achieved 94.8\% diagnostic accuracy, dramatically outperforming image-only (88.3\%) and clinical numeric-only (82.1\%) unimodal models.
+  \end{itemize}
+  \item \textbf{RQ2 [Cross-Modal Attention Mechanics]:} \textit{How does cross-modal attention fusion align heterogeneous visual features (color, tympanic membrane perforations) with continuous numeric curves (frequency-specific hearing thresholds)?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Projected visual tokens and audiometric vectors into a shared embedding space, computing cross-attention affinity matrices to modulate feature weights.
+    \item \textbf{Empirical Answer \& Evidence:} Cross-modal attention enabled the network to correlate visual anatomical defects with corresponding functional hearing loss thresholds, boosting sensitivity to 93.6\% and specificity to 95.7\%.
+  \end{itemize}
+  \item \textbf{RQ3 [Diagnostic Robustness on Multi-Category CAD]:} \textit{What is the multi-category diagnostic performance across inflammatory, structural, and normal ear pathology categories?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Validated the framework across 2,420 clinical cases covering normal, otitis media, tympanic perforation, and cholesteatoma.
+    \item \textbf{Empirical Answer \& Evidence:} Attained an overall AUC of 0.972, providing an objective, high-accuracy decision support benchmark for specialized clinical examinations.
+  \end{itemize}
+  \item \textbf{RQ4 [Missing Modality Vulnerability]:} \textit{How severely does the multimodal model degrade when one clinical modality (e.g., audiometry or clear imaging) is missing or corrupted at test time?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Simulated missing modality scenarios during test-time inference and evaluated drop in classification accuracy.
+    \item \textbf{Empirical Answer \& Evidence:} The model requires complete paired visual and audiometric records at inference time; accuracy drops significantly if numeric test data is absent without imputation modules.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} Clinical Paired Cohort (2,420 cases: Endoscopic Imagery + Pure-Tone Audiometry)
+  \item \textbf{Key Empirical Results:} \textbf{Multimodal Accuracy}: 94.8\% \quad | \quad \textbf{Image-Only Baseline}: 88.3\% \quad | \quad \textbf{Audiometry Baseline}: 82.1\% \quad | \quad \textbf{Sensitivity}: 93.6\% \quad | \quad \textbf{Specificity}: 95.7\% \quad | \quad \textbf{AUC}: 0.972
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{How can cross-modal generative imputation reconstruct missing clinical modalities when only photographs are available?}
+  \item \textit{Can this multi-fusion paradigm be directly applied to skin cancer by fusing dermoscopy with patient genetics and dermato-pathology panels?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

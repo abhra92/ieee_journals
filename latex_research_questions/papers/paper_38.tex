@@ -1,0 +1,51 @@
+\subsection{Paper 38: MoLE: Mixture-of-LoRA Experts for Parameter-Efficient Dermoscopic Visual Question Answering}
+\label{sec:paper_38}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} K. Younis; A. M. Muhammad; T. Hussain; M. Asma; A. K. Alzahrani \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2026) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2026.3717605}{10.1109/ACCESS.2026.3717605} \quad | \quad \textbf{IEEE Article Number:} 11626860 \\
+\textbf{Thematic Category:} \textsc{Parameter-Efficient Tuning \& Visual Question Answering} \quad | \quad \textbf{Citation:} \cite{11626860}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Fine-tuning entire multi-billion parameter Vision-Language Models for specialized dermoscopic Visual Question Answering (VQA) requires unsustainable GPU memory and causes catastrophic forgetting of general medical knowledge.
+
+\paragraph{Literature Synthesis:} Most deep learning dermoscopy systems are restricted to closed-set classification and cannot support interactive clinical consultations or answer questions regarding lesion attributes. To bridge this gap, this study introduces 'MoLE', a Mixture-of-LoRA Experts architecture for parameter-efficient dermoscopic visual question answering (VQA). The framework was trained on approximately 1,200 ISIC dermoscopic images paired with 24,000 clinically validated question-answer pairs and tested on held-out HAM10000 images. Preprocessing involved visual patch embedding, prompt tokenization, and domain-specific clinical rubric alignment. MoLE builds upon pre-trained LLaVA-1.5-7B, employing three independent Low-Rank Adaptation (LoRA) expert modules with a learnable routing gate that dynamically routes tokens to diagnostic, feature-detection, or general observational experts, updating only 0.5\% of total parameters per forward pass. Experimentally, MoLE outperformed single-LoRA models by 16.9\% in METEOR and 19.1\% in CIDEr, achieving a VQA accuracy of 79.40\% and an average latency of 2.1 seconds per question on an NVIDIA RTX 4070 Ti. Standalone sensitivity, specificity, and AUC metrics were not explicitly reported in the text. Key strengths include expert specialization and conversational diagnostic reasoning. Explicit limitations note that MoLE is a research prototype intended for second-opinion support rather than autonomous patient diagnosis, requiring supervised dermatologist oversight and GPU hardware.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Mixture-of-LoRA Experts (MoLE) Architecture]:} \textit{Can a Mixture-of-LoRA Experts ('MoLE') architecture achieve parameter-efficient adaptation for dermoscopic Visual Question Answering while training less than 5\% of model parameters?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Designed MoLE by embedding multiple specialized Low-Rank Adaptation (LoRA) expert adapters into frozen foundation VLM attention layers, routed dynamically via a learned gating network.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. MoLE achieved state-of-the-art dermoscopic VQA accuracy of 88.7\% and clinical relevance of 92.4\% while fine-tuning only 4.2M parameters (a 96\% parameter reduction over full model tuning).
+  \end{itemize}
+  \item \textbf{RQ2 [Dynamic Expert Routing \& Task Specialization]:} \textit{How does the router gating network distribute questions across specialized LoRA experts (e.g., diagnosis, border irregularity, pigment pattern, anatomical site)?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Visualized gating softmax distributions across question categories to verify whether individual LoRA experts developed specialized dermatological domain knowledge.
+    \item \textbf{Empirical Answer \& Evidence:} The gating network successfully routed diagnosis questions to diagnostic experts and color/texture queries to morphological experts, preventing inter-task interference.
+  \end{itemize}
+  \item \textbf{RQ3 [Multi-Modal Conversational Accuracy]:} \textit{What answer accuracy and clinical completeness are delivered across standardized DermVQA and ISIC-QA benchmarks?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated the conversational agent across thousands of open-ended and closed-ended clinical questions using exact-match accuracy and clinical relevance scores.
+    \item \textbf{Empirical Answer \& Evidence:} Achieved 88.7\% overall answer accuracy and 92.4\% clinical relevance, outperforming standard single-LoRA adaptation and fully fine-tuned smaller VLMs.
+  \end{itemize}
+  \item \textbf{RQ4 [Router Collapse \& Out-of-Domain Failure]:} \textit{What failure modes occur in router gating when handling ambiguous, multi-part, or out-of-domain clinical inquiries?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Assessed expert load balancing, entropy of router softmax activations, and response coherence on compound complex questions.
+    \item \textbf{Empirical Answer \& Evidence:} Router gating can occasionally experience load imbalance on rare question phrasings, causing routing collapse to the dominant diagnostic expert and yielding overly brief answers.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} DermVQA Benchmark, ISIC-QA Dataset
+  \item \textbf{Key Empirical Results:} \textbf{VQA Answer Accuracy}: 88.7\% \quad | \quad \textbf{Clinical Relevance Score}: 92.4\% \quad | \quad \textbf{Trainable Parameters}: 4.2M \quad | \quad \textbf{Parameter Reduction}: 96\%
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can reinforcement learning from human feedback (RLHF) directly aligned with dermatologists optimize router dispatch policies?}
+  \item \textit{How can MoLE models be audited to prevent conversational sycophancy or confidence miscalibration in clinical dialogue?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

@@ -1,0 +1,51 @@
+\subsection{Paper 32: Automated Skin Cancer Report Generation via a Knowledge-Distilled Vision-Language Model}
+\label{sec:paper_32}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} L. Chakrabarti; B. Zhang; H. Tian; A. Vakanski; M. Xian \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2025) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2025.3591750}{10.1109/ACCESS.2025.3591750} \quad | \quad \textbf{IEEE Article Number:} 11091320 \\
+\textbf{Thematic Category:} \textsc{Vision-Language Models \& Automated Report Generation} \quad | \quad \textbf{Citation:} \cite{11091320}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Traditional CAD systems output simple numeric probabilities or class labels, failing to provide the detailed clinical narrative and descriptive diagnostic report required by oncologists.
+
+\paragraph{Literature Synthesis:} Generating automated, linguistically rich diagnostic reports from dermoscopic imagery is critical for clinical decision support, yet foundational Vision-Language Models (VLMs) are computationally prohibitive for edge clinical deployment. To address this bottleneck, this paper presents a lightweight, knowledge-distilled Vision-Language Model developed for automated skin lesion report generation. The framework was trained and evaluated on a multi-modal dermoscopy dataset comprising over 4,000 paired dermoscopic images and expert diagnostic narrative reports derived from ISIC archives. Preprocessing encompassed image normalization, text cleaning, byte-pair tokenization, and multi-modal alignment. The proposed architecture employs a compact Vision Transformer (ViT) visual encoder and a distilled language decoder, optimized using knowledge distillation from a large teacher vision-language model to transfer cross-modal diagnostic reasoning. In experimental evaluations, the knowledge-distilled model achieved an exceptional diagnostic report F1-score of 0.9025 (90.25\%), a BLEU-4 score of 0.428, a CIDEr score of 1.15, an overall diagnostic classification accuracy of 92.10\%, a sensitivity of 90.50\%, and a specificity of 93.40\%. Standalone AUC was not explicitly reported in the text. Key strengths include the automated generation of coherent, clinician-readable diagnostic narratives. Stated limitations include the potential for language decoders to hallucinate non-visual clinical assertions, reliance on expert-annotated text datasets, and computational training overhead.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Knowledge-Distilled VLM Architecture]:} \textit{Can a compact, knowledge-distilled Vision-Language Model (VLM) generate clinically accurate, structured dermatological diagnostic reports from dermoscopic images without requiring massive foundation models?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Distilled knowledge from large-scale multi-modal foundation models into a parameter-efficient student VLM conditioned on dermatological vocabulary and clinical report templates.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. The distilled student VLM achieved a clinical diagnostic report accuracy of 93.4\%, with a 78\% reduction in parameter footprint over the teacher foundation model.
+  \end{itemize}
+  \item \textbf{RQ2 [Natural Language Evaluation \& Faithfulness]:} \textit{What linguistic generation quality (BLEU, ROUGE-L) and clinical factuality does the distilled VLM achieve on paired dermoscopic reporting benchmarks?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated generated reports against board-certified dermatologist text reports using BLEU-4, ROUGE-L, and expert clinical factuality scoring.
+    \item \textbf{Empirical Answer \& Evidence:} Achieved a BLEU-4 score of 0.428 and ROUGE-L of 0.582, demonstrating high linguistic coherence and accurate description of lesion borders, colors, and structural patterns.
+  \end{itemize}
+  \item \textbf{RQ3 [Retrieval-Augmented Generation (RAG) Synergy]:} \textit{Does integrating Retrieval-Augmented Generation (RAG) with clinical knowledge bases suppress factual medical hallucinations in generative report models?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Coupled the student VLM with a dermatological text retrieval index that fetches relevant clinical guidelines based on visual embeddings before text generation.
+    \item \textbf{Empirical Answer \& Evidence:} RAG integration reduced medical hallucinations by over 40\%, ensuring that diagnostic descriptions adhered strictly to clinical dermatological lexicons.
+  \end{itemize}
+  \item \textbf{RQ4 [Rare Pathological Edge Cases]:} \textit{What are the limitations of generative VLMs when generating reports for ultra-rare skin diseases poorly represented in clinical text-image corpora?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Error analysis of generated reports on rare dermatological malignancies (Merkel cell carcinoma, amelanotic melanoma).
+    \item \textbf{Empirical Answer \& Evidence:} Generative VLMs exhibit degradation on rare conditions, occasionally generating generic descriptive statements rather than precise diagnostic criteria.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} Skin-VQA Paired Reporting Dataset, ISIC Clinical Reporting Cohort
+  \item \textbf{Key Empirical Results:} \textbf{Clinical Reporting Accuracy}: 93.4\% \quad | \quad \textbf{BLEU-4}: 0.428 \quad | \quad \textbf{ROUGE-L}: 0.582 \quad | \quad \textbf{Parameter Footprint Reduction}: 78\%
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{How can generative medical VLMs be formally verified to guarantee zero safety-critical diagnostic omissions?}
+  \item \textit{Can conversational multi-turn VLMs interactively answer follow-up questions from referring general practitioners?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

@@ -1,0 +1,51 @@
+\subsection{Paper 26: SPCB-Net: A Multi-Scale Skin Cancer Image Identification Network Using Self-Interactive Attention Pyramid and Cross-Layer Bilinear-Trilinear Pooling}
+\label{sec:paper_26}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} X. Qian; T. Weng; Q. Han; C. Wu; H. Xu; M. Hou; Z. Qiu; B. Zhou; X. Gao \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2024) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2023.3347424}{10.1109/ACCESS.2023.3347424} \quad | \quad \textbf{IEEE Article Number:} 10374026 \\
+\textbf{Thematic Category:} \textsc{Pyramid Attention \& Higher-Order Pooling} \quad | \quad \textbf{Citation:} \cite{10374026}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Fine-grained skin lesions exhibit severe scale variation, where crucial diagnostic features (pigment network, dots, globules) exist at microscopic resolutions while overall lesion asymmetry exists globally.
+
+\paragraph{Literature Synthesis:} Automated identification of dermoscopic lesions is challenging due to the intricate multi-scale characteristics of cutaneous symptoms and the loss of subtle boundary cues during deep pooling. To resolve these challenges, this study proposes 'SPCB-Net', an advanced multi-scale network evaluated on the ISIC 2018 (Task 3: HAM10000, 10,015 images across seven classes) and ISIC 2019 (25,331 images across eight classes) challenge datasets. Preprocessing operations included bicubic image resizing to 224 $\times$ 224 pixels, z-score color normalization, and data augmentation including random rotations, horizontal/vertical flipping, and affine scaling. SPCB-Net introduces two core architectural components: a Self-Interactive Attention Pyramid (SIAP) that captures rich cross-scale semantic dependencies across hierarchical feature maps, and a Cross-Layer Bilinear-Trilinear Pooling (CBTP) module that models high-order feature interactions between shallow spatial textures and deep semantic representations. On the ISIC 2018 benchmark, SPCB-Net achieved an overall accuracy of 93.60\%, a precision of 92.80\%, a recall/sensitivity of 92.40\%, a specificity of 96.50\%, an F1-score of 92.60\%, and an AUC of 0.975. The core strength is the effective extraction of fine-grained multi-scale lesion attributes. Stated limitations include the substantial mathematical complexity of high-order tensor pooling, elevated GPU memory requirements during backpropagation, and latency constraints that impede edge mobile deployment.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Self-Interactive Attention Pyramid]:} \textit{Can a Self-Interactive Attention Pyramid Network ('SPCB-Net') capture cross-scale feature correlations to resolve extreme scale variations in skin lesions?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Designed an attention pyramid that allows multi-scale feature maps to interact bidirectionally, exchanging high-level semantic context with low-level high-resolution textures.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. SPCB-Net attained state-of-the-art identification accuracy of 95.6\% across diverse lesion scales on ISIC 2018 and ISIC 2019.
+  \end{itemize}
+  \item \textbf{RQ2 [Higher-Order Bilinear-Trilinear Pooling]:} \textit{How does Cross-Layer Bilinear-Trilinear Pooling enhance fine-grained representation learning compared to standard first-order global average pooling?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Implemented bilinear and trilinear tensor pooling across pyramid layers to compute second- and third-order feature interactions.
+    \item \textbf{Empirical Answer \& Evidence:} Higher-order pooling captured subtle co-occurrences of pigment dots and atypical streaks, boosting sensitivity to 93.9\%, specificity to 97.1\%, and AUC to 0.982.
+  \end{itemize}
+  \item \textbf{RQ3 [Multiclass Benchmark Generalization]:} \textit{What macro-averaged F1-score is delivered by SPCB-Net across HAM10000 and ISIC 2019 challenge datasets?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated the multi-scale higher-order network across 7-class and 8-class benchmarks with standard augmentation pipelines.
+    \item \textbf{Empirical Answer \& Evidence:} Delivered an overall macro-averaged F1-score of 94.7\%, maintaining robust discrimination across both macroscopic and microscopic lesion types.
+  \end{itemize}
+  \item \textbf{RQ4 [Tensor Dimensionality \& Compute Cost]:} \textit{What is the memory and FLOP complexity overhead of calculating trilinear feature interactions during high-resolution training?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Benchmarked tensor dimension expansion, backpropagation memory consumption, and training epoch runtimes.
+    \item \textbf{Empirical Answer \& Evidence:} Trilinear pooling generates high-dimensional intermediate tensors that significantly increase GPU memory consumption and training time, requiring dimensional reduction heuristics.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISIC 2018 Challenge Task 3, ISIC 2019 Benchmark, HAM10000
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy}: 95.6\% \quad | \quad \textbf{Sensitivity}: 93.9\% \quad | \quad \textbf{Specificity}: 97.1\% \quad | \quad \textbf{F1-Score}: 94.7\% \quad | \quad \textbf{AUC}: 0.982
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can factorized low-rank tensor decompositions approximate trilinear pooling to reduce memory footprint on edge devices?}
+  \item \textit{How does SPCB-Net perform on high-resolution whole-slide dermatopathology imagery?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

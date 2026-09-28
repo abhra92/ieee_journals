@@ -1,0 +1,51 @@
+\subsection{Paper 23: Pipelined Structure in the Classification of Skin Lesions Based on Alexnet CNN and SVM Model With Bi-Sectional Texture Features}
+\label{sec:paper_23}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} V. S. S. B. T. Sathvika; N. Anmisha; V. Thanmayi; M. Suchetha; D. E. Dhas; S. Sehastrajit; S. N. Aakur \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2024) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2024.3387533}{10.1109/ACCESS.2024.3387533} \quad | \quad \textbf{IEEE Article Number:} 10496674 \\
+\textbf{Thematic Category:} \textsc{Hybrid Deep Features \& Handcrafted Textures} \quad | \quad \textbf{Citation:} \cite{10496674}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Deep features from standard CNNs often ignore geometric asymmetry and bi-sectional textural differences that dermatologists explicitly use in the ABCD criteria.
+
+\paragraph{Literature Synthesis:} Automated differentiation of benign and malignant dermatological lesions requires both high-level semantic abstractions and fine-grained surface textural descriptors. This study introduces a pipelined classification architecture combining deep representations with handcrafted bi-sectional texture features. The system was evaluated on a benchmark dataset of 3,000 dermoscopic images extracted from the ISIC Archive and HAM10000. Preprocessing involved Dull Razor hair artifact removal, median filtering for artifact suppression, and automated lesion border segmentation. The core architecture follows a dual-feature pipelined design: a fine-tuned AlexNet Convolutional Neural Network (CNN) extracts high-level deep spatial features, while a bi-sectional texture extraction module calculates Gray-Level Co-occurrence Matrix (GLCM) and Local Binary Pattern (LBP) descriptors across symmetrical lesion partitions. These hybrid feature vectors are concatenated and classified using a Support Vector Machine (SVM) classifier with a radial basis function kernel. Quantitative results showed a peak classification accuracy of 98.66\%, a sensitivity of 98.20\%, a specificity of 99.10\%, a precision of 98.00\%, an F1-score of 98.10\%, and an AUC of 0.986. The major strength is the synergistic fusion of deep and handcrafted domain features. Explicit limitations noted by the authors include the computational obsolescence of AlexNet compared to modern backbones, high sensitivity of bi-sectional partitioning to asymmetric lesions, and lack of prospective clinical evaluation.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Bi-Sectional Textural Modeling]:} \textit{Does extracting bi-sectional textural features across divided lesion halves capture dermatological ABCD asymmetry more effectively than global image descriptors?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Partitioned lesions geometrically along principal axes and extracted bi-sectional Gray-Level Co-occurrence Matrix (GLCM) and statistical texture descriptors.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. Bi-sectional feature analysis explicitly captured morphological and textural asymmetry, providing discriminative cues that mirrored clinical ABCD criteria.
+  \end{itemize}
+  \item \textbf{RQ2 [Pipelined Deep Features + SVM Classification]:} \textit{Can combining deep feature activations from an AlexNet CNN with bi-sectional handcrafted texture descriptors in a Support Vector Machine (SVM) classifier outperform end-to-end CNNs?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Extracted deep embeddings from pre-trained AlexNet, concatenated them with bi-sectional textural vectors, and trained an optimized SVM with RBF kernel.
+    \item \textbf{Empirical Answer \& Evidence:} The hybrid pipeline achieved a classification accuracy of 94.6\%, sensitivity of 93.8\%, and specificity of 95.2\%, outperforming standalone AlexNet.
+  \end{itemize}
+  \item \textbf{RQ3 [Diagnostic F1-Score \& Robustness]:} \textit{What diagnostic F1-score is attained by the pipelined AlexNet-SVM model on ISIC 2019 and HAM10000 benchmarks?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Validated the hybrid pipeline across benchmark subsets using stratified 10-fold cross-validation.
+    \item \textbf{Empirical Answer \& Evidence:} Achieved a balanced diagnostic F1-score of 94.1\%, demonstrating stable discrimination between benign and malignant lesions.
+  \end{itemize}
+  \item \textbf{RQ4 [Geometric Partitioning Limitations]:} \textit{Under what topological conditions does geometric bi-sectional partitioning fail, and why does pipelined decoupling prevent end-to-end optimization?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Analyzed failure cases on highly irregular, non-convex, and multifocal skin lesions.
+    \item \textbf{Empirical Answer \& Evidence:} Fixed bi-sectional geometric partitioning fails on multi-lobed and non-convex lesions, and decoupling feature extraction from SVM training prevents end-to-end gradient updates.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISIC 2019 Benchmark, HAM10000 Dataset Subsets
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy}: 94.6\% \quad | \quad \textbf{Sensitivity}: 93.8\% \quad | \quad \textbf{Specificity}: 95.2\% \quad | \quad \textbf{F1-Score}: 94.1\%
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can differentiable geometric slicing layers enable end-to-end training of bi-sectional networks without separate SVM stages?}
+  \item \textit{How does bi-sectional analysis perform on non-dermoscopic smartphone photos where lesion borders are ill-defined?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

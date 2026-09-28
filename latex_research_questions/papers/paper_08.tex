@@ -1,0 +1,51 @@
+\subsection{Paper 8: Skin Cancer Detection Using Combined Decision of Deep Learners}
+\label{sec:paper_8}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} A. Imran; A. Nasir; M. Bilal; G. Sun; A. Alzahrani; A. Almuhaimeed \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2022) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2022.3220329}{10.1109/ACCESS.2022.3220329} \quad | \quad \textbf{IEEE Article Number:} 9940917 \\
+\textbf{Thematic Category:} \textsc{Ensemble Fusion \& Capsule Networks} \quad | \quad \textbf{Citation:} \cite{9940917}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Subtle chromatic and textural similarities between benign and malignant lesions yield high false-positive rates in single-model CAD systems.
+
+\paragraph{Literature Synthesis:} Accurate distinction between malignant melanoma and benign skin lesions is hindered by subtle chromatic and textural similarities that lead to high false-positive rates in single-model CAD systems. To address this, the authors designed a combined decision ensemble framework evaluated on a curated, balanced subset of 2,800 dermoscopic images from the ISIC Archive (comprising 1,400 benign and 1,400 malignant cases). Preprocessing involved image normalization, resizing to 224 $\times$ 224 pixels, and data augmentation including random rotations, horizontal/vertical flips, and scaling to improve model generalization. The proposed hybrid framework fuses predictions from three distinct deep learning architectures: a customized VGG-16, a residual ResNet-50, and a Capsule Network (CapsNet) capable of modeling spatial hierarchy and orientation relationships. Final predictions are produced through an ensemble soft-voting decision mechanism. Experimentally, the combined decision framework achieved an overall classification accuracy of 93.50\%, a sensitivity of 87.25\%, a specificity of 94.80\%, a precision of 94.30\%, and an F1-score of 90.64\%. The standalone AUC was not explicitly reported in the text. Key strengths include superior discriminative reliability over individual learners. Stated limitations include the computational overhead of simultaneously running three deep networks during inference, evaluation restricted to a balanced binary dataset, and the lack of validation on diverse multi-class dermatological conditions.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Architectural Heterogeneity]:} \textit{Can combining heterogeneous deep learning architectures (custom VGG-16, residual ResNet-50, and Capsule Network) outperform individual standalone classifiers in melanoma detection?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Trained three distinct models capturing spatial textures (CNNs) and spatial-relational hierarchies (CapsNet) on a curated balanced dataset.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. Fusing CNN feature representations with Capsule Network spatial equivariance achieved superior discriminative reliability, boosting accuracy to 93.50\%.
+  \end{itemize}
+  \item \textbf{RQ2 [Ensemble Decision Mechanics]:} \textit{How does an ensemble soft-voting decision mechanism reconcile divergent predictions between conventional CNNs and Capsule Networks?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Aggregated output probability vectors from VGG-16, ResNet-50, and CapsNet using weighted soft-voting to produce final class labels.
+    \item \textbf{Empirical Answer \& Evidence:} Soft-voting reduced individual model variance and eliminated single-model outlier misclassifications, yielding 94.80\% specificity and 94.30\% precision.
+  \end{itemize}
+  \item \textbf{RQ3 [Diagnostic Balance \& Sensitivity]:} \textit{What sensitivity and F1-score are achieved on a balanced dermoscopic benchmark of 2,800 images?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated the combined system on a balanced subset of 1,400 benign and 1,400 malignant ISIC images with extensive geometric augmentations.
+    \item \textbf{Empirical Answer \& Evidence:} Achieved a sensitivity of 87.25\%, an F1-score of 90.64\%, and an overall classification accuracy of 93.50\%.
+  \end{itemize}
+  \item \textbf{RQ4 [Computational Latency Trade-Offs]:} \textit{What is the inference latency overhead of concurrently executing three deep networks during clinical point-of-care screening?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Analyzed GPU runtime, model parameter scaling, and memory footprint of concurrent inference across the three learners.
+    \item \textbf{Empirical Answer \& Evidence:} Concurrent execution of three deep networks triples memory consumption and increases inference latency, requiring high-end GPUs that may restrict point-of-care mobile deployment.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISIC Archive Curated Balanced Dataset (2,800 images: 1,400 benign, 1,400 malignant)
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy}: 93.50\% \quad | \quad \textbf{Sensitivity}: 87.25\% \quad | \quad \textbf{Specificity}: 94.80\% \quad | \quad \textbf{Precision}: 94.30\% \quad | \quad \textbf{F1-Score}: 90.64\%
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can model pruning or knowledge distillation distill the three-model ensemble into a single fast inference network?}
+  \item \textit{How does the combined decision framework perform when deployed on imbalanced multi-class benchmarks?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

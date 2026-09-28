@@ -1,0 +1,51 @@
+\subsection{Paper 7: Malignant Melanoma Classification Using Deep Learning: Datasets, Performance Measurements, Challenges and Opportunities}
+\label{sec:paper_7}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} A. Naeem; M. S. Farooq; A. Khelifi; A. Abid \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2020) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2020.3001507}{10.1109/ACCESS.2020.3001507} \quad | \quad \textbf{IEEE Article Number:} 9113301 \\
+\textbf{Thematic Category:} \textsc{Systematic Literature Review (Kitchenham SLR)} \quad | \quad \textbf{Citation:} \cite{9113301}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Lack of standardized evaluation protocols, heterogeneous dataset partitions, and unaddressed class imbalance prevent objective comparison of deep learning melanoma diagnostic algorithms.
+
+\paragraph{Literature Synthesis:} This work presents a systematic evaluation and unified experimental benchmarking of deep learning methodologies developed for malignant melanoma screening, addressing the acute lack of standardized evaluation protocols across diverse dermatological repositories. The authors conducted comparative experiments across five public benchmark datasets: PH2 (200 images), ISIC 2016 (900 training, 379 test), ISIC 2017 (2,000 images), ISIC 2018 (10,015 images), and HAM10000, analyzing binary and multiclass formulations. Standardized preprocessing encompassed aspect-ratio preserving resizing, hair artifact suppression, color normalization, and geometric data augmentations (horizontal/vertical flipping, zooming). The study systematically benchmarked pre-trained Convolutional Neural Network (CNN) architectures including ResNet-50, VGG-16, Inception-v3, and DenseNet-121 under uniform transfer learning protocols. Across the evaluated architectures, the highest reported classification accuracy reached 93.4\%, with an average sensitivity of 91.0\%, specificity of 94.2\%, and an AUC of 0.95 under cross-validation. Precision and F1-scores were not uniformly reported across all baseline models in the text. The primary strength of this work is establishing an objective comparative baseline across disparate benchmarks. However, the authors identified critical research gaps: severe class imbalance that artificially inflates accuracy, absence of multi-center clinical validation, and insufficient integration of clinical demographic metadata in existing deep learning diagnostic pipelines.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [SLR Explicit RQ1: Model Taxonomy]:} \textit{What type of deep learning based classifiers are used for diagnosing melanoma disease?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Conducted a systematic literature review following the Kitchenham protocol across IEEE, Springer, Elsevier, ACM, ScienceDirect, and Medline from 2014 to 2020.
+    \item \textbf{Empirical Answer \& Evidence:} Pre-trained CNN architectures dominate the literature (ResNet-50, VGG-16, Inception-v3, and DenseNet-121), with transfer learning being the preferred strategy to overcome medical image scarcity.
+  \end{itemize}
+  \item \textbf{RQ2 [SLR Explicit RQ2: Performance Measurement]:} \textit{What is the performance measurement used for the evaluation of deep learning models in melanoma diagnosis?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Analyzed performance metric reporting standards across 52 finalized peer-reviewed publications.
+    \item \textbf{Empirical Answer \& Evidence:} Accuracy, Sensitivity (Recall), Specificity, and ROC-AUC are the primary metrics; best models achieve ~93.4\% accuracy and 0.95 AUC, but precision and F1 are inconsistently reported.
+  \end{itemize}
+  \item \textbf{RQ3 [SLR Explicit RQ3: Dataset Taxonomy]:} \textit{What type of datasets are used for melanoma diagnosis in existing literature?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Categorized benchmark repositories, sample sizes, class distributions, and data accessibility across published studies.
+    \item \textbf{Empirical Answer \& Evidence:} Public benchmarks dominate: ISIC Challenge archives (2016-2018), HAM10000, and PH2 are universally used, but severe class imbalance (benign nevi >> melanoma) universally distorts accuracy.
+  \end{itemize}
+  \item \textbf{RQ4 [SLR Research Gaps \& Opportunities]:} \textit{What are the critical open challenges and future research opportunities identified in deep learning melanoma diagnosis?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Synthesized unresolved methodological and clinical gaps across the systematic review corpus.
+    \item \textbf{Empirical Answer \& Evidence:} Identified 3 major gaps: (1) lack of prospective multi-center clinical validation, (2) failure to integrate clinical demographic metadata, and (3) vulnerability to adversarial artifacts and hair occlusions.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} PH2 (200 images), ISIC 2016 (1,279 images), ISIC 2017 (2,000 images), ISIC 2018 (10,015 images), HAM10000
+  \item \textbf{Key Empirical Results:} \textbf{Highest Benchmark Accuracy}: 93.4\% \quad | \quad \textbf{Average Sensitivity}: 91.0\% \quad | \quad \textbf{Average Specificity}: 94.2\% \quad | \quad \textbf{Peak AUC}: 0.95
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{How can standardized cross-validation benchmarks be enforced across IEEE and medical AI publications?}
+  \item \textit{What multimodal architectures best fuse clinical patient metadata with deep dermoscopic visual embeddings?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

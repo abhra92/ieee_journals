@@ -1,0 +1,116 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{cite}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{15pt}
+\lhead{\small\textit{Research Questions Catalog}}
+\rhead{\small\textit{Medical Deep Learning (39 Papers)}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!80!black,
+    citecolor=green!60!black,
+    filecolor=magenta,
+    urlcolor=blue!70!black
+}
+
+\providecommand{\IEEEkeywords}[1]{\textbf{\textit{Keywords:}} #1}
+
+\begin{document}
+
+\input{sections/00_frontmatter.tex}
+
+\thispagestyle{plain}
+\setcounter{tocdepth}{1}
+\tableofcontents
+\vspace{2.5em}
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=\textbf{Monograph Structure \& Navigation Guide}]
+\small
+This comprehensive research monograph synthesizes Research Questions across 39 peer-reviewed publications.
+\begin{itemize}[leftmargin=1.5em, itemsep=0.4em]
+    \item \textbf{Section 1 (Methodology):} Epistemological formulation of RQs, Kitchenham SLR criteria, and the standardized 4D extraction schema (pages~\pageref{sec:methodology}--\pageref{sec:matrix}).
+    \item \textbf{Section 2 (Master Matrix):} Multi-page comparative matrix indexing all 39 papers, problem domains, architectures, and empirical findings (pages~\pageref{sec:matrix}--\pageref{sec:papers_catalog}).
+    \item \textbf{Section 3 (Paper Catalog):} Complete, unabridged analyses for \textbf{Papers 1 through 39} (pages~\pageref{sec:papers_catalog}--\pageref{sec:thematic_synthesis}), detailing 3--4 structured RQs, experimental designs, quantitative metrics, and open gaps for each paper.
+    \item \textbf{Section 4 (Thematic Synthesis):} Cross-study synthesis across 6 core architectural and clinical themes (pages~\pageref{sec:thematic_synthesis}--\pageref{sec:open_rqs}).
+    \item \textbf{Section 5 (Open Research Agenda):} Consolidated frontiers in demographic equity, generative hallucination, and edge translation (pages~\pageref{sec:open_rqs}--\pageref{sec:references}).
+\end{itemize}
+\end{tcolorbox}
+\newpage
+
+\input{sections/01_introduction_methodology.tex}
+\newpage
+
+\input{sections/02_taxonomy_matrix.tex}
+\newpage
+
+\section{Comprehensive Catalog of Individual Research Papers (1--39)}
+\label{sec:papers_catalog}
+This section provides the complete, unabridged extraction and formalization of Research Questions across all 39 peer-reviewed publications. Each entry details the primary problem formulation, structured RQs across methodological dimensions, experimental designs, empirical answers, and explicitly acknowledged open research gaps.
+\vspace{1em}
+
+\input{papers/paper_01.tex}
+\input{papers/paper_02.tex}
+\input{papers/paper_03.tex}
+\input{papers/paper_04.tex}
+\input{papers/paper_05.tex}
+\input{papers/paper_06.tex}
+\input{papers/paper_07.tex}
+\input{papers/paper_08.tex}
+\input{papers/paper_09.tex}
+\input{papers/paper_10.tex}
+\input{papers/paper_11.tex}
+\input{papers/paper_12.tex}
+\input{papers/paper_13.tex}
+\input{papers/paper_14.tex}
+\input{papers/paper_15.tex}
+\input{papers/paper_16.tex}
+\input{papers/paper_17.tex}
+\input{papers/paper_18.tex}
+\input{papers/paper_19.tex}
+\input{papers/paper_20.tex}
+\input{papers/paper_21.tex}
+\input{papers/paper_22.tex}
+\input{papers/paper_23.tex}
+\input{papers/paper_24.tex}
+\input{papers/paper_25.tex}
+\input{papers/paper_26.tex}
+\input{papers/paper_27.tex}
+\input{papers/paper_28.tex}
+\input{papers/paper_29.tex}
+\input{papers/paper_30.tex}
+\input{papers/paper_31.tex}
+\input{papers/paper_32.tex}
+\input{papers/paper_33.tex}
+\input{papers/paper_34.tex}
+\input{papers/paper_35.tex}
+\input{papers/paper_36.tex}
+\input{papers/paper_37.tex}
+\input{papers/paper_38.tex}
+\input{papers/paper_39.tex}
+\newpage
+\input{sections/03_thematic_synthesis.tex}
+\newpage
+\input{sections/04_open_research_questions.tex}
+\newpage
+\section*{References}
+\label{sec:references}
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

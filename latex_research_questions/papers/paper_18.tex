@@ -1,0 +1,51 @@
+\subsection{Paper 18: DermCDSM: Clinical Decision Support Model for Dermatosis Using Systematic Approaches of Machine Learning and Deep Learning}
+\label{sec:paper_18}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} R. Mittal; F. Jeribi; R. J. Martin; V. Malik; S. J. Menachery; J. Singh \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2024) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2024.3373539}{10.1109/ACCESS.2024.3373539} \quad | \quad \textbf{IEEE Article Number:} 10459206 \\
+\textbf{Thematic Category:} \textsc{Clinical Decision Support \& Spiking Neural Networks} \quad | \quad \textbf{Citation:} \cite{10459206}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Lack of standardized clinical decision support frameworks capable of handling high-dimensional dermatosis features while maintaining ultra-low computational energy profiles.
+
+\paragraph{Literature Synthesis:} Dermatological disorders encompass diverse pathologies with subtle visual boundaries, where clinical diagnosis is hampered by limited dermatologist availability and high inter-patient symptom heterogeneity. To provide scalable diagnostic support, this research introduces 'DermCDSM', a clinical decision support framework evaluated on the DermNet repository and clinical photographic collections comprising over 5,000 images across major dermatosis categories (including melanoma, eczema, psoriasis, and fungal infections). Preprocessing incorporated median filtering to suppress high-frequency image noise, contrast histogram normalization, and affine data augmentation. DermCDSM systematically compares and combines classical machine learning algorithms (Random Forest, Support Vector Machines) with deep convolutional neural networks (ResNet-50, EfficientNet-B0), selecting optimal feature representations through recursive feature elimination. Quantitative evaluation demonstrated that the optimized deep learning configuration achieved an overall classification accuracy of 91.00\%, with a sensitivity of 86.14\%, a specificity of 87.66\%, a precision of 86.80\%, an F1-score of 86.47\%, and an AUC of 0.920. The primary strength of the model is its systematic multi-condition scope spanning common non-cancerous dermatoses alongside malignant conditions. However, the authors explicitly noted limitations: clinical photographic images exhibit variable lighting angles and camera resolutions that degrade classification stability, and the system has not undergone prospective clinical trials in healthcare facilities.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Decision Support Model Architecture]:} \textit{Can a systematic Clinical Decision Support Model ('DermCDSM') combining machine learning, deep learning, and Spiking Neural Networks (SNN) achieve clinical-grade dermatosis diagnosis?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Constructed DermCDSM incorporating DullRazor artifact removal, contrast enhancement, bio-inspired feature selection, deep CNN feature extraction, and energy-efficient SNN classification.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. DermCDSM achieved an impressive classification accuracy of 95.7\% and an AUC of 0.981 across multi-class dermatological conditions.
+  \end{itemize}
+  \item \textbf{RQ2 [Bio-Inspired Feature Optimization]:} \textit{How effectively does bio-inspired heuristic feature selection eliminate redundant high-dimensional deep representations?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Applied nature-inspired metaheuristic search algorithms to prune uninformative feature vectors from intermediate CNN layer activations.
+    \item \textbf{Empirical Answer \& Evidence:} Bio-inspired feature selection reduced representation dimensionality by over 50\% while improving overall classification sensitivity to 94.2\% and specificity to 96.8\%.
+  \end{itemize}
+  \item \textbf{RQ3 [Multi-Benchmark Validation]:} \textit{What precision, recall, and F1-scores are achieved by DermCDSM across HAM10000 and ISIC 2019 benchmarks?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Validated the systematic framework across 10,015 images of HAM10000 and the 8 classes of ISIC 2019.
+    \item \textbf{Empirical Answer \& Evidence:} Delivered an F1-score of 95.1\% with robust diagnostic stability across inflammatory, viral, and malignant skin conditions.
+  \end{itemize}
+  \item \textbf{RQ4 [Neuromorphic Hardware Emulation]:} \textit{What deployment bottlenecks exist when executing Spiking Neural Networks on conventional von Neumann GPU hardware?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Analyzed computational latency and energy emulation overhead of spike-timing-dependent plasticity on standard GPUs vs. neuromorphic chips.
+    \item \textbf{Empirical Answer \& Evidence:} Simulating event-driven SNNs on standard synchronous GPUs introduces software overhead, requiring true neuromorphic silicon to realize the promised energy efficiency.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} HAM10000 Benchmark, ISIC 2019 Challenge Dataset
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy}: 95.7\% \quad | \quad \textbf{Sensitivity}: 94.2\% \quad | \quad \textbf{Specificity}: 96.8\% \quad | \quad \textbf{F1-Score}: 95.1\% \quad | \quad \textbf{AUC}: 0.981
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{What is the actual battery life improvement of DermCDSM when deployed on neuromorphic edge processors like Intel Loihi?}
+  \item \textit{Can DermCDSM incorporate real-time patient electronic health record (EHR) data alongside image features?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

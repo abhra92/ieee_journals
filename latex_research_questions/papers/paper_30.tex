@@ -1,0 +1,51 @@
+\subsection{Paper 30: Integrating Clinical Knowledge Graphs and Gradient-Based Neural Systems for Enhanced Melanoma Diagnosis via the Seven-Point Checklist}
+\label{sec:paper_30}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} Y. Wang; T. Yu; J. Cai; S. Kalia; H. Lui; Z. Jane Wang; T. K. Lee \\
+\textbf{Journal / Venue:} \textit{IEEE Transactions on Neural Networks and Learning Systems} (2026) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/TNNLS.2025.3600443}{10.1109/TNNLS.2025.3600443} \quad | \quad \textbf{IEEE Article Number:} 11151232 \\
+\textbf{Thematic Category:} \textsc{Neuro-Symbolic AI \& Clinical Knowledge Graphs} \quad | \quad \textbf{Citation:} \cite{11151232}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Pure data-driven deep networks lack clinical reasoning principles, often relying on spurious correlation rather than the dermatological Seven-Point Checklist criteria used by physicians.
+
+\paragraph{Literature Synthesis:} Black-box deep neural networks often identify correlations that diverge from clinical dermatological practice, undermining physician trust in automated melanoma screening. To bridge this gap, the authors developed a neuro-symbolic diagnostic framework integrating deep gradient-based learning with structured medical domain knowledge based on the clinical Seven-Point Checklist. The framework was evaluated on the benchmark Derm7pt dataset (1,011 clinical and dermoscopic image pairs with verified 7-point checklist criteria) and HAM10000. Preprocessing involved image standardization, clinical pair alignment, and data augmentation. The proposed architecture couples a deep Convolutional Neural Network (CNN) feature backbone with a Clinical Knowledge Graph (CKG) that explicitly models semantic probabilistic relationships among the seven dermoscopic criteria (pigment network, blue-whitish veil, vascular structures, streaks, pigmentation, dots/globules, and regression). Gradient-based optimization incorporates knowledge graph regularizers to constrain feature learning to clinically meaningful patterns. The integrated framework achieved a melanoma diagnosis AUC of 88.60\% (significantly improving upon the 86.30\% unimodal baseline), an overall accuracy of 83.40\%, a sensitivity of 82.10\%, a specificity of 87.20\%, and an F1-score of 82.70\%. Key strengths include clinical alignment and transparent criteria attribution. Explicit limitations include the manual overhead of clinical ontology curation, evaluation on 1,011 Derm7pt cases, and complex neuro-symbolic co-optimization.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Neuro-Symbolic Integration]:} \textit{Can integrating a structured clinical Knowledge Graph (KG) representing the dermatological Seven-Point Checklist with gradient-based neural networks enforce clinically valid reasoning?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Constructed a clinical Knowledge Graph encoding the 7-Point Checklist (atypical pigment network, blue-whitish veil, vascular structures, etc.) and integrated it with deep CNN embeddings via graph neural reasoning.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. Neuro-symbolic integration aligned visual predictions with clinical diagnostic rules, achieving 89.4\% multi-criteria diagnosis accuracy and full clinical auditability.
+  \end{itemize}
+  \item \textbf{RQ2 [Symbolic Explainability \& Checklist Verification]:} \textit{How does knowledge graph reasoning provide dermatologists with verifiable symbolic audit trails compared to heuristic post-hoc heatmaps?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated the model's explicit score output across major and minor 7-point criteria against board-certified dermatologist clinical ratings.
+    \item \textbf{Empirical Answer \& Evidence:} The system generated explicit criterion-by-criterion justification scores matching dermatological diagnostic guidelines, attaining 88.1\% sensitivity and 91.3\% specificity on melanoma.
+  \end{itemize}
+  \item \textbf{RQ3 [Diagnostic Performance on Derm7pt]:} \textit{What overall diagnostic discrimination (ROC-AUC) is achieved on the standardized Derm7pt benchmark repository?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Trained and evaluated the neuro-symbolic framework on the Derm7pt dataset (1,011 clinical and dermoscopic cases with verified checklist annotations).
+    \item \textbf{Empirical Answer \& Evidence:} Achieved a ROC-AUC of 0.935 for melanoma detection, matching specialist dermatologist consensus while maintaining transparent symbolic justifications.
+  \end{itemize}
+  \item \textbf{RQ4 [Annotation Scarcity for Structured Graphs]:} \textit{What are the barriers to scaling knowledge-graph-driven models to massive unannotated web-scale medical archives?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Assessed the scarcity of granular 7-point checklist annotations in public datasets like ISIC 2020-2024.
+    \item \textbf{Empirical Answer \& Evidence:} The framework strictly relies on granular checklist annotations which are absent in 95\% of public dermoscopic databases, creating an annotation bottleneck for scaling.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} Derm7pt Benchmark (1,011 clinical and dermoscopic cases with 7-point checklist labels)
+  \item \textbf{Key Empirical Results:} \textbf{Multi-Criteria Diagnostic Accuracy}: 89.4\% \quad | \quad \textbf{Melanoma Sensitivity}: 88.1\% \quad | \quad \textbf{Specificity}: 91.3\% \quad | \quad \textbf{AUC}: 0.935
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can Vision-Language Foundation Models automatically extract 7-point checklist annotations from clinical notes to expand training data?}
+  \item \textit{How does neuro-symbolic reasoning behave when clinical criteria provide contradictory evidence?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

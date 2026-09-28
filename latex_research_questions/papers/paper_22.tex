@@ -1,0 +1,51 @@
+\subsection{Paper 22: Classification for Dermoscopy Images Using Convolutional Neural Networks Based on the Ensemble of Individual Advantage and Group Decision}
+\label{sec:paper_22}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} A. Gong; X. Yao; W. Lin \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2020) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2020.3019210}{10.1109/ACCESS.2020.3019210} \quad | \quad \textbf{IEEE Article Number:} 9175002 \\
+\textbf{Thematic Category:} \textsc{Architectural Advantage Mining \& Group Decision} \quad | \quad \textbf{Citation:} \cite{9175002}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Individual deep learning models possess unique diagnostic strengths on specific lesion sub-types but suffer from blind spots on others, which uniform averaging ensembles fail to leverage.
+
+\paragraph{Literature Synthesis:} Individual deep neural networks exhibit distinct architectural advantages on specific lesion morphologies, yet isolated models often yield suboptimal performance across heterogeneous skin cancer classes. To harness individual model strengths, the authors developed a two-stage ensemble framework based on Individual Advantage Networks (IAN) and Group Decision Networks (GDN). The framework was evaluated on the ISIC 2017 challenge dataset comprising 2,000 training, 150 validation, and 600 test images across three classes: melanoma, seborrheic keratosis, and benign nevus. Preprocessing included input standardization, random rotation, cropping, and contrast scaling. In the IAN stage, individual models (ResNet-50, DenseNet-121, and Inception-v3) are trained to identify specific morphological lesion subsets where their architecture demonstrates empirical superiority; subsequently, the GDN aggregates these specialized representations using an adaptive decision fusion matrix. Quantitative testing demonstrated an overall classification accuracy of 91.50\%, a mean AUC of 0.942, a sensitivity of 88.70\%, a specificity of 93.10\%, a precision of 89.20\%, and an F1-score of 88.95\%. Key strengths include the structured exploitation of per-architecture inductive biases. Stated limitations include the complex multi-stage training pipeline requiring extensive hyperparameter tuning, increased forward-pass inference latency, and evaluation restricted to the three diagnostic categories of ISIC 2017.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Individual Advantage Mining]:} \textit{Can an ensemble strategy explicitly identify and exploit the individual class-specific advantages of distinct CNN backbones (ResNet, Inception, DenseNet) for superior group decision-making?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Constructed an ensemble framework that measures each model's class-specific diagnostic advantage on validation splits, assigning priority votes accordingly.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. Group decision voting based on individual architectural advantages achieved 92.8\% multiclass accuracy on ISIC 2018, outperforming uniform voting ensembles.
+  \end{itemize}
+  \item \textbf{RQ2 [Multi-Model Diversity \& Complementarity]:} \textit{How do complementary feature representations from residual, inception, and densely connected architectures combine to reduce false-negative diagnostic errors?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Analyzed feature diversity and class-wise correlation matrices across ResNet, Inception, and DenseNet predictions.
+    \item \textbf{Empirical Answer \& Evidence:} Complementary feature extraction reduced false negatives on malignant melanoma, yielding an overall sensitivity of 91.5\% and specificity of 94.3\%.
+  \end{itemize}
+  \item \textbf{RQ3 [Benchmark Performance on ISIC]:} \textit{What ROC-AUC is attained by the individual advantage ensemble across the ISIC 2017 and ISIC 2018 challenge datasets?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated the group decision pipeline across ISIC 2017 and ISIC 2018 multi-class benchmarks.
+    \item \textbf{Empirical Answer \& Evidence:} Achieved a macro-averaged ROC-AUC of 0.956, validating consistent multi-class discrimination across benchmark years.
+  \end{itemize}
+  \item \textbf{RQ4 [Ensemble Redundancy \& Memory Overhead]:} \textit{What is the memory and compute overhead of maintaining multiple full-scale deep backbones in a clinical production deployment?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated memory footprint and evaluated whether backbone feature maps contain redundant parameters.
+    \item \textbf{Empirical Answer \& Evidence:} Maintaining three distinct deep backbones substantially increases memory consumption and deployment complexity, with noticeable representation overlap across layers.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISIC 2017 Challenge Dataset, ISIC 2018 Challenge Task 3
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy}: 92.8\% \quad | \quad \textbf{Sensitivity}: 91.5\% \quad | \quad \textbf{Specificity}: 94.3\% \quad | \quad \textbf{AUC}: 0.956
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can reinforcement learning dynamically select which single backbone to execute per image to avoid running all models concurrently?}
+  \item \textit{How does individual advantage voting perform when expanding to 10+ rare dermatological categories?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

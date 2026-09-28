@@ -1,0 +1,36 @@
+\section{Research Methodology \& Formulation of Research Questions}
+\label{sec:methodology}
+
+\subsection{The Epistemological Role of Research Questions in Medical AI}
+In scientific research methodology, a research question acts as the fundamental axis around which study design, algorithmic experimentation, empirical hypothesis testing, and clinical validation revolve. Within the intersection of computer vision, deep learning, and oncology, research questions must bridge computational novelty (e.g., parameter efficiency, loss formulation, attention mechanisms) with rigorous clinical utility (e.g., sensitivity to early-stage malignant melanoma, reduction of false-positive biopsy rates, and transparency).
+
+Unlike exploratory coding or benchmark leaderboarding, academic research demands that every architectural modification or experimental ablation answer a specific, measurable question. In this study, we systematically survey 39 peer-reviewed publications preserved in the \texttt{downloaded\_journals/} archive. We categorize the literature into two distinct methodological paradigms:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Secondary Research / Systematic Literature Reviews (SLR):} Exemplified by Paper 7 (\cite{9113301}), which explicitly establishes formal Research Questions following the Kitchenham and Charters guidelines~\cite{kitchenham2007} to survey deep learning classifiers, evaluation metrics, and dataset distributions.
+    \item \textbf{Primary Design Science \& Empirical Studies:} Comprising the remaining 38 papers, which formulate hypotheses and research inquiries through technical problem statements, comparative baselines, and ablation studies.
+\end{enumerate}
+
+\subsection{Standardized Four-Dimensional RQ Extraction Schema}
+To establish an objective, uniform standard across all 39 papers, each empirical investigation has been analyzed and formalized across four canonical research methodology dimensions:
+
+\begin{description}[leftmargin=!]
+    \item[\textbf{Dimension 1: Architectural Innovation \& Algorithmic Design (RQ1)}] 
+    What specific neural topology, mathematical regularization, dynamic loss function, or attention mechanism is proposed to address existing computational bottlenecks (e.g., overfitting, spatial information loss, gradient vanishing, or high parameter count)?
+    
+    \item[\textbf{Dimension 2: Preprocessing, Data Representation \& Artifact Handling (RQ2)}] 
+    How do data transformations (e.g., power-law gamma correction, DullRazor artifact suppression, deep inpainting, Normalized Cross-Correlation, or generative synthetic augmentation) affect the separability of subtle morphological features?
+    
+    \item[\textbf{Dimension 3: Clinical Diagnostic Performance \& Benchmarking (RQ3)}] 
+    What quantitative diagnostic accuracy, sensitivity, specificity, F1-score, and ROC-AUC does the proposed method achieve on international benchmark repositories (ISIC 2016--2024, HAM10000, PH2, DermIS, DermQuest) in comparison to state-of-the-art baselines?
+    
+    \item[\textbf{Dimension 4: Explainability, Computational Efficiency \& Clinical Translation (RQ4)}] 
+    How does the framework provide verifiable clinical auditability (e.g., Grad-CAM, case-based twin retrieval, neuro-symbolic checklists, or textual report generation) and achieve runtime latency compatible with edge-device or mobile point-of-care screening?
+\end{description}
+
+\subsection{Evidence-Bound Anti-Hallucination Extraction Protocol}
+To preserve absolute scientific fidelity, all extractions adhere to a strict verification protocol:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Zero Extrapolation:} Only quantitative metrics, sample counts, and architectural details explicitly confirmed in the paper text and literature index are reported.
+    \item \textbf{Explicit Omission Tracking:} Where specific metrics (e.g., standalone precision, F1-score, or inference latency) were omitted by the original authors, this absence is explicitly noted rather than inferred.
+    \item \textbf{Unresolved Gap Cataloging:} For every paper, the specific research gaps, edge cases, and future directions acknowledged by the authors are systematically cataloged.
+\end{itemize}

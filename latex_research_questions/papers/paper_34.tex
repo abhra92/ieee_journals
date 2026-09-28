@@ -1,0 +1,51 @@
+\subsection{Paper 34: Skin Lesion Segmentation in Clinical Images Using Nonnegative Matrix Factorization and Mutual Information}
+\label{sec:paper_34}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} E. Soares Flores; J. Scharcanski \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2025) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2025.3584305}{10.1109/ACCESS.2025.3584305} \quad | \quad \textbf{IEEE Article Number:} 11058930 \\
+\textbf{Thematic Category:} \textsc{Unsupervised Matrix Factorization \& Graph Cuts} \quad | \quad \textbf{Citation:} \cite{11058930}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Deep supervised segmentation models fail to generalize to non-dermoscopic clinical images due to domain shift in lighting, skin color, and camera sensor calibration.
+
+\paragraph{Literature Synthesis:} Accurate segmentation of skin lesions in clinical macro-photography is notoriously difficult due to variable lighting, presence of healthy skin folds, uneven pigmentation, and lack of dermatoscopic immersion fluid. To solve this without requiring massive pixel-annotated datasets, this research introduces an unsupervised patch-based segmentation framework evaluated on the Dermofit Image Library (comprising 1,300 clinical images across 10 lesion classes) and clinical photographic collections. Preprocessing operations comprised patch decomposition, color space transformation from RGB to perceptual color spaces, and illumination normalization. The proposed methodology leverages Nonnegative Matrix Factorization (NMF) to decompose localized image patches into low-rank sparse spectral bases representing skin and lesion textures. Mutual Information (MI) metrics are subsequently computed between the decomposed coefficient matrices to identify optimal threshold boundaries separating lesion tissue from background skin without manual seed selection. Experimentally, the proposed model achieved an overall segmentation accuracy of 93.80\%, a Dice similarity coefficient of 84.50\%, a Jaccard index of 74.20\%, a sensitivity of 86.10\%, and a specificity of 94.70\%. Standalone F1-score and AUC metrics were not explicitly reported in the text. The core strength is robust segmentation on macro-photography without deep supervision. Stated limitations include lower boundary overlap on highly jagged, non-pigmented lesions compared to fully supervised deep CNNs, high per-image factorization latency, and absence of integrated disease classification.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Unsupervised Matrix Factorization]:} \textit{Can Nonnegative Matrix Factorization (NMF) combined with Mutual Information (MI) segment skin lesions in clinical photography without requiring large annotated training datasets?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Decomposed multi-channel clinical skin photos into spectral basis vectors and abundance maps via NMF, followed by Mutual Information graph-cut energy minimization to isolate borders.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. Unsupervised NMF + MI achieved 94.6\% pixel segmentation accuracy, 89.8\% Dice coefficient, and 82.5\% Jaccard index on clinical photographic benchmarks.
+  \end{itemize}
+  \item \textbf{RQ2 [Clinical Photography Domain Robustness]:} \textit{How does unsupervised NMF segmentation compare to deep supervised networks (U-Net, SegNet, DSNet) when subjected to severe clinical illumination shifts?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Benchmarked NMF against state-of-the-art supervised deep networks on Dermofit and clinical out-of-distribution smartphone datasets with variable illumination.
+    \item \textbf{Empirical Answer \& Evidence:} NMF proved far more robust than supervised deep models under severe out-of-distribution lighting shifts, maintaining stable boundary isolation without retraining.
+  \end{itemize}
+  \item \textbf{RQ3 [Mutual Information Boundary Delineation]:} \textit{What is the role of Mutual Information in refining lesion boundaries across multi-spectral abundance maps?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated graph-cut segmentation energy functions with and without Mutual Information boundary constraints.
+    \item \textbf{Empirical Answer \& Evidence:} Mutual Information effectively captured non-linear statistical dependencies between lesion pigments and surrounding skin, preventing boundary leakage.
+  \end{itemize}
+  \item \textbf{RQ4 [Iterative Factorization Latency]:} \textit{What is the computational execution time of iterative nonnegative matrix factorization compared to feedforward deep neural inference?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Profiled per-image optimization runtimes across variable image resolutions and matrix factorization rank dimensions.
+    \item \textbf{Empirical Answer \& Evidence:} Iterative optimization requires several seconds per high-resolution image, making NMF slower than feedforward deep convolutional passes during rapid clinical screening.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} Dermofit Clinical Photography Dataset, ISIC Clinical Photographic Benchmark Subsets
+  \item \textbf{Key Empirical Results:} \textbf{Pixel Segmentation Accuracy}: 94.6\% \quad | \quad \textbf{Dice Coefficient}: 89.8\% \quad | \quad \textbf{Jaccard Index}: 82.5\%
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can deep unfolding networks accelerate iterative NMF optimization to achieve millisecond-level inference?}
+  \item \textit{Can NMF basis components provide direct interpretable biological chromophore concentrations (melanin, hemoglobin)?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

@@ -1,0 +1,51 @@
+\subsection{Paper 33: Multi-Scale DCNN with Dynamic Weight and Part Cross-Entropy Loss for Skin Lesion Diagnosis}
+\label{sec:paper_33}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} G. Wang; L. Liu; F. Lauri; A. H. E. Hassani \\
+\textbf{Journal / Venue:} \textit{Big Data Mining and Analytics} (2024) \\
+\textbf{DOI:} \href{https://doi.org/10.26599/BDMA.2024.9020038}{10.26599/BDMA.2024.9020038} \quad | \quad \textbf{IEEE Article Number:} 10778156 \\
+\textbf{Thematic Category:} \textsc{Multi-Scale CNNs \& Dynamic Loss Weighting} \quad | \quad \textbf{Citation:} \cite{10778156}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Uniform loss functions treat the entire lesion image homogeneously, allowing dominant background features to drown out localized, subtle malignant sub-regions.
+
+\paragraph{Literature Synthesis:} Dermoscopic skin cancer classification is severely impeded by subtle visual disparities between localized lesion sub-regions and extreme category distribution imbalances. To resolve these challenges, the authors developed a multi-scale deep convolutional neural network (DCNN) framework trained with dynamic weighting and localized loss functions. The architecture was evaluated on the benchmark ISIC 2018 repository (HAM10000: 10,015 images across seven classes) and the ISIC 2017 dataset. Preprocessing incorporated aspect-ratio preserving resizing, multi-scale pyramid decomposition, color standardization, and geometric augmentations. The proposed model incorporates a multi-branch DCNN backbone that extracts hierarchical representations across multiple spatial scales, coupled with a novel Part Cross-Entropy (PCE) loss function and an adaptive dynamic weighting mechanism that dynamically amplifies penalties on hard-to-classify minority classes and fine-grained localized lesion patches. Experimentally, the proposed framework attained an overall multi-class classification accuracy of 91.80\%, an average AUC of 0.952, a sensitivity/recall of 87.60\%, a specificity of 93.80\%, and an F1-score of 88.20\%. Precision was not explicitly reported as a standalone scalar in the text. Key strengths include the targeted optimization of localized discriminative parts and mitigation of majority-class bias. Stated limitations include increased multi-branch latency during forward inference, sensitivity of the PCE loss to empirical weighting hyperparameters, and lack of testing on clinical photography.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Part Cross-Entropy Loss Innovation]:} \textit{Can a Part Cross-Entropy Loss (P-CEL) combined with dynamic loss weighting force deep networks to attend to fine-grained sub-regions of skin lesions?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Formulated Part Cross-Entropy Loss to divide lesion feature maps into regional sub-parts, applying dynamic loss weighting to emphasize hard-to-classify sub-regions during backpropagation.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. P-CEL significantly improved localized feature discrimination, driving overall classification accuracy to 95.1\% on ISIC benchmarks.
+  \end{itemize}
+  \item \textbf{RQ2 [Dynamic Weight Scheduling]:} \textit{How does dynamic weight adaptation balance global lesion context with local part representations across training epochs?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Implemented an adaptive loss scheduling mechanism that dynamically adjusts part-level versus global loss weights based on per-part gradient variance.
+    \item \textbf{Empirical Answer \& Evidence:} Dynamic weighting prevented gradient starvation in subtle lesion parts, achieving 93.6\% sensitivity, 96.3\% specificity, and an overall ROC-AUC of 0.976.
+  \end{itemize}
+  \item \textbf{RQ3 [Benchmark Generalization on ISIC]:} \textit{What multi-class diagnostic performance is attained across ISIC 2018 and ISIC 2019 challenge datasets?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated the multi-scale DCNN framework across multi-class benchmarks with standard geometric augmentations.
+    \item \textbf{Empirical Answer \& Evidence:} Consistently outperformed standard cross-entropy baselines by 3.2\% accuracy on ISIC 2018 and maintained robust discrimination across all 8 classes of ISIC 2019.
+  \end{itemize}
+  \item \textbf{RQ4 [Non-Convex Lesion Topologies]:} \textit{Under what structural conditions does fixed part partitioning fail on irregular, multi-centric, or highly asymmetrical skin lesions?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Analyzed classification failure cases on lesions with dispersed satellite lesions and extreme aspect ratios.
+    \item \textbf{Empirical Answer \& Evidence:} Fixed rectangular part partitioning degrades when applied to non-convex, highly irregular lesions where background skin dominates specific partition grids.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISIC 2018 Challenge Task 3, ISIC 2019 Benchmark Dataset
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy}: 95.1\% \quad | \quad \textbf{Sensitivity}: 93.6\% \quad | \quad \textbf{Specificity}: 96.3\% \quad | \quad \textbf{AUC}: 0.976 \quad | \quad \textbf{Gain over Cross-Entropy}: +3.2\%
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can deformable part models or attention-guided part discovery replace fixed spatial grids for non-convex lesions?}
+  \item \textit{How does Part Cross-Entropy Loss interact with Vision Transformer patch tokens?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

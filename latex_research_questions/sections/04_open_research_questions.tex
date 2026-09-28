@@ -1,0 +1,24 @@
+\section{Consolidated Agenda of Open Research Questions for Future Inquiry}
+\label{sec:open_rqs}
+
+A critical requirement of research methodology is identifying unresolved questions and empirical frontiers. Synthesizing the limitations explicitly declared across all 39 publications reveals an urgent agenda of open research questions for the medical machine learning community:
+
+\subsection{Open Questions in Clinical Generalization \& Demographic Equity}
+\begin{enumerate}[label=\textbf{OQ-\arabic*.}, leftmargin=*]
+    \item \textbf{The Fitzpatrick Phototype Representation Deficit:} Public benchmark archives (ISIC, HAM10000, PH2) consist overwhelmingly of skin types I--III (light skin), with dark phototypes (Fitzpatrick IV--VI) representing less than 5\% of images. \textit{How can deep models be trained or regularized to maintain equitable diagnostic sensitivity and specificity across diverse racial and demographic populations without performance degradation on darker skin?}
+    \item \textbf{The Retrospective vs. Prospective Reality Gap:} Over 95\% of published models report performance exclusively on curated retrospective challenge benchmarks. \textit{What is the true false-positive and false-negative rate of state-of-the-art vision transformers when evaluated in prospective, multi-center outpatient clinics with uncurated patient populations?}
+    \item \textbf{Clinical Photography vs. Polarized Dermoscopy:} Smartphone-acquired clinical photographs exhibit uncontrolled ambient lighting, variable focus, flash glare, and shadow occlusions. \textit{How can domain adaptation frameworks bridge the severe feature distribution shift between high-magnification polarized dermoscopy and handheld patient smartphone photography?}
+\end{enumerate}
+
+\subsection{Open Questions in Algorithmic Robustness \& Mathematical Foundations}
+\begin{enumerate}[label=\textbf{OQ-\arabic*., resume}, leftmargin=*]
+    \item \textbf{Mathematical Guarantees Against Generative Hallucination:} Generative models (StyleGAN, diffusion pipelines) can synthesize convincing pigment reticulations that do not correspond to true pathology. \textit{What mathematical constraints or structural similarity metrics can guarantee that synthetic training samples preserve strict biological factuality?}
+    \item \textbf{Neuro-Symbolic Reasoning Under Incomplete Clinical Supervision:} Knowledge graph models (such as 7-point checklist systems) require granular clinical annotations that are absent in 95\% of public archives. \textit{How can weakly-supervised or self-supervised foundation models automatically infer structured clinical criteria directly from unannotated dermoscopic imagery?}
+    \item \textbf{Dynamic Test-Time Modality Imputation:} Multi-modal systems that fuse dermoscopy with patient metadata or clinical histories drop significantly in accuracy when test data is partially missing. \textit{How can generative multimodal imputation networks dynamically reconstruct missing patient demographic vectors at inference time without introducing spurious correlation?}
+\end{enumerate}
+
+\subsection{Open Questions in Edge Computing \& Point-of-Care Translation}
+\begin{enumerate}[label=\textbf{OQ-\arabic*., resume}, leftmargin=*]
+    \item \textbf{Ultra-Low-Power Neuromorphic Implementation:} Spiking Neural Networks (SNNs) and embedded IoMT devices promise sub-100ms inference on low-power battery-operated dermoscopes. \textit{Can event-driven neuromorphic silicon (e.g., Intel Loihi) execute real-time multi-class dermatological triage at sub-watt power envelopes?}
+    \item \textbf{Conversational Safety and Sycophancy Mitigation in Medical VLMs:} As vision-language models become conversational diagnostic agents, they risk agreeing with incorrect patient prompts (conversational sycophancy). \textit{What reinforcement learning from human feedback (RLHF) protocols are necessary to guarantee medical safety, certainty calibration, and appropriate clinical referral recommendations in multi-turn dialogues?}
+\end{enumerate}

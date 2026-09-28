@@ -1,0 +1,51 @@
+\subsection{Paper 9: FixCaps: An Improved Capsules Network for Diagnosis of Skin Cancer}
+\label{sec:paper_9}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} Z. Lan; S. Cai; X. He; X. Wen \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2022) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2022.3181225}{10.1109/ACCESS.2022.3181225} \quad | \quad \textbf{IEEE Article Number:} 9791221 \\
+\textbf{Thematic Category:} \textsc{Capsule Networks \& Attention Routing} \quad | \quad \textbf{Citation:} \cite{9791221}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Standard CNN pooling layers discard critical spatial part-whole relationships, while traditional Capsule Networks suffer from slow convergence and high compute latency due to iterative dynamic routing.
+
+\paragraph{Literature Synthesis:} Traditional Convolutional Neural Networks lose critical spatial part-whole hierarchies due to downsampling operations, while standard Capsule Networks suffer from high computational complexity in iterative dynamic routing. To overcome these defects, this study introduces 'FixCaps', an improved capsule network architecture designed for automated dermoscopic diagnosis. The authors evaluated FixCaps on the benchmark HAM10000 repository comprising 10,015 images spanning seven dermatological classes: melanoma, melanocytic nevi, basal cell carcinoma, actinic keratoses, benign keratosis, dermatofibroma, and vascular lesions. Preprocessing included color normalization, image resizing, and affine data augmentation. FixCaps replaces traditional dynamic routing with a fixed matrix transformation routing mechanism and integrates convolutional attention modules, drastically accelerating training convergence while retaining spatial transformation equivariance and vector feature representations. Quantitative experiments demonstrated that FixCaps achieved a peak classification accuracy of 96.49\%, a sensitivity of 93.47\%, a specificity of 98.13\%, a precision of 93.64\%, an F1-score of 93.55\%, and an AUC of 0.98. Key advantages include superior parameter efficiency and preservation of spatial lesion features. However, the authors explicitly noted limitations: computational latency remains higher than standard lightweight CNNs, minor performance degradation occurs on heavily underrepresented minority classes such as dermatofibroma, and the model was not tested on independent clinical photography.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Routing Algorithm Innovation]:} \textit{Can replacing iterative dynamic routing with a fixed matrix transformation routing mechanism ('FixCaps') eliminate the computational bottleneck of Capsule Networks in dermoscopy?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Replaced dynamic routing with fixed matrix transformation and incorporated convolutional attention modules to maintain transformation equivariance without routing iterations.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. FixCaps dramatically accelerated training convergence while retaining vector capsule representations, achieving an extraordinary peak accuracy of 96.49\% on HAM10000.
+  \end{itemize}
+  \item \textbf{RQ2 [Spatial Hierarchy \& Equivariance]:} \textit{How does vector capsule representation enhance feature discrimination across multi-class skin lesions with complex spatial sub-structures?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated vector activation norms for encoding lesion pose, orientation, and subtle textural patterns across 7 diagnostic categories.
+    \item \textbf{Empirical Answer \& Evidence:} Vector capsules effectively captured spatial part-whole relationships (pigment network to border), yielding 93.47\% sensitivity, 98.13\% specificity, and 0.98 AUC.
+  \end{itemize}
+  \item \textbf{RQ3 [Diagnostic Precision \& F1]:} \textit{What precision and F1-score are attained by FixCaps across the 10,015 images of the HAM10000 benchmark?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Benchmarked FixCaps using 5-fold cross-validation on color-normalized and augmented HAM10000 images.
+    \item \textbf{Empirical Answer \& Evidence:} FixCaps achieved 93.64\% precision and 93.55\% F1-score, establishing state-of-the-art capsule performance in dermatological CAD.
+  \end{itemize}
+  \item \textbf{RQ4 [Minority Class Robustness]:} \textit{What are the performance limitations of FixCaps on severely underrepresented minority classes such as dermatofibroma?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Class-wise sensitivity breakdown and evaluation on out-of-distribution clinical photography.
+    \item \textbf{Empirical Answer \& Evidence:} Minor sensitivity degradation was observed on rare classes (dermatofibroma), and the architecture was not validated on clinical (non-dermoscopic) photographs.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} HAM10000 (10,015 images across 7 classes)
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy}: 96.49\% \quad | \quad \textbf{Sensitivity}: 93.47\% \quad | \quad \textbf{Specificity}: 98.13\% \quad | \quad \textbf{Precision}: 93.64\% \quad | \quad \textbf{F1-Score}: 93.55\% \quad | \quad \textbf{AUC}: 0.98
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can FixCaps be adapted to segment lesion boundaries directly from capsule activation lengths?}
+  \item \textit{How does FixCaps perform on non-dermoscopic smartphone images taken under variable clinical lighting?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

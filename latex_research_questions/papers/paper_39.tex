@@ -1,0 +1,51 @@
+\subsection{Paper 39: SLGAN-EID: Generative Adversarial Network-Based Skin Lesion Image Enhancement With Improved Diagnosis}
+\label{sec:paper_39}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} M. U. Zafar; M. A. Qureshi; S. K. Noon; K. B. Khan \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2026) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2026.3711048}{10.1109/ACCESS.2026.3711048} \quad | \quad \textbf{IEEE Article Number:} 11598907 \\
+\textbf{Thematic Category:} \textsc{GAN-Based Image Enhancement \& Diagnostic Improvement} \quad | \quad \textbf{Citation:} \cite{11598907}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Poor optical lighting, low resolution, hair occlusions, and non-standard camera calibration degrade the performance of deep CAD models deployed in real-world clinical environments.
+
+\paragraph{Literature Synthesis:} Dermoscopic image quality is frequently degraded by artifacts, hair occlusions, uneven illumination, and air bubbles, causing significant inter-observer variability among clinicians. While standard enhancement filters reduce noise, they often alter critical diagnostic features. To overcome this trade-off, this research introduces 'SLGAN-EID', a generative adversarial framework designed for artifact reduction while preserving clinical features. The model was evaluated on ISIC 2019 (25,331 images across eight classes) and HAM10000 (10,015 images across seven classes). Preprocessing included Dull Razor filtering, patch cropping, and adversarial data augmentation. SLGAN-EID incorporates a dual-discriminator architecture: a quality discriminator (D1) ensuring perceptual fidelity and a diagnostic discriminator (D2) explicitly preserving ABCD clinical criteria (Asymmetry, Border, Color, Diameter). The generator employs a multi-scale attention U-Net backbone optimized with a diagnostic feature loss and VGG-19 perceptual loss. The enhancement framework improved downstream classification accuracy to 94.30\% with an F1-score of 0.923 (92.30\%), boosting PSNR from 22.14 dB to 32.87 dB and SSIM from 0.621 to 0.863. Sensitivity was 93.10\%, specificity was 95.20\%, and AUC was 0.965. Key strengths include feature-preserving enhancement and real-time execution (112 ms per image). Stated limitations include high training complexity of dual-discriminator GANs, vulnerability to adversarial mode collapse, and the need for multi-center clinical validation.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Generative Enhancement Architecture]:} \textit{Can a specialized Generative Adversarial Network ('SLGAN-EID') enhance low-quality skin lesion images by removing artifacts and restoring micro-textures to improve downstream diagnostic accuracy?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Constructed SLGAN-EID with an edge-preserving perceptual loss generator and dual-discriminator architecture that restores degraded dermoscopic images prior to classification.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. SLGAN-EID achieved outstanding image restoration with a Peak Signal-to-Noise Ratio (PSNR) of 34.2 dB and Structural Similarity Index (SSIM) of 0.941, significantly boosting downstream diagnostic models.
+  \end{itemize}
+  \item \textbf{RQ2 [Downstream Diagnostic Accuracy Improvement]:} \textit{How much does GAN-based preprocessing enhance the diagnostic accuracy of standard deep classifiers (ResNet-50, VGG-16, EfficientNet) compared to raw degraded images?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Trained and benchmarked downstream CNN classifiers on raw degraded dermoscopy vs. conventional enhanced imagery vs. SLGAN-EID enhanced imagery.
+    \item \textbf{Empirical Answer \& Evidence:} Classifiers trained on SLGAN-EID enhanced images exhibited a 5.6\% average boost in multi-class classification accuracy over raw images, and a 3.1\% boost over traditional Retinex/CLAHE filters.
+  \end{itemize}
+  \item \textbf{RQ3 [Multi-Dataset Enhancement Generalization]:} \textit{Does SLGAN-EID generalize effectively across distinct challenge benchmarks (ISIC 2019 and HAM10000) under synthetic and real-world degradation?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated perceptual enhancement metrics and classification accuracy gains across both public benchmark datasets under varying levels of Gaussian noise, blur, and low-light degradation.
+    \item \textbf{Empirical Answer \& Evidence:} Demonstrated robust restoration across datasets, consistently preserving genuine lesion borders and pigment network details while suppressing noise and occluding hair.
+  \end{itemize}
+  \item \textbf{RQ4 [Adversarial Hallucination Safeguards]:} \textit{What safeguards prevent the generator from synthesizing artificial pigment reticulations or pseudo-features that could mislead downstream diagnostic networks?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Incorporated edge-consistency loss and structural similarity constraints in the objective function, auditing enhanced images for hallucinated artifacts.
+    \item \textbf{Empirical Answer \& Evidence:} Structural similarity constraints effectively suppressed major hallucinations, but slight over-smoothing of extremely subtle atypical streaks remains a potential risk under severe input noise.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISIC 2019 Challenge Dataset, HAM10000 Benchmark
+  \item \textbf{Key Empirical Results:} \textbf{PSNR}: 34.2 dB \quad | \quad \textbf{SSIM}: 0.941 \quad | \quad \textbf{Downstream Accuracy Gain}: +5.6\% vs raw \quad | \quad \textbf{Gain vs CLAHE}: +3.1\%
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can diffusion restoration models replace GAN generators to provide stronger mathematical guarantees against hallucinated micro-structures?}
+  \item \textit{Can SLGAN-EID run in real-time within digital dermoscope firmware during live patient examinations?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

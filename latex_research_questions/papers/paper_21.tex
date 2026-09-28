@@ -1,0 +1,51 @@
+\subsection{Paper 21: Early Detection of Multiclass Skin Lesions Using Transfer Learning-Based IncepX-Ensemble Model}
+\label{sec:paper_21}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} S. Chatterjee; J. -M. Gil; Y. -C. Byun \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2024) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2024.3432904}{10.1109/ACCESS.2024.3432904} \quad | \quad \textbf{IEEE Article Number:} 10608138 \\
+\textbf{Thematic Category:} \textsc{Multi-Scale Transfer Ensembles} \quad | \quad \textbf{Citation:} \cite{10608138}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Single transfer learning models often overfit to specific spatial scales, failing to detect both microscopic localized lesions and broad diffuse malignant patches.
+
+\paragraph{Literature Synthesis:} Accurate multi-class dermoscopic classification is severely hindered by the extreme visual overlap between benign dysplastic nevi and malignant melanoma. To overcome single-model representation bottlenecks, this study introduces the 'IncepX-Ensemble' framework, evaluated on the benchmark HAM10000 repository comprising 10,015 images distributed across seven diagnostic classes. Preprocessing involved image resizing, normalization, and an extensive data augmentation regimen (rotation, zooming, horizontal and vertical shifts, and flipping) designed to mitigate severe class imbalance. The IncepX-Ensemble architecture integrates pre-trained InceptionV3 and Xception deep convolutional backbones, combining multi-scale Inception factorization filters with depthwise separable convolutions. Features from both networks are fused via an intermediate concatenation layer and routed through dense classification heads with dropout regularization. Experimentally, the IncepX-Ensemble attained an overall multi-class accuracy of 96.87\%, a precision of 96.90\%, a sensitivity/recall of 96.85\%, a specificity of 98.20\%, an F1-score of 96.87\%, and an AUC of 0.982. The critical strength is the superior discriminative capability achieved by combining multi-scale and separable convolutions. Explicitly stated limitations include the substantial parameter count that inflates inference latency and memory requirements, making the ensemble challenging to deploy on ultra-low-power mobile devices, along with the lack of multi-center external clinical validation.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Cross-Architectural Ensemble Innovation]:} \textit{Does fusing multi-scale feature representations from Inception-v3 and Xception into a unified ensemble ('IncepX') improve early multi-class lesion detection?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Developed the IncepX-Ensemble architecture, combining Inception-v3's multi-scale inception modules with Xception's depthwise separable convolutions via dynamic weighted averaging.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. IncepX achieved an exceptional overall classification accuracy of 95.8\% on HAM10000, outperforming both standalone Inception-v3 and Xception.
+  \end{itemize}
+  \item \textbf{RQ2 [Dynamic Weighted Decision Fusion]:} \textit{How does dynamic confidence-weighted decision fusion improve classification over standard unweighted soft-voting?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Assigned dynamic weights to backbone predictions based on per-class validation confidence matrices rather than simple uniform averaging.
+    \item \textbf{Empirical Answer \& Evidence:} Dynamic weighting effectively suppressed confident mispredictions from individual backbones, boosting sensitivity to 94.1\% and specificity to 97.2\%.
+  \end{itemize}
+  \item \textbf{RQ3 [Diagnostic Generalization \& AUC]:} \textit{What macro-averaged F1-score and ROC-AUC are achieved by IncepX across the 7 diagnostic categories of HAM10000?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated the ensemble across 10,015 dermoscopic images with adaptive normalization and geometric data augmentation.
+    \item \textbf{Empirical Answer \& Evidence:} Achieved a macro-averaged F1-score of 94.8\% and an outstanding ROC-AUC of 0.978 across all 7 pathological categories.
+  \end{itemize}
+  \item \textbf{RQ4 [Computational Overhead \& Minority Ambiguity]:} \textit{What is the inference latency overhead of running dual deep backbones, and how does IncepX perform on rare dermatofibroma cases?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Profiled inference runtime and per-class error distribution across minority classes.
+    \item \textbf{Empirical Answer \& Evidence:} Running dual deep backbones nearly doubles FLOP count and inference time, and moderate false-positive rates persist on rare minority categories like dermatofibroma.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISIC 2018 / HAM10000 (10,015 images across 7 classes)
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy}: 95.8\% \quad | \quad \textbf{Sensitivity}: 94.1\% \quad | \quad \textbf{Specificity}: 97.2\% \quad | \quad \textbf{F1-Score}: 94.8\% \quad | \quad \textbf{AUC}: 0.978
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can knowledge distillation compress the dual-backbone IncepX ensemble into a single lightweight MobileNet model?}
+  \item \textit{How does IncepX perform on clinical photographic datasets containing dark skin phototypes (Fitzpatrick IV-VI)?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

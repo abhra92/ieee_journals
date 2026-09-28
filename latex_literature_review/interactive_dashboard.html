@@ -1,0 +1,950 @@
+<title>Skin Cancer Detection Research Dashboard</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --text: #1a1a1a;
+  --text-muted: #666666;
+  --border: #e0e0e0;
+  --accent: #2563eb;
+  --accent-light: #dbeafe;
+  --success: #059669;
+  --warning: #d97706;
+  --grid: #f5f5f5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a0a0a;
+    --surface: #1a1a1a;
+    --text: #f0f0f0;
+    --text-muted: #a0a0a0;
+    --border: #333333;
+    --accent: #3b82f6;
+    --accent-light: #1e3a8a;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --grid: #262626;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0a0a0a;
+  --surface: #1a1a1a;
+  --text: #f0f0f0;
+  --text-muted: #a0a0a0;
+  --border: #333333;
+  --accent: #3b82f6;
+  --accent-light: #1e3a8a;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --grid: #262626;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 24px 0;
+  margin-bottom: 32px;
+}
+
+h1 {
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 15px;
+  margin: 0;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+.tab {
+  background: none;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 15px;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.tab:hover {
+  color: var(--text);
+}
+
+.tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+input[type="search"] {
+  flex: 1;
+  min-width: 240px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 14px;
+}
+
+select {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.table-container {
+  overflow-x: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  background: var(--grid);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+th:hover {
+  background: var(--border);
+}
+
+th::after {
+  content: '⇅';
+  opacity: 0.3;
+  margin-left: 6px;
+  font-size: 11px;
+}
+
+th.sorted-asc::after {
+  content: '↑';
+  opacity: 1;
+}
+
+th.sorted-desc::after {
+  content: '↓';
+  opacity: 1;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: var(--grid);
+}
+
+.metric {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+.metric-high {
+  color: var(--success);
+}
+
+.metric-mid {
+  color: var(--warning);
+}
+
+.year-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.chart-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+}
+
+canvas {
+  max-width: 100%;
+  height: auto !important;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin: 4px 0 0 0;
+}
+
+.filter-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.tag {
+  padding: 4px 10px;
+  background: var(--grid);
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 640px) {
+  h1 { font-size: 22px; }
+  .controls { flex-direction: column; }
+  input[type="search"], select { width: 100%; }
+  .chart-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  th, td { padding: 8px; font-size: 13px; }
+}
+</style>
+
+<header>
+  <div class="container">
+    <h1>Skin Cancer Detection Research Dashboard</h1>
+    <p class="subtitle">Comprehensive analysis of 39 deep learning papers (2019-2026)</p>
+  </div>
+</header>
+
+<div class="container">
+  <div class="stats-grid" id="statsGrid"></div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="overview">Overview Table</button>
+    <button class="tab" data-tab="performance">Performance Charts</button>
+    <button class="tab" data-tab="datasets">Dataset Analysis</button>
+    <button class="tab" data-tab="timeline">Timeline & Trends</button>
+  </div>
+
+  <div class="tab-content active" id="overview">
+    <div class="controls">
+      <input type="search" id="searchInput" placeholder="Search by title, authors, or dataset...">
+      <select id="yearFilter">
+        <option value="">All Years</option>
+        <option value="2026">2026</option>
+        <option value="2025">2025</option>
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2020">2020</option>
+        <option value="2019">2019</option>
+      </select>
+      <select id="datasetFilter">
+        <option value="">All Datasets</option>
+        <option value="HAM10000">HAM10000</option>
+        <option value="ISIC">ISIC</option>
+        <option value="PH2">PH2</option>
+        <option value="DermIS">DermIS</option>
+        <option value="DermQuest">DermQuest</option>
+      </select>
+    </div>
+    <div class="table-container">
+      <table id="paperTable">
+        <thead>
+          <tr>
+            <th data-sort="id">#</th>
+            <th data-sort="title">Title</th>
+            <th data-sort="year">Year</th>
+            <th data-sort="dataset">Primary Dataset</th>
+            <th data-sort="accuracy">Accuracy (%)</th>
+            <th data-sort="auc">AUC</th>
+            <th data-sort="architecture">Architecture</th>
+          </tr>
+        </thead>
+        <tbody id="paperTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="tab-content" id="performance">
+    <div class="chart-grid">
+      <div class="chart-card">
+        <h3 class="chart-title">Accuracy Distribution by Year</h3>
+        <canvas id="accuracyChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3 class="chart-title">Top 10 Performing Models</h3>
+        <canvas id="topModelsChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3 class="chart-title">Performance Metrics Comparison</h3>
+        <canvas id="metricsChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3 class="chart-title">Sensitivity vs Specificity</h3>
+        <canvas id="sensSpecChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="datasets">
+    <div class="chart-grid">
+      <div class="chart-card">
+        <h3 class="chart-title">Dataset Usage Frequency</h3>
+        <canvas id="datasetUsageChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3 class="chart-title">Average Performance by Dataset</h3>
+        <canvas id="datasetPerfChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="timeline">
+    <div class="chart-grid">
+      <div class="chart-card" style="grid-column: 1/-1;">
+        <h3 class="chart-title">Performance Evolution Over Time</h3>
+        <canvas id="timelineChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3 class="chart-title">Architecture Evolution</h3>
+        <canvas id="archChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3 class="chart-title">Publications by Year</h3>
+        <canvas id="pubYearChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+const papers = [
+  {id: 1, title: "Skin Lesion Classification Using CNN With Novel Regularizer", authors: "M. A. Albahar", year: 2019, dataset: "ISIC", samples: 23906, accuracy: 97.49, sensitivity: null, specificity: null, precision: null, f1: null, auc: 0.77, architecture: "Custom CNN"},
+  {id: 2, title: "Region-of-Interest Based Transfer Learning Framework", authors: "R. Ashraf et al.", year: 2020, dataset: "DermIS", samples: 705, accuracy: 97.9, sensitivity: 96.3, specificity: 98.7, precision: 96.3, f1: 96.3, auc: 0.97, architecture: "AlexNet/VGG-16"},
+  {id: 3, title: "Interpretable CNN for Smart Healthcare System", authors: "K. Mridha et al.", year: 2023, dataset: "HAM10000", samples: 10015, accuracy: 82.0, sensitivity: 82.0, specificity: 94.17, precision: null, f1: null, auc: null, architecture: "Optimized CNN"},
+  {id: 4, title: "Ensemble Lightweight Deep Learning Network", authors: "L. Wei et al.", year: 2020, dataset: "ISBI 2016", samples: 900, accuracy: 87.3, sensitivity: 83.2, specificity: 89.1, precision: 73.2, f1: null, auc: 0.886, architecture: "Lightweight U-Net+CNN"},
+  {id: 5, title: "DeepSkin Deep Learning Approach", authors: "H. L. Gururaj et al.", year: 2023, dataset: "HAM10000", samples: 10015, accuracy: 88.0, sensitivity: 86.2, specificity: 85.0, precision: 86.4, f1: null, auc: null, architecture: "CNN+ResNet-50"},
+  {id: 6, title: "FCN-Based DenseNet Framework", authors: "A. A. Adegun et al.", year: 2020, dataset: "ISIC 2018", samples: 2594, accuracy: 98.5, sensitivity: 96.0, specificity: 97.0, precision: null, f1: 95.0, auc: 0.98, architecture: "FCN+DenseNet"},
+  {id: 7, title: "Malignant Melanoma Classification Using Deep Learning", authors: "A. Naeem et al.", year: 2020, dataset: "HAM10000", samples: 10015, accuracy: 93.4, sensitivity: 91.0, specificity: 94.2, precision: null, f1: null, auc: 0.95, architecture: "ResNet-50/VGG-16"},
+  {id: 8, title: "Combined Decision of Deep Learners", authors: "A. Imran et al.", year: 2022, dataset: "ISIC", samples: 2800, accuracy: 93.50, sensitivity: 87.25, specificity: 94.80, precision: 94.30, f1: 90.64, auc: null, architecture: "VGG-16+ResNet-50+CapsNet"},
+  {id: 9, title: "FixCaps Improved Capsule Network", authors: "Z. Lan et al.", year: 2022, dataset: "HAM10000", samples: 10015, accuracy: 96.49, sensitivity: 93.47, specificity: 98.13, precision: 93.64, f1: 93.55, auc: 0.98, architecture: "FixCaps"},
+  {id: 10, title: "Deep Clustering via COMF-TL", authors: "Ş. Öztürk et al.", year: 2022, dataset: "ISIC 2018", samples: 10015, accuracy: 83.7, sensitivity: 82.4, specificity: 92.1, precision: null, f1: 81.9, auc: 0.912, architecture: "VGG-16/ResNet-50"},
+  {id: 11, title: "Neural Architecture Search", authors: "A. Kwasigroch et al.", year: 2020, dataset: "HAM10000", samples: 10015, accuracy: 78.4, sensitivity: 77.2, specificity: 91.5, precision: null, f1: 76.8, auc: 0.843, architecture: "DARTS NAS"},
+  {id: 12, title: "Performance Enhancement Using Computer Vision", authors: "A. Magdy et al.", year: 2023, dataset: "HAM10000", samples: 10015, accuracy: 97.75, sensitivity: 97.20, specificity: 98.10, precision: 97.50, f1: 97.35, auc: 0.985, architecture: "DenseNet-201"},
+  {id: 13, title: "EFAM-Net Enhanced Feature Fusion", authors: "Z. Ji et al.", year: 2024, dataset: "ISIC 2019", samples: 25331, accuracy: 92.30, sensitivity: 89.80, specificity: null, precision: 90.25, f1: 90.02, auc: 0.960, architecture: "EFAM-Net"},
+  {id: 14, title: "Hair Segmentation Using Deep Learning", authors: "L. Talavera-Martínez et al.", year: 2021, dataset: "ISIC", samples: 196, accuracy: 95.8, sensitivity: 89.6, specificity: null, precision: 90.4, f1: 90.0, auc: null, architecture: "U-Net FCN"},
+  {id: 15, title: "StyleGANs and Decision Fusion", authors: "A. Gong et al.", year: 2020, dataset: "HAM10000", samples: 10015, accuracy: 92.83, sensitivity: 88.90, specificity: null, precision: 89.20, f1: 89.05, auc: 0.965, architecture: "StyleGAN+Ensemble"},
+  {id: 16, title: "Comprehensive Joint Learning System", authors: "L. Riaz et al.", year: 2023, dataset: "ISIC", samples: null, accuracy: 98.60, sensitivity: 97.80, specificity: 98.90, precision: 97.50, f1: 97.65, auc: null, architecture: "VGG-19+ResNet-50+MobileNet"},
+  {id: 17, title: "Multiple Connected Neural Networks", authors: "L. Ichim et al.", year: 2020, dataset: "MED-NODE", samples: 170, accuracy: 97.50, sensitivity: 96.80, specificity: 98.00, precision: 97.10, f1: 96.95, auc: null, architecture: "U-Net+Multi-network"},
+  {id: 18, title: "DermCDSM Clinical Decision Support", authors: "R. Mittal et al.", year: 2024, dataset: "DermNet", samples: 5000, accuracy: 91.00, sensitivity: 86.14, specificity: 87.66, precision: 86.80, f1: 86.47, auc: 0.920, architecture: "ResNet-50+EfficientNet"},
+  {id: 19, title: "Hybrid Swin Transformer + DGS-NLAN", authors: "R. Karthik et al.", year: 2024, dataset: "HAM10000", samples: 10015, accuracy: 94.21, sensitivity: 93.80, specificity: 97.10, precision: 94.00, f1: 96.64, auc: 0.978, architecture: "Swin Transformer"},
+  {id: 20, title: "IoT Intelligent Things Analysis", authors: "D. Połap", year: 2019, dataset: "Clinical", samples: 1200, accuracy: 91.20, sensitivity: 89.50, specificity: 92.40, precision: 90.10, f1: 89.80, auc: null, architecture: "Lightweight NN"},
+  {id: 21, title: "IncepX-Ensemble Transfer Learning", authors: "S. Chatterjee et al.", year: 2024, dataset: "HAM10000", samples: 10015, accuracy: 96.87, sensitivity: 96.85, specificity: 98.20, precision: 96.90, f1: 96.87, auc: 0.982, architecture: "InceptionV3+Xception"},
+  {id: 22, title: "Individual Advantage + Group Decision", authors: "A. Gong et al.", year: 2020, dataset: "ISIC 2017", samples: 2000, accuracy: 91.50, sensitivity: 88.70, specificity: 93.10, precision: 89.20, f1: 88.95, auc: 0.942, architecture: "IAN+GDN"},
+  {id: 23, title: "AlexNet CNN + SVM Bi-Sectional", authors: "V. S. S. B. T. Sathvika et al.", year: 2024, dataset: "HAM10000", samples: 3000, accuracy: 98.66, sensitivity: 98.20, specificity: 99.10, precision: 98.00, f1: 98.10, auc: 0.986, architecture: "AlexNet+SVM"},
+  {id: 24, title: "NCC k-Means Segmentation", authors: "M. I. Faizi et al.", year: 2024, dataset: "PH2", samples: 200, accuracy: 99.29, sensitivity: 94.20, specificity: 97.70, precision: null, f1: null, auc: null, architecture: "NMF+k-Means"},
+  {id: 25, title: "Multiple Instance Learning 3D Features", authors: "P. M. M. Pereira et al.", year: 2022, dataset: "3D Scan", samples: 50, accuracy: 84.00, sensitivity: 88.89, specificity: 81.25, precision: 80.00, f1: 84.21, auc: 0.880, architecture: "MIL+3D"},
+  {id: 26, title: "SPCB-Net Multi-Scale Attention", authors: "X. Qian et al.", year: 2024, dataset: "HAM10000", samples: 10015, accuracy: 93.60, sensitivity: 92.40, specificity: 96.50, precision: 92.80, f1: 92.60, auc: 0.975, architecture: "SPCB-Net"},
+  {id: 27, title: "IARS SegNet Interpretable Attention", authors: "V. S. Narayanan et al.", year: 2024, dataset: "ISIC 2018", samples: 2594, accuracy: 96.80, sensitivity: 93.10, specificity: 97.50, precision: null, f1: null, auc: null, architecture: "SegNet"},
+  {id: 28, title: "Multi-Modal Ear Disease Diagnosis", authors: "T. Kim et al.", year: 2023, dataset: "Endoscopic", samples: 2416, accuracy: 94.90, sensitivity: 93.20, specificity: 96.10, precision: 93.50, f1: 93.35, auc: 0.970, architecture: "ResNet-50+1DCNN"},
+  {id: 29, title: "Quantum Chebyshev Polynomials", authors: "Farhatullah et al.", year: 2024, dataset: "HAM10000", samples: 10015, accuracy: 98.23, sensitivity: 98.21, specificity: 99.12, precision: 98.26, f1: 98.24, auc: 0.991, architecture: "QCP+Autoencoder"},
+  {id: 30, title: "Clinical Knowledge Graphs + Neural Systems", authors: "Y. Wang et al.", year: 2026, dataset: "Derm7pt", samples: 1011, accuracy: 83.40, sensitivity: 82.10, specificity: 87.20, precision: null, f1: 82.70, auc: 0.886, architecture: "CNN+CKG"},
+  {id: 31, title: "YOLOv9 + Faster R-CNN Hybrid", authors: "M. I. Marie et al.", year: 2025, dataset: "ISIC 2020", samples: 33126, accuracy: 95.80, sensitivity: 95.60, specificity: 96.80, precision: 95.20, f1: 95.40, auc: null, architecture: "YOLOv9+Faster R-CNN"},
+  {id: 32, title: "Knowledge-Distilled Vision-Language", authors: "L. Chakrabarti et al.", year: 2025, dataset: "ISIC", samples: 4000, accuracy: 92.10, sensitivity: 90.50, specificity: 93.40, precision: null, f1: 90.25, auc: null, architecture: "ViT+Distilled Decoder"},
+  {id: 33, title: "Multi-Scale DCNN Dynamic Weight", authors: "G. Wang et al.", year: 2024, dataset: "HAM10000", samples: 10015, accuracy: 91.80, sensitivity: 87.60, specificity: 93.80, precision: null, f1: 88.20, auc: 0.952, architecture: "Multi-Scale DCNN"},
+  {id: 34, title: "NMF + Mutual Information Segmentation", authors: "E. S. Flores et al.", year: 2025, dataset: "Dermofit", samples: 1300, accuracy: 93.80, sensitivity: 86.10, specificity: 94.70, precision: null, f1: null, auc: null, architecture: "NMF+MI"},
+  {id: 35, title: "Transparent Siamese Search Framework", authors: "Z. Tabatabaei et al.", year: 2025, dataset: "BreakHis", samples: 9109, accuracy: 88.50, sensitivity: 87.80, specificity: null, precision: 89.10, f1: 88.40, auc: null, architecture: "Siamese Network"},
+  {id: 36, title: "FoMoSkinNet Focal Modulation", authors: "F. Bibi et al.", year: 2026, dataset: "ISIC 2024", samples: 12000, accuracy: 99.46, sensitivity: 98.40, specificity: 99.50, precision: 98.23, f1: 99.47, auc: 0.995, architecture: "FocalNet+LFNet"},
+  {id: 37, title: "MSPE-DeiT Multimodal Vision Transformer", authors: "U. Mittal et al.", year: 2026, dataset: "HAM10000", samples: 10015, accuracy: 91.76, sensitivity: 84.81, specificity: 91.77, precision: 85.20, f1: 85.00, auc: 0.935, architecture: "DeiT+MSPE"},
+  {id: 38, title: "MoLE Mixture-of-LoRA Experts", authors: "K. Younis et al.", year: 2026, dataset: "ISIC", samples: 1200, accuracy: 79.40, sensitivity: null, specificity: null, precision: null, f1: null, auc: null, architecture: "MoLE (VQA)"},
+  {id: 39, title: "SLGAN-EID GAN-Based Enhancement", authors: "M. U. Zafar et al.", year: 2026, dataset: "ISIC 2019", samples: 25331, accuracy: 94.30, sensitivity: 93.10, specificity: 95.20, precision: null, f1: 92.30, auc: 0.965, architecture: "SLGAN-EID"}
+];
+
+let filteredPapers = [...papers];
+let currentSort = { column: 'id', direction: 'asc' };
+
+// Stats
+function calculateStats() {
+  const validAccuracies = papers.filter(p => p.accuracy).map(p => p.accuracy);
+  const validAUCs = papers.filter(p => p.auc).map(p => p.auc);
+
+  const avgAccuracy = (validAccuracies.reduce((a, b) => a + b, 0) / validAccuracies.length).toFixed(2);
+  const maxAccuracy = Math.max(...validAccuracies).toFixed(2);
+  const avgAUC = (validAUCs.reduce((a, b) => a + b, 0) / validAUCs.length).toFixed(3);
+
+  const yearCounts = {};
+  papers.forEach(p => yearCounts[p.year] = (yearCounts[p.year] || 0) + 1);
+  const mostProductiveYear = Object.entries(yearCounts).sort((a, b) => b[1] - a[1])[0][0];
+
+  document.getElementById('statsGrid').innerHTML = `
+    <div class="stat-card">
+      <div class="stat-value">39</div>
+      <div class="stat-label">Total Papers Reviewed</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">${avgAccuracy}%</div>
+      <div class="stat-label">Average Accuracy</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">${maxAccuracy}%</div>
+      <div class="stat-label">Highest Accuracy</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">${avgAUC}</div>
+      <div class="stat-label">Average AUC</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">2019-2026</div>
+      <div class="stat-label">Publication Range</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">${mostProductiveYear}</div>
+      <div class="stat-label">Most Productive Year</div>
+    </div>
+  `;
+}
+
+// Table rendering
+function renderTable() {
+  const tbody = document.getElementById('paperTableBody');
+  tbody.innerHTML = filteredPapers.map(paper => `
+    <tr>
+      <td>${paper.id}</td>
+      <td>${paper.title}</td>
+      <td><span class="year-badge">${paper.year}</span></td>
+      <td>${paper.dataset}</td>
+      <td class="metric ${paper.accuracy >= 95 ? 'metric-high' : paper.accuracy >= 90 ? 'metric-mid' : ''}">${paper.accuracy ? paper.accuracy.toFixed(2) : '—'}</td>
+      <td class="metric">${paper.auc ? paper.auc.toFixed(3) : '—'}</td>
+      <td>${paper.architecture}</td>
+    </tr>
+  `).join('');
+}
+
+// Sorting
+document.querySelectorAll('th[data-sort]').forEach(th => {
+  th.addEventListener('click', () => {
+    const column = th.dataset.sort;
+    if (currentSort.column === column) {
+      currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+    } else {
+      currentSort.column = column;
+      currentSort.direction = 'asc';
+    }
+
+    document.querySelectorAll('th').forEach(h => h.className = '');
+    th.className = `sorted-${currentSort.direction}`;
+
+    filteredPapers.sort((a, b) => {
+      let aVal = a[column];
+      let bVal = b[column];
+      if (aVal === null || aVal === undefined) return 1;
+      if (bVal === null || bVal === undefined) return -1;
+      if (typeof aVal === 'string') {
+        return currentSort.direction === 'asc'
+          ? aVal.localeCompare(bVal)
+          : bVal.localeCompare(aVal);
+      }
+      return currentSort.direction === 'asc' ? aVal - bVal : bVal - aVal;
+    });
+
+    renderTable();
+  });
+});
+
+// Filtering
+function applyFilters() {
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  const yearFilter = document.getElementById('yearFilter').value;
+  const datasetFilter = document.getElementById('datasetFilter').value;
+
+  filteredPapers = papers.filter(paper => {
+    const matchesSearch = !searchTerm ||
+      paper.title.toLowerCase().includes(searchTerm) ||
+      paper.authors.toLowerCase().includes(searchTerm) ||
+      paper.dataset.toLowerCase().includes(searchTerm);
+
+    const matchesYear = !yearFilter || paper.year.toString() === yearFilter;
+    const matchesDataset = !datasetFilter || paper.dataset.includes(datasetFilter);
+
+    return matchesSearch && matchesYear && matchesDataset;
+  });
+
+  renderTable();
+}
+
+document.getElementById('searchInput').addEventListener('input', applyFilters);
+document.getElementById('yearFilter').addEventListener('change', applyFilters);
+document.getElementById('datasetFilter').addEventListener('change', applyFilters);
+
+// Tab switching
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+  });
+});
+
+// Charts
+function createCharts() {
+  const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const textColor = isDark ? '#f0f0f0' : '#1a1a1a';
+  const gridColor = isDark ? '#333333' : '#e0e0e0';
+
+  Chart.defaults.color = textColor;
+  Chart.defaults.borderColor = gridColor;
+
+  // Accuracy by Year
+  const yearGroups = {};
+  papers.forEach(p => {
+    if (!yearGroups[p.year]) yearGroups[p.year] = [];
+    if (p.accuracy) yearGroups[p.year].push(p.accuracy);
+  });
+
+  new Chart(document.getElementById('accuracyChart'), {
+    type: 'boxplot',
+    data: {
+      labels: Object.keys(yearGroups).sort(),
+      datasets: [{
+        label: 'Accuracy Distribution',
+        backgroundColor: 'rgba(37, 99, 235, 0.5)',
+        borderColor: 'rgb(37, 99, 235)',
+        borderWidth: 2,
+        outlierColor: '#999',
+        padding: 10,
+        itemRadius: 0,
+        data: Object.values(yearGroups).map(vals => ({
+          min: Math.min(...vals),
+          q1: vals.sort((a,b)=>a-b)[Math.floor(vals.length*0.25)],
+          median: vals.sort((a,b)=>a-b)[Math.floor(vals.length*0.5)],
+          q3: vals.sort((a,b)=>a-b)[Math.floor(vals.length*0.75)],
+          max: Math.max(...vals)
+        }))
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: {
+          title: { display: true, text: 'Accuracy (%)' },
+          beginAtZero: false,
+          min: 75
+        }
+      }
+    }
+  });
+
+  // Top 10 Models
+  const top10 = [...papers]
+    .filter(p => p.accuracy)
+    .sort((a, b) => b.accuracy - a.accuracy)
+    .slice(0, 10);
+
+  new Chart(document.getElementById('topModelsChart'), {
+    type: 'bar',
+    data: {
+      labels: top10.map(p => `#${p.id}`),
+      datasets: [{
+        label: 'Accuracy (%)',
+        data: top10.map(p => p.accuracy),
+        backgroundColor: top10.map(p =>
+          p.accuracy >= 99 ? 'rgba(5, 150, 105, 0.8)' :
+          p.accuracy >= 97 ? 'rgba(37, 99, 235, 0.8)' :
+          'rgba(217, 119, 6, 0.8)'
+        )
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: {
+          title: { display: true, text: 'Accuracy (%)' },
+          min: 90
+        }
+      }
+    }
+  });
+
+  // Metrics Comparison
+  const avgMetrics = {
+    accuracy: papers.filter(p=>p.accuracy).reduce((s,p)=>s+p.accuracy,0) / papers.filter(p=>p.accuracy).length,
+    sensitivity: papers.filter(p=>p.sensitivity).reduce((s,p)=>s+p.sensitivity,0) / papers.filter(p=>p.sensitivity).length,
+    specificity: papers.filter(p=>p.specificity).reduce((s,p)=>s+p.specificity,0) / papers.filter(p=>p.specificity).length,
+    precision: papers.filter(p=>p.precision).reduce((s,p)=>s+p.precision,0) / papers.filter(p=>p.precision).length,
+    f1: papers.filter(p=>p.f1).reduce((s,p)=>s+p.f1,0) / papers.filter(p=>p.f1).length
+  };
+
+  new Chart(document.getElementById('metricsChart'), {
+    type: 'radar',
+    data: {
+      labels: ['Accuracy', 'Sensitivity', 'Specificity', 'Precision', 'F1-Score'],
+      datasets: [{
+        label: 'Average Performance',
+        data: Object.values(avgMetrics),
+        fill: true,
+        backgroundColor: 'rgba(37, 99, 235, 0.2)',
+        borderColor: 'rgb(37, 99, 235)',
+        pointBackgroundColor: 'rgb(37, 99, 235)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgb(37, 99, 235)'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        r: {
+          angleLines: { color: gridColor },
+          grid: { color: gridColor },
+          pointLabels: { color: textColor },
+          ticks: { color: textColor, backdropColor: 'transparent' },
+          suggestedMin: 80,
+          suggestedMax: 100
+        }
+      }
+    }
+  });
+
+  // Sensitivity vs Specificity
+  const sensSpecData = papers.filter(p => p.sensitivity && p.specificity);
+
+  new Chart(document.getElementById('sensSpecChart'), {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        label: 'Papers',
+        data: sensSpecData.map(p => ({ x: p.specificity, y: p.sensitivity })),
+        backgroundColor: 'rgba(37, 99, 235, 0.6)',
+        borderColor: 'rgb(37, 99, 235)'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              const paper = sensSpecData[ctx.dataIndex];
+              return `#${paper.id}: Sens ${paper.sensitivity}%, Spec ${paper.specificity}%`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          title: { display: true, text: 'Specificity (%)' },
+          min: 75,
+          max: 100
+        },
+        y: {
+          title: { display: true, text: 'Sensitivity (%)' },
+          min: 75,
+          max: 100
+        }
+      }
+    }
+  });
+
+  // Dataset Usage
+  const datasetCounts = {};
+  papers.forEach(p => {
+    const dataset = p.dataset.includes('ISIC') ? 'ISIC' :
+                    p.dataset.includes('HAM') ? 'HAM10000' : p.dataset;
+    datasetCounts[dataset] = (datasetCounts[dataset] || 0) + 1;
+  });
+
+  new Chart(document.getElementById('datasetUsageChart'), {
+    type: 'doughnut',
+    data: {
+      labels: Object.keys(datasetCounts),
+      datasets: [{
+        data: Object.values(datasetCounts),
+        backgroundColor: [
+          'rgba(37, 99, 235, 0.8)',
+          'rgba(5, 150, 105, 0.8)',
+          'rgba(217, 119, 6, 0.8)',
+          'rgba(220, 38, 38, 0.8)',
+          'rgba(147, 51, 234, 0.8)',
+          'rgba(14, 165, 233, 0.8)'
+        ]
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false
+    }
+  });
+
+  // Dataset Performance
+  const datasetPerf = {};
+  papers.forEach(p => {
+    if (!p.accuracy) return;
+    const ds = p.dataset.includes('ISIC') ? 'ISIC' :
+               p.dataset.includes('HAM') ? 'HAM10000' : p.dataset;
+    if (!datasetPerf[ds]) datasetPerf[ds] = [];
+    datasetPerf[ds].push(p.accuracy);
+  });
+
+  const avgDatasetPerf = Object.entries(datasetPerf).map(([ds, accs]) => ({
+    dataset: ds,
+    avg: accs.reduce((a,b)=>a+b,0) / accs.length
+  })).sort((a,b) => b.avg - a.avg);
+
+  new Chart(document.getElementById('datasetPerfChart'), {
+    type: 'bar',
+    data: {
+      labels: avgDatasetPerf.map(d => d.dataset),
+      datasets: [{
+        label: 'Average Accuracy (%)',
+        data: avgDatasetPerf.map(d => d.avg),
+        backgroundColor: 'rgba(37, 99, 235, 0.8)'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: {
+          title: { display: true, text: 'Accuracy (%)' },
+          min: 85
+        }
+      }
+    }
+  });
+
+  // Timeline
+  const yearData = {};
+  papers.forEach(p => {
+    if (!p.accuracy) return;
+    if (!yearData[p.year]) yearData[p.year] = [];
+    yearData[p.year].push(p.accuracy);
+  });
+
+  const yearAvgs = Object.entries(yearData)
+    .sort(([a], [b]) => a - b)
+    .map(([year, accs]) => ({
+      year,
+      avg: accs.reduce((a,b)=>a+b,0) / accs.length,
+      max: Math.max(...accs),
+      min: Math.min(...accs)
+    }));
+
+  new Chart(document.getElementById('timelineChart'), {
+    type: 'line',
+    data: {
+      labels: yearAvgs.map(d => d.year),
+      datasets: [
+        {
+          label: 'Average Accuracy',
+          data: yearAvgs.map(d => d.avg),
+          borderColor: 'rgb(37, 99, 235)',
+          backgroundColor: 'rgba(37, 99, 235, 0.1)',
+          fill: true,
+          tension: 0.4
+        },
+        {
+          label: 'Maximum Accuracy',
+          data: yearAvgs.map(d => d.max),
+          borderColor: 'rgb(5, 150, 105)',
+          borderDash: [5, 5],
+          fill: false,
+          tension: 0.4
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          title: { display: true, text: 'Accuracy (%)' },
+          min: 75
+        },
+        x: {
+          title: { display: true, text: 'Publication Year' }
+        }
+      }
+    }
+  });
+
+  // Architecture Evolution
+  const archCounts = {};
+  papers.forEach(p => {
+    const archType = p.architecture.includes('Transformer') || p.architecture.includes('DeiT') || p.architecture.includes('Swin') ? 'Transformer' :
+                     p.architecture.includes('GAN') ? 'GAN' :
+                     p.architecture.includes('CNN') || p.architecture.includes('ResNet') || p.architecture.includes('VGG') || p.architecture.includes('DenseNet') ? 'CNN' :
+                     p.architecture.includes('Caps') ? 'Capsule' :
+                     p.architecture.includes('U-Net') ? 'U-Net' : 'Other';
+    archCounts[archType] = (archCounts[archType] || 0) + 1;
+  });
+
+  new Chart(document.getElementById('archChart'), {
+    type: 'pie',
+    data: {
+      labels: Object.keys(archCounts),
+      datasets: [{
+        data: Object.values(archCounts),
+        backgroundColor: [
+          'rgba(37, 99, 235, 0.8)',
+          'rgba(5, 150, 105, 0.8)',
+          'rgba(217, 119, 6, 0.8)',
+          'rgba(220, 38, 38, 0.8)',
+          'rgba(147, 51, 234, 0.8)'
+        ]
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false
+    }
+  });
+
+  // Publications by Year
+  const pubCounts = {};
+  papers.forEach(p => pubCounts[p.year] = (pubCounts[p.year] || 0) + 1);
+
+  new Chart(document.getElementById('pubYearChart'), {
+    type: 'bar',
+    data: {
+      labels: Object.keys(pubCounts).sort(),
+      datasets: [{
+        label: 'Publications',
+        data: Object.values(pubCounts),
+        backgroundColor: 'rgba(37, 99, 235, 0.8)'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: {
+          title: { display: true, text: 'Number of Papers' },
+          ticks: { stepSize: 1 }
+        },
+        x: {
+          title: { display: true, text: 'Year' }
+        }
+      }
+    }
+  });
+}
+
+// Initialize
+calculateStats();
+renderTable();
+createCharts();
+
+// Theme handling
+const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+mediaQuery.addListener(() => {
+  createCharts();
+});
+</script>

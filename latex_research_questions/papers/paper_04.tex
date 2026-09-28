@@ -1,0 +1,51 @@
+\subsection{Paper 4: Automatic Skin Cancer Detection in Dermoscopy Images Based on Ensemble Lightweight Deep Learning Network}
+\label{sec:paper_4}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} L. Wei; K. Ding; H. Hu \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2020) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2020.2997710}{10.1109/ACCESS.2020.2997710} \quad | \quad \textbf{IEEE Article Number:} 9099799 \\
+\textbf{Thematic Category:} \textsc{Lightweight Networks \& Ensemble Learning} \quad | \quad \textbf{Citation:} \cite{9099799}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+High computational complexity and massive parameter counts prevent deployment of state-of-the-art deep networks on resource-constrained clinical workstations and edge devices.
+
+\paragraph{Literature Synthesis:} To resolve the dual bottlenecks of high computational resource consumption and substantial intra-class morphological variance, this study proposes a lightweight recognition and semantic segmentation framework for automated dermoscopic lesion analysis. The authors validated their framework on the benchmark ISBI 2016 challenge dataset (900 training and 379 testing images) and the ISBI 2017 dataset for binary melanoma detection. The preprocessing pipeline integrates a lightweight U-Net segmentation network trained via a transfer learning migration strategy, isolating lesion contours end-to-end without requiring manual artifact filtering. For classification, the architecture introduces a pair-based feature extraction module utilizing lightweight CNNs coupled with a feature discrimination network trained on positive and negative sample pairs using fine-grained classification principles, finalized via ensemble decision fusion. Quantitative testing on ISBI 2016 demonstrated a classification accuracy of 87.3\%, an AUC of 0.886, a sensitivity/recall of 83.2\%, a specificity of 89.1\%, and an average precision of 0.732. The primary architectural merit is the drastic reduction in model parameters while preserving discriminative fine-grained representations. Explicitly declared limitations include sensitivity degradation on lesions with highly indistinct margins, modest ensemble computational overhead during training, and restricting evaluation predominantly to binary classification benchmarks.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Lightweight Architecture Efficiency]:} \textit{Can a lightweight ensemble deep learning framework drastically reduce model parameters while maintaining state-of-the-art diagnostic accuracy on benchmark dermoscopic challenges?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Designed a parameter-efficient ensemble using lightweight CNN feature extractors, a lightweight U-Net segmentation module, and a fine-grained discrimination network.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. The framework achieved an accuracy of 87.3\% and an AUC of 0.886 on ISBI 2016 with orders-of-magnitude fewer parameters than standard heavyweight baselines.
+  \end{itemize}
+  \item \textbf{RQ2 [Pair-Based Feature Discrimination]:} \textit{How does pair-based feature extraction and fine-grained metric learning improve discrimination between visually ambiguous benign nevi and malignant melanoma?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Trained a feature discrimination network on positive and negative sample pairs using fine-grained classification principles to learn subtle boundary differences.
+    \item \textbf{Empirical Answer \& Evidence:} Pair-based learning effectively separated subtle boundary patterns, yielding a test sensitivity of 83.2\%, specificity of 89.1\%, and average precision of 0.732 on ISBI 2016.
+  \end{itemize}
+  \item \textbf{RQ3 [Integrated Semantic Segmentation]:} \textit{Does integrating a lightweight U-Net trained via transfer learning eliminate the need for manual hair and artifact preprocessing?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Trained an end-to-end lightweight U-Net to isolate lesion contours directly from raw dermoscopic imagery without heuristic artifact filtering.
+    \item \textbf{Empirical Answer \& Evidence:} Automated segmentation successfully isolated lesion contours end-to-end, providing clean input patches to downstream pair-based classification networks.
+  \end{itemize}
+  \item \textbf{RQ4 [Boundary Sensitivity \& Complexity]:} \textit{What are the diagnostic failure modes on lesions with highly indistinct, diffuse boundaries, and what is the training overhead of ensemble decision fusion?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated ensemble convergence, training memory footprint, and false-negative edge cases on ISBI 2016 and ISBI 2017.
+    \item \textbf{Empirical Answer \& Evidence:} Performance modestly degraded on lesions with fuzzy, diffuse boundaries, and training multiple lightweight networks sequentially introduced non-negligible training time overhead.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISBI 2016 (900 train, 379 test), ISBI 2017 Challenge Dataset
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy}: 87.3\% \quad | \quad \textbf{AUC}: 0.886 \quad | \quad \textbf{Sensitivity}: 83.2\% \quad | \quad \textbf{Specificity}: 89.1\% \quad | \quad \textbf{Average Precision}: 0.732
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can pair-based lightweight feature discrimination scale effectively to 8-class multi-category classification?}
+  \item \textit{Can knowledge distillation compress the lightweight ensemble into a single ultra-compact inference model?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

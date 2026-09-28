@@ -1,0 +1,51 @@
+\subsection{Paper 5: DeepSkin: A Deep Learning Approach for Skin Cancer Classification}
+\label{sec:paper_5}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} H. L. Gururaj; N. Manju; A. Nagarjun; V. N. M. Aradhya; F. Flammini \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2023) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2023.3274848}{10.1109/ACCESS.2023.3274848} \quad | \quad \textbf{IEEE Article Number:} 10122533 \\
+\textbf{Thematic Category:} \textsc{Residual Custom Architectures \& Multi-Class Screening} \quad | \quad \textbf{Citation:} \cite{10122533}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Existing CAD systems suffer from accuracy degradation in multi-class classification and require heavy pre-trained backbones that struggle with class-imbalanced dermoscopic archives.
+
+\paragraph{Literature Synthesis:} Early detection of cutaneous malignancies is essential for timely intervention, yet diagnostic accuracy remains restricted in resource-constrained clinical settings. This study introduces 'DeepSkin', a deep learning classification methodology evaluated on the ISIC 2018 and HAM10000 dermatoscopic datasets encompassing 10,015 images distributed across seven pathological categories: melanocytic nevi, melanoma, benign keratosis, basal cell carcinoma, actinic keratoses, vascular lesions, and dermatofibroma. Preprocessing incorporated image resizing to 224 $\times$ 224 pixels, Min-Max pixel intensity scaling, and data augmentation procedures including random rotations, horizontal flipping, zooming, and brightness adjustments to combat class distribution skewness. The proposed DeepSkin framework integrates a tailored Convolutional Neural Network (CNN) architecture with residual skip connections and comparative transfer learning models (VGG-16, ResNet-50, and MobileNet) to extract multi-level visual representations. Experimentally, DeepSkin achieved an overall classification accuracy of 88.0\%, with a sensitivity of 86.2\%, a specificity of 85.0\%, and a precision of 86.4\%. Standalone F1-score and AUC metrics were not explicitly reported in the text. The model demonstrated effective generalization across predominant classes, but the authors highlighted explicit limitations regarding confusion between visually overlapping benign keratosis and melanoma, lack of edge-device deployment profiling, and the absence of prospective multi-ethnic clinical evaluations.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Architectural Design]:} \textit{Can a tailored custom CNN with residual skip connections ('DeepSkin') match or surpass standard transfer learning models (VGG-16, ResNet-50, MobileNet) on multi-class dermoscopic screening?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Architected DeepSkin with residual skip connections to preserve low-level textural gradients, benchmarked comparatively against VGG-16, ResNet-50, and MobileNet.
+    \item \textbf{Empirical Answer \& Evidence:} DeepSkin achieved 88.0\% overall accuracy, outperforming several heavier pre-trained models while maintaining architectural simplicity and compact parameterization.
+  \end{itemize}
+  \item \textbf{RQ2 [Multiclass Performance \& Imbalance]:} \textit{How effectively does DeepSkin handle the 7 diagnostic classes of HAM10000 under Min-Max scaling and geometric data augmentation?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Preprocessed 10,015 images with Min-Max intensity scaling, 224x224 resizing, and spatial augmentations (rotations, flips, zooms, brightness adjustments).
+    \item \textbf{Empirical Answer \& Evidence:} Achieved overall sensitivity of 86.2\%, specificity of 85.0\%, and precision of 86.4\% across all 7 pathological categories.
+  \end{itemize}
+  \item \textbf{RQ3 [Diagnostic Confusion Patterns]:} \textit{Which pathological categories exhibit the highest cross-class confusion within the DeepSkin architecture?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated class-wise confusion matrices and classification errors across benign keratosis, melanocytic nevi, and malignant melanoma.
+    \item \textbf{Empirical Answer \& Evidence:} The primary clinical confusion occurred between benign keratosis and melanoma due to morphological and chromatic overlaps in early-stage lesions.
+  \end{itemize}
+  \item \textbf{RQ4 [Edge Profiling \& Clinical Readiness]:} \textit{What deployment barriers remain before DeepSkin can be integrated into resource-constrained point-of-care settings?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Assessed deployment requirements, edge hardware profiling, and demographic population diversity.
+    \item \textbf{Empirical Answer \& Evidence:} Identified lack of hardware edge-profiling (FPS, RAM consumption) and absence of multi-ethnic clinical validation cohorts as critical deployment gaps.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISIC 2018 / HAM10000 (10,015 images, 7 classes)
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy}: 88.0\% \quad | \quad \textbf{Sensitivity}: 86.2\% \quad | \quad \textbf{Specificity}: 85.0\% \quad | \quad \textbf{Precision}: 86.4\%
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{How can attention gates be added to DeepSkin to resolve confusion between benign keratosis and melanoma?}
+  \item \textit{What is the inference latency of DeepSkin on embedded microcontroller and edge-TPU hardware?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

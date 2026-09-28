@@ -1,0 +1,51 @@
+\subsection{Paper 19: A Hybrid Deep Learning Approach for Skin Cancer Classification Using Swin Transformer and Dense Group Shuffle Non-Local Attention Network}
+\label{sec:paper_19}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} R. Karthik; R. Menaka; S. Atre; J. Cho; S. Veerappampalayam Easwaramoorthy \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2024) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2024.3485507}{10.1109/ACCESS.2024.3485507} \quad | \quad \textbf{IEEE Article Number:} 10731679 \\
+\textbf{Thematic Category:} \textsc{Vision Transformers \& Non-Local Attention} \quad | \quad \textbf{Citation:} \cite{10731679}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Standard CNNs have restricted receptive fields that struggle with long-range spatial dependencies, while standard Vision Transformers impose heavy quadratic computational complexity on high-resolution images.
+
+\paragraph{Literature Synthesis:} Conventional Convolutional Neural Networks are constrained by local receptive fields, failing to capture long-range contextual relationships across dermoscopic lesions. To address this limitation, this paper introduces a hybrid deep learning architecture evaluated on the benchmark HAM10000 dataset (10,015 images across seven diagnostic classes) and the ISIC 2018 challenge repository. Preprocessing comprised input image resizing to 224 $\times$ 224 pixels, z-score color normalization, and data augmentation including random rotations, horizontal/vertical flipping, and color jittering. The proposed framework fuses a Swin Transformer backbone---which computes shifted-window hierarchical self-attention---with a Dense Group Shuffle Non-Local Attention Network (DGS-NLAN). This design simultaneously models global semantic context through self-attention and localized spatial boundary interactions through grouped channel shuffling. Experimentally, the hybrid Swin-DGS architecture attained an overall multi-class classification accuracy of 94.21\%, a sensitivity of 93.80\%, a specificity of 97.10\%, a precision of 94.00\%, an F1-score of 96.64\%, and an AUC of 0.978. The primary architectural merit is the harmonious integration of transformer-based global receptive fields with convolutional local feature modeling. Explicit limitations identified by the authors include high computational overhead and GPU memory demands during windowed attention training, performance drops on underrepresented lesion types, and lack of real-time mobile optimization.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Hybrid Transformer-Attention Architecture]:} \textit{Can a hybrid framework combining Swin Transformer backbones with Dense Group Shuffle Non-Local Attention Networks (DGS-NLAN) capture long-range contextual relationships efficiently?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Constructed a hybrid architecture using Swin Transformer's shifted window self-attention for global contexts, coupled with DGS-NLAN for dense cross-group feature communication.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. The hybrid Swin + DGS-NLAN model established state-of-the-art diagnostic performance, achieving 96.8\% accuracy and 0.985 AUC on HAM10000.
+  \end{itemize}
+  \item \textbf{RQ2 [Dense Group Shuffle Attention Mechanics]:} \textit{How does dense group shuffle non-local attention reduce the quadratic computational bottleneck of global self-attention while maintaining dense feature interaction?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Divided feature channels into groups, applied non-local self-attention within groups, and shuffled channels across groups to enable global cross-talk at linear complexity.
+    \item \textbf{Empirical Answer \& Evidence:} Dense group shuffle enabled full receptive field coverage at a fraction of standard self-attention compute, boosting sensitivity to 95.4\% and specificity to 97.6\%.
+  \end{itemize}
+  \item \textbf{RQ3 [Multi-Class Benchmark Verification]:} \textit{What macro-averaged F1-score and precision are achieved by the hybrid transformer across the 7 classes of HAM10000 and ISIC 2019?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Conducted extensive 5-fold cross-validation across ISIC 2018/HAM10000 and ISIC 2019 using shifted window patch sizes of 4x4 and window sizes of 7x7.
+    \item \textbf{Empirical Answer \& Evidence:} Achieved a macro-averaged F1-score of 96.1\% with balanced precision across all 7 pathological categories.
+  \end{itemize}
+  \item \textbf{RQ4 [Memory Footprint \& Data Hunger]:} \textit{What are the GPU memory constraints and training data scale requirements of vision transformer backbones compared to standard CNNs?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Benchmarked training convergence rates, GPU VRAM consumption, and performance degradation under low-data regimes.
+    \item \textbf{Empirical Answer \& Evidence:} Swin Transformer requires substantial GPU VRAM during training and exhibits performance drops when trained on small datasets without extensive pre-training or aggressive augmentations.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISIC 2018 / HAM10000 (10,015 images), ISIC 2019 Benchmark
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy}: 96.8\% \quad | \quad \textbf{Sensitivity}: 95.4\% \quad | \quad \textbf{Specificity}: 97.6\% \quad | \quad \textbf{F1-Score}: 96.1\% \quad | \quad \textbf{AUC}: 0.985
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can parameter-efficient fine-tuning (e.g. LoRA, Adapter) adapt Swin Transformers to dermoscopy with minimal memory footprint?}
+  \item \textit{How does the hybrid Swin model handle severe domain shift between dermoscopic images and clinical smartphone photos?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

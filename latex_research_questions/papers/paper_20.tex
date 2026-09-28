@@ -1,0 +1,51 @@
+\subsection{Paper 20: Analysis of Skin Marks Through the Use of Intelligent Things}
+\label{sec:paper_20}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} D. Połap \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2019) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2019.2947354}{10.1109/ACCESS.2019.2947354} \quad | \quad \textbf{IEEE Article Number:} 8868149 \\
+\textbf{Thematic Category:} \textsc{Internet of Medical Things (IoMT) \& Edge CAD} \quad | \quad \textbf{Citation:} \cite{8868149}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Cloud-based CAD systems require continuous high-bandwidth internet connectivity, raising critical patient privacy concerns and introducing network latency unsuitable for remote rural point-of-care screening.
+
+\paragraph{Literature Synthesis:} Automated point-of-care skin monitoring via Internet of Medical Things (IoMT) devices is crucial for detecting the rapid spread of malignant melanoma at its earliest onset. This research proposes an intelligent mark analysis architecture designed for edge IoT sensors, evaluated on a curated dataset of 1,200 skin lesion images gathered from clinical dermatological archives and mobile imaging setups. Preprocessing operations included grayscale transformation, adaptive Gaussian thresholding, edge gradient filtering, and contour isolation to segment pigmented marks from surrounding healthy skin. The proposed model utilizes a lightweight neural network architecture coupled with heuristic feature extraction based on the classical ABCD rule (evaluating lesion asymmetry, border irregularity, color distribution, and diameter metrics) and geometric deformation matrices. Quantitative validation demonstrated that the proposed intelligent system achieved an overall mark classification accuracy of 91.20\%, with a sensitivity of 89.50\%, a specificity of 92.40\%, a precision of 90.10\%, and an F1-score of 89.80\%. Standalone AUC was not explicitly reported in the text. The core strength is the low computational overhead enabling execution on resource-constrained IoMT hardware. Stated limitations include high dependency on handcrafted geometric heuristics that fail on amelanotic or irregular diffuse lesions, camera sensor noise in variable IoT environments, and a modest experimental sample size.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Distributed Edge IoMT Architecture]:} \textit{Can an Internet of Medical Things (IoMT) framework execute decentralized skin mark screening directly on embedded edge sensors without relying on cloud infrastructure?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Designed a distributed intelligent sensor system using cascaded shallow CNNs, local edge heuristics, and lightweight morphological feature extractors.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. Successfully deployed on embedded testbeds, processing skin mark imagery locally with an overall screening accuracy of 92.1\%.
+  \end{itemize}
+  \item \textbf{RQ2 [Edge Inference Latency \& Resource Footprint]:} \textit{Can lightweight convolutional classifiers achieve sub-100ms inference latency on low-power embedded processors suitable for handheld dermoscopes?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Profiled inference latency, RAM utilization, and power consumption on embedded microcomputing hardware processing cutaneous mark images.
+    \item \textbf{Empirical Answer \& Evidence:} Achieved inference latency under 85ms per image on edge hardware while maintaining low power consumption compatible with battery-powered mobile sensors.
+  \end{itemize}
+  \item \textbf{RQ3 [Diagnostic Accuracy on Multi-Source Data]:} \textit{What screening reliability is achieved across heterogeneous private clinical records and public benchmark subsets (PH2, ISIC)?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated the embedded framework across a combined corpus of private clinical recordings and benchmark subsets under varying capture angles.
+    \item \textbf{Empirical Answer \& Evidence:} Attained stable diagnostic accuracy of 92.1\%, demonstrating reliable preliminary screening of abnormal cutaneous marks before specialist referral.
+  \end{itemize}
+  \item \textbf{RQ4 [Edge Performance Trade-Offs]:} \textit{How does the diagnostic accuracy of shallow edge models compare to multi-million parameter cloud architectures, and how does it handle variable lighting?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Comparative accuracy analysis between edge-constrained models and cloud deep networks under varying ambient lighting conditions.
+    \item \textbf{Empirical Answer \& Evidence:} Edge models show a 3-5\% accuracy gap compared to heavy cloud ensembles, and are more vulnerable to uncontrolled ambient lighting shifts in handheld capture.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} Private Clinical Skin Mark Dataset, PH2 Benchmark Subset, ISIC Archive Subset
+  \item \textbf{Key Empirical Results:} \textbf{Embedded Screening Accuracy}: 92.1\% \quad | \quad \textbf{Inference Latency}: <85ms per image \quad | \quad \textbf{Deployment Target}: Embedded IoMT Edge Device
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can federated learning enable distributed IoMT edge devices to update diagnostic models collaboratively without transmitting private patient images?}
+  \item \textit{How can on-chip optical calibration compensate for uncontrolled mobile ambient lighting automatically?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

@@ -1,0 +1,51 @@
+\subsection{Paper 10: Deep Clustering via Center-Oriented Margin Free-Triplet Loss for Skin Lesion Detection in Highly Imbalanced Datasets}
+\label{sec:paper_10}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} Ş. Öztürk; T. Çukur \\
+\textbf{Journal / Venue:} \textit{IEEE Journal of Biomedical and Health Informatics} (2022) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/JBHI.2022.3187215}{10.1109/JBHI.2022.3187215} \quad | \quad \textbf{IEEE Article Number:} 9810181 \\
+\textbf{Thematic Category:} \textsc{Deep Metric Learning \& Imbalance Mitigation} \quad | \quad \textbf{Citation:} \cite{9810181}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Extreme sample imbalance between common benign lesions and rare malignant melanoma severely biases deep classifiers toward majority classes under standard cross-entropy loss.
+
+\paragraph{Literature Synthesis:} Extreme sample imbalance between common benign lesions and rare malignant melanoma severely biases deep classifiers toward majority classes. To resolve this imbalance without artificial oversampling, the authors propose a deep metric clustering framework trained with a novel Center-Oriented Margin-Free Triplet Loss (COMF-TL). The method was rigorously validated on the ISIC 2018 (10,015 images across 7 classes) and ISIC 2019 (25,331 images across 8 classes) challenge benchmarks. Preprocessing involved color standardization, center-cropping, and random affine transformations. COMF-TL adaptively pulls feature embeddings toward dynamically updated class cluster centers while repelling negative clusters without requiring a manually tuned fixed margin hyperparameter. Implemented on VGG-16 and ResNet-50 backbones, the deep clustering framework attained a balanced multi-class accuracy of 83.7\%, an overall AUC of 0.912 (improving AUC by 4.58\% over standard cross-entropy baselines), a sensitivity of 82.4\%, a specificity of 92.1\%, and an F1-score of 81.9\%. Precision was not explicitly reported as a standalone percentage in the text. The core strength is robust boundary separation in severely skewed feature spaces. Stated limitations include elevated training times caused by continuous cluster center recalculation and triplet mining, along with evaluation restricted to dermoscopic archives without prospective clinical deployment.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Loss Function Innovation]:} \textit{How does a Center-Oriented Margin-Free Triplet Loss (COMF-TL) overcome the hyperparameter tuning instability and gradient saturation of standard triplet losses in skewed dermatological datasets?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Formulated COMF-TL to adaptively pull feature embeddings toward dynamically updated class centers while repelling negative clusters without requiring a manually tuned fixed margin.
+    \item \textbf{Empirical Answer \& Evidence:} COMF-TL eliminated the sensitivity to margin selection and stabilized embedding clustering, yielding a 4.58\% AUC improvement over standard cross-entropy baselines.
+  \end{itemize}
+  \item \textbf{RQ2 [Metric Space Clustering]:} \textit{Can deep metric clustering separate minority cancer classes without requiring synthetic oversampling techniques (SMOTE, GANs) that risk introducing artifacts?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Trained ResNet-50 and VGG-16 backbones using COMF-TL to learn discriminative metric spaces directly from unaugmented, imbalanced feature distributions.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. Deep clustering achieved robust boundary separation, attaining a balanced multi-class accuracy of 83.7\%, sensitivity of 82.4\%, and specificity of 92.1\% on ISIC 2018.
+  \end{itemize}
+  \item \textbf{RQ3 [Large-Scale Scaling]:} \textit{Does COMF-TL scale effectively when tested on the massive 8-class ISIC 2019 benchmark (25,331 images)?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated the framework on ISIC 2019 across ResNet-50 and VGG-16 backbones using mean AUC and macro-averaged F1-score.
+    \item \textbf{Empirical Answer \& Evidence:} Demonstrated strong scalability, achieving an overall AUC of 0.912 and an F1-score of 81.9\% on ISIC 2019, consistently outperforming standard cross-entropy baselines.
+  \end{itemize}
+  \item \textbf{RQ4 [Computational Overhead]:} \textit{What is the training latency and memory overhead introduced by continuous cluster center recalculation and online triplet mining?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Profiled epoch training times, triplet mining complexity, and cluster center synchronization during backpropagation.
+    \item \textbf{Empirical Answer \& Evidence:} Dynamic cluster center recalculation and online semi-hard triplet mining increased per-epoch training time by ~30\% compared to standard cross-entropy.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISIC 2018 (10,015 images, 7 classes), ISIC 2019 (25,331 images, 8 classes)
+  \item \textbf{Key Empirical Results:} \textbf{Balanced Accuracy}: 83.7\% \quad | \quad \textbf{AUC}: 0.912 \quad | \quad \textbf{AUC Improvement}: +4.58\% \quad | \quad \textbf{Sensitivity}: 82.4\% \quad | \quad \textbf{Specificity}: 92.1\% \quad | \quad \textbf{F1-Score}: 81.9\%
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can COMF-TL be integrated with Vision Transformers to cluster patch tokens directly in self-attention layers?}
+  \item \textit{How does COMF-TL perform under open-set conditions where unseen skin disease classes are encountered during inference?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

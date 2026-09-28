@@ -1,0 +1,42 @@
+\section{Thematic Synthesis of Core Research Questions}
+\label{sec:thematic_synthesis}
+
+Across the 39 reviewed publications spanning 2019 through 2026, the scientific inquiry converges around six fundamental thematic axes. Analyzing how different authors formulate and answer related research questions reveals the conceptual evolution of the field.
+
+\subsection{Theme 1: Architectural Progression from Regularized CNNs to Vision Transformers}
+\textbf{The Driving Research Question:} \textit{Can self-attention and non-local receptive fields overcome the inductive bias limitations of conventional convolution in capturing irregular, multi-scale lesion margins?}
+
+Early investigations (Papers 1, 4, 5, 6; 2019--2020) focused predominantly on addressing the parameter bloat and overfitting tendencies of standard CNNs. Authors investigated whether weight regularizers ($\lambda = 0.02$, Paper 1~\cite{8669763}), lightweight paired feature extractors (Paper 4~\cite{9099799}), or DenseNet feature reuse (Paper 6~\cite{9167192}) could stabilize convergence on small dermoscopic archives. By 2024--2026 (Papers 19, 26, 36, 37), the core inquiry shifted toward whether Vision Transformers (Swin, DeiT) and focal modulation could capture long-range contextual dependencies across entire lesion topographies. The empirical consensus demonstrates that while hybrid Swin-attention models (Paper 19~\cite{10731679}) achieve superior AUC (0.985), they require either distillation tokens (Paper 37~\cite{11641552}) or focal context gates (Paper 36~\cite{11435372}) to prevent prohibitive quadratic memory scaling.
+
+\subsection{Theme 2: Spatial Equivariance and Capsule Routing vs. Pooling}
+\textbf{The Driving Research Question:} \textit{Does the scalar pooling operation in standard CNNs irrevocably destroy critical dermatological part-whole spatial relationships (such as pigment network orientation relative to border asymmetry)?}
+
+This question was directly investigated by Imran et al. (Paper 8~\cite{9940917}) and Lan et al. (Paper 9~\cite{9791221}). While Paper 8 demonstrated that fusing standard CNN representations with Capsule Networks (CapsNets) via soft-voting improved accuracy to 93.50\%, it identified Sabour's dynamic routing as a critical latency bottleneck. Lan et al. (Paper 9) answered this bottleneck directly by creating \textit{FixCaps}, replacing dynamic routing with a fixed matrix transformation. FixCaps achieved 96.49\% accuracy and 0.98 AUC on HAM10000, confirming that spatial transformation equivariance can be preserved without iterative routing delays.
+
+\subsection{Theme 3: The Class Imbalance Dilemma: Metric Clustering vs. Generative Augmentation}
+\textbf{The Driving Research Question:} \textit{How can severe clinical class imbalance (where benign nevi outnumber rare malignant melanomas by up to 50:1) be resolved without introducing synthetic hallucination artifacts?}
+
+Two competing methodological paradigms emerged:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Generative Synthetic Augmentation (Papers 15, 39):} Gong et al.~\cite{9062473} used StyleGANs to synthesize photorealistic minority lesions (FID = 18.4), achieving a 6.8\% boost in multi-class accuracy. However, authors in Paper 39~\cite{11598907} and Paper 7~\cite{9113301} cautioned against subtle generative hallucinations that risk teaching neural networks non-physiological features.
+    \item \textbf{Deep Metric Space Re-Structuring (Paper 10):} Öztürk and Çukur~\cite{9810181} investigated whether a Center-Oriented Margin-Free Triplet Loss (COMF-TL) could cluster minority classes dynamically without generating any artificial pixels. COMF-TL yielded an 83.7\% balanced accuracy and improved ROC-AUC by 4.58\% on the 25,331-image ISIC 2019 dataset, confirming that loss-level metric structuring is fundamentally safer than synthetic oversampling.
+\end{enumerate}
+
+\subsection{Theme 4: Artifact Mitigation: Morphological Filters vs. Deep Inpainting vs. Matrix Factorization}
+\textbf{The Driving Research Question:} \textit{Do classical hair removal algorithms (DullRazor) corrupt diagnostic micro-vascular structures, and can deep inpainting or unsupervised matrix decomposition preserve genuine margins?}
+
+In Paper 14, Talavera-Mart{\'\i}nez et al.~\cite{9306830} showed that deep U-Net hair segmentation (92.8\% Dice) and contextual inpainting outperformed classical DullRazor filtering by 2.1\% in downstream diagnostic accuracy. However, both deep inpainting and DullRazor introduce slight local blurring over fine pigment networks. In Paper 34, Soares Flores and Scharcanski~\cite{11058930} addressed this through unsupervised Nonnegative Matrix Factorization (NMF) and Mutual Information, demonstrating that decomposing images into spectral abundance maps isolates lesions on clinical photography without blurring or supervised mask annotations.
+
+\subsection{Theme 5: The Evolution of Explainability: From Saliency Heatmaps to Neuro-Symbolic Knowledge Graphs}
+\textbf{The Driving Research Question:} \textit{Can explainable AI transition from post-hoc visual heatmaps (which physicians often find ambiguous) to verifiable clinical reasoning aligned with established medical criteria?}
+
+In early works (Paper 3~\cite{10107401}), explainability was limited to post-hoc Grad-CAM and Grad-CAM++ attribution maps. While visually intuitive, heatmaps cannot state \textit{why} a lesion is malignant. By 2025--2026, authors investigated two advanced paradigms:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Case-Based Twin Retrieval (Paper 35):} Tabatabaei et al.~\cite{11224374} formulated explainability as Content-Based Image Retrieval using Siamese networks, providing dermatologists with visually and pathologically verified twin cases (Top-5 precision of 94.2\%).
+    \item \textbf{Neuro-Symbolic Knowledge Graphs (Paper 30):} Wang et al.~\cite{11151232} integrated structured dermatological knowledge graphs based on the clinical Seven-Point Checklist directly into gradient-based networks, generating symbolic clinical audit trails with 89.4\% multi-criteria accuracy.
+\end{itemize}
+
+\subsection{Theme 6: Foundation Models, Parameter-Efficient Tuning, and Automated Report Generation}
+\textbf{The Driving Research Question:} \textit{Can multi-modal Vision-Language Models generate complete, structured clinical reports and conduct interactive question-answering without unsustainable computational fine-tuning?}
+
+Papers 32 (\cite{11091320}) and 38 (\cite{11626860}) represent the frontier of medical artificial intelligence. Chakrabarti et al. demonstrated that knowledge distillation from foundation models allows compact student VLMs (78\% parameter reduction) to generate clinical reports with a BLEU-4 score of 0.428 and clinical accuracy of 93.4\%. Younis et al. (Paper 38) introduced Mixture-of-LoRA Experts (MoLE) for dermoscopic Visual Question Answering (VQA), proving that dynamic routing across specialized low-rank adaptation experts trains only 4.2M parameters (a 96\% reduction) while achieving 88.7\% VQA accuracy.

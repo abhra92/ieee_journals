@@ -1,0 +1,51 @@
+\subsection{Paper 1: Skin Lesion Classification Using Convolutional Neural Network With Novel Regularizer}
+\label{sec:paper_1}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} M. A. Albahar \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2019) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2019.2906241}{10.1109/ACCESS.2019.2906241} \quad | \quad \textbf{IEEE Article Number:} 8669763 \\
+\textbf{Thematic Category:} \textsc{Regularized \& Lightweight CNNs} \quad | \quad \textbf{Citation:} \cite{8669763}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Fine-grained morphological overlaps between benign and malignant skin lesions cause catastrophic overfitting in traditional unregularized deep CNNs.
+
+\paragraph{Literature Synthesis:} This study addresses the critical clinical challenge of discriminating between benign and malignant skin lesions from dermoscopic imagery, where fine-grained morphological differences complicate automated diagnosis. The author evaluated the framework on dermoscopic images from the benchmark International Skin Imaging Collaboration (ISIC) archive containing 23,906 images across multiple lesion categories. The dataset was partitioned into subsets of approximately 8,000 images, each using a 70\% training (5,600 images) and 30\% validation split (2,400 images). Preprocessing involved resizing images to 300 $\times$ 300 $\times$ 3 pixels and applying a power-law transformation (gamma correction) to adjust contrast and reduce computational overhead. The proposed architecture consists of a custom Convolutional Neural Network (CNN) featuring two convolutional layers embedded with a novel weight-controlling regularizer ($\lambda$ = 0.02), followed by max pooling, dropout, a 128-neuron dense layer, and an output classification layer. Experimentally, the model achieved an average validation weighted accuracy of 97.49\% over 100 epochs. Across binary tasks, the area under the ROC curve reached 0.77 for nevus versus melanoma, 0.93 for seborrheic keratosis versus basal cell carcinoma, 0.85 for seborrheic keratosis versus melanoma, and 0.86 for solar lentigo versus melanoma. Standalone precision, recall, and F1 percentages were not explicitly reported in the text. Key limitations include restricting evaluation to binary pairwise distinctions rather than unified multi-class classification and lack of prospective multi-center validation.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Architectural Innovation]:} \textit{Can a lightweight custom Convolutional Neural Network with an embedded novel weight-controlling regularizer prevent weight explosion and mitigate overfitting in binary skin lesion classification without requiring multi-million parameter backbones?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Constructed a 2-layer convolutional network embedded with a novel weight regularizer (penalty hyperparameter lambda = 0.02), coupled with max pooling, dropout, a 128-neuron dense layer, and softmax output.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. The novel regularizer successfully stabilized weight trajectories during 100 training epochs, achieving an average validation weighted accuracy of 97.49\% and preventing divergence on fine-grained lesion classes.
+  \end{itemize}
+  \item \textbf{RQ2 [Preprocessing \& Data Transformation]:} \textit{How does nonlinear power-law transformation (gamma correction) affect image contrast and convergence speed in automated dermoscopic image classification?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Applied power-law transformation to standardize 300x300x3 dermoscopic images, balancing illumination differences and highlighting subtle boundary gradations prior to convolution.
+    \item \textbf{Empirical Answer \& Evidence:} Power-law transformation accelerated gradient descent convergence and reduced training loss fluctuations across varying lighting conditions across the ISIC dataset.
+  \end{itemize}
+  \item \textbf{RQ3 [Clinical Diagnostic Performance]:} \textit{What diagnostic discrimination capability (ROC-AUC) does the regularized model achieve across specific pairwise benign versus malignant lesion types?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Partitioned 23,906 ISIC archive images into ~8,000 image subsets (70\% train, 30\% val) across binary clinical pairings.
+    \item \textbf{Empirical Answer \& Evidence:} Achieved ROC-AUC of 0.77 for nevus vs. melanoma, 0.93 for seborrheic keratosis vs. basal cell carcinoma, 0.85 for seborrheic keratosis vs. melanoma, and 0.86 for solar lentigo vs. melanoma.
+  \end{itemize}
+  \item \textbf{RQ4 [Clinical Translation \& Scalability]:} \textit{What are the structural constraints of pairwise binary classification when translating computer-aided diagnostic systems to multi-class clinical triage?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Analyzed model inference across disparate clinical presentations against practical dermatologist triage needs.
+    \item \textbf{Empirical Answer \& Evidence:} The binary pairwise formulation cannot holistically evaluate complex multi-class differential diagnoses, and the lack of external prospective multi-center testing limits generalizability.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISIC Archive (23,906 images; 8,000 subset, 70/30 split)
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy}: 97.49\% \quad | \quad \textbf{AUC (Nevus vs Mel)}: 0.77 \quad | \quad \textbf{AUC (SK vs BCC)}: 0.93 \quad | \quad \textbf{AUC (SK vs Mel)}: 0.85
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{How can the weight regularizer be generalized to unified multi-class differential diagnosis without loss of per-class sensitivity?}
+  \item \textit{How does the model perform prospectively across diverse patient phototypes in multi-center clinical trials?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

@@ -1,0 +1,51 @@
+\subsection{Paper 3: An Interpretable Skin Cancer Classification Using Optimized Convolutional Neural Network for a Smart Healthcare System}
+\label{sec:paper_3}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} K. Mridha; M. M. Uddin; J. Shin; S. Khadka; M. F. Mridha \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2023) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2023.3269694}{10.1109/ACCESS.2023.3269694} \quad | \quad \textbf{IEEE Article Number:} 10107401 \\
+\textbf{Thematic Category:} \textsc{Explainable AI (XAI) \& Mobile Healthcare} \quad | \quad \textbf{Citation:} \cite{10107401}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Deep learning CAD systems act as 'black boxes', lacking visual transparency and suffering from severe performance drops on underrepresented minority classes in multi-class dermatological screening.
+
+\paragraph{Literature Synthesis:} Addressing the pressing need for interpretable point-of-care dermatology, this investigation develops an explainable deep learning framework integrated into an Android smart healthcare application for automated multi-class skin lesion screening. The authors utilized the benchmark HAM10000 repository comprising 10,015 dermatoscopic images distributed across seven diagnostic classes: actinic keratoses, basal cell carcinoma, benign keratosis-like lesions, dermatofibroma, melanoma, melanocytic nevi, and vascular lesions. To tackle severe class imbalance and dimensional variance, preprocessing comprised image resizing, pixel intensity normalization, and extensive data augmentation incorporating random rotations, zooms, shear transformations, and flips. The proposed architecture is an optimized custom Convolutional Neural Network (CNN) incorporating batch normalization, max pooling, and dropout, systematically benchmarked across Adam and RMSprop optimizers with ReLU, Swish, and Tanh activation functions. Model interpretability was achieved via Grad-CAM and Grad-CAM++ attribution maps visualizing localized clinical decision regions. The optimized model attained an overall classification accuracy of 82.0\%, with a specificity of 94.17\%, sensitivity of 82.0\%, and a loss accuracy of 0.47\%. Key advantages include transparent visual justifications and mobile application integration. Stated limitations include modest multiclass sensitivity on severely underrepresented minority classes (dermatofibroma and vascular lesions) and the requirement for prospective clinical validation on multi-center patient populations.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Optimization \& Activation Engineering]:} \textit{What combination of optimization algorithms (Adam vs. RMSprop) and activation functions (ReLU, Swish, Tanh) maximizes multi-class lesion classification accuracy on HAM10000?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Trained a custom CNN with batch normalization, max pooling, and dropout across systematic combinations of optimizers and activation functions.
+    \item \textbf{Empirical Answer \& Evidence:} The custom CNN achieved peak overall accuracy of 82.0\% and specificity of 94.17\% with Adam optimizer and Swish/ReLU activations, with a loss accuracy of 0.47\%.
+  \end{itemize}
+  \item \textbf{RQ2 [Explainable AI \& Visual Attribution]:} \textit{Can post-hoc visual attribution maps (Grad-CAM and Grad-CAM++) accurately highlight clinically relevant lesion structures to build clinician trust?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Generated localized gradient attribution heatmaps at the final convolutional layer to visualize discriminative regions for each of the 7 diagnostic classes.
+    \item \textbf{Empirical Answer \& Evidence:} Grad-CAM and Grad-CAM++ successfully localized pigmented network patterns and atypical margins matching dermatologist inspection criteria.
+  \end{itemize}
+  \item \textbf{RQ3 [Class Imbalance Impact]:} \textit{How significantly does class imbalance affect per-class sensitivity across common (melanocytic nevi) versus rare (dermatofibroma, vascular) skin lesions?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Analyzed confusion matrices across all 7 classes of HAM10000 (10,015 images) following geometric data augmentation.
+    \item \textbf{Empirical Answer \& Evidence:} Sensitivity remained high for dominant classes but dropped on minority classes (df and vasc), demonstrating that geometric augmentation alone is insufficient to resolve extreme skew.
+  \end{itemize}
+  \item \textbf{RQ4 [Point-of-Care Mobile Feasibility]:} \textit{Can an explainable deep CNN be integrated into an Android smart healthcare application for real-time mobile clinical triage?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Exported the optimized lightweight CNN model and embedded it within an end-to-end Android mobile screening application.
+    \item \textbf{Empirical Answer \& Evidence:} Successfully validated end-to-end mobile execution with near real-time inference latency suitable for decentralized point-of-care screening.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} HAM10000 (10,015 images across 7 classes)
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy}: 82.0\% \quad | \quad \textbf{Specificity}: 94.17\% \quad | \quad \textbf{Sensitivity}: 82.0\% \quad | \quad \textbf{Loss Accuracy}: 0.47\%
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{How can synthetic metric oversampling or cost-sensitive losses improve minority class sensitivity in mobile models?}
+  \item \textit{What is the diagnostic accuracy of the Android application when tested prospectively in multi-ethnic outpatient clinics?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

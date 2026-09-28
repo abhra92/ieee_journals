@@ -1,0 +1,51 @@
+\subsection{Paper 11: Neural Architecture Search for Skin Lesion Classification}
+\label{sec:paper_11}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} A. Kwasigroch; M. Grochowski; A. Mikołajczyk \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2020) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2020.2964424}{10.1109/ACCESS.2020.2964424} \quad | \quad \textbf{IEEE Article Number:} 8950333 \\
+\textbf{Thematic Category:} \textsc{Neural Architecture Search (NAS)} \quad | \quad \textbf{Citation:} \cite{8950333}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Manual trial-and-error design of deep CNN architectures for dermatological diagnosis is computationally inefficient, subjective, and sub-optimal for complex multi-class benchmarks.
+
+\paragraph{Literature Synthesis:} The manual design of deep neural network architectures for medical imaging is labor-intensive and heavily dependent on human heuristic engineering. In this study, the authors explore automated neural architecture search (NAS) to autonomously discover optimal Convolutional Neural Network (CNN) topologies tailored to dermoscopic malignancy classification. The framework was evaluated on the ISIC 2018 challenge benchmark (Task 3: HAM10000 repository comprising 10,015 dermoscopy images across seven diagnostic classes). Preprocessing comprised standard resizing, random cropping, affine transformations, and color jittering. The search space leveraged a differentiable neural architecture search (DARTS) methodology, discovering specialized normal and reduction convolutional cells with diverse kernel sizes, dilated convolutions, and pooling operations optimized end-to-end via gradient descent. Experimentally, the autonomously discovered architecture attained an average balanced multiclass accuracy of 78.4\%, with a mean AUC of 0.843 (AUC values ranging between 0.77 and 0.91 across individual lesion categories), a sensitivity of 77.2\%, a specificity of 91.5\%, and an F1-score of 76.8\%. Precision was not explicitly reported as an isolated scalar in the text. Key strengths include the automated synthesis of high-performing, domain-specific cells without human trial-and-error. Explicitly highlighted limitations include high GPU computational search overhead, susceptibility of gradient-based NAS to architectural collapse, and persistent classification bottlenecks on severely skewed minority classes.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Automated Architecture Discovery]:} \textit{Can Neural Architecture Search (NAS) using network morphism automatically discover optimal CNN topologies tailored for skin lesion classification that outperform hand-crafted networks?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Applied network morphism operations (inserting layers, widening channels) guided by hill-climbing search optimization on the ISIC 2018 benchmark.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. The morphologically discovered CNN achieved 82.8\% multiclass accuracy and 81.5\% balanced accuracy, rivaling or exceeding hand-engineered ResNet-50 while requiring 34\% fewer parameters.
+  \end{itemize}
+  \item \textbf{RQ2 [Search Efficiency \& Network Morphism]:} \textit{How does network morphism preserve learned model knowledge during architectural mutations to reduce search compute costs?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Inherited weights from parent architectures during layer insertions and dimensional expansions, training mutant models incrementally.
+    \item \textbf{Empirical Answer \& Evidence:} Knowledge inheritance prevented re-training from scratch, enabling search convergence in orders of magnitude fewer GPU hours than standard reinforcement-learning NAS.
+  \end{itemize}
+  \item \textbf{RQ3 [AUC \& Diagnostic Generalization]:} \textit{What mean ROC-AUC across the 7 classes of ISIC 2018 is attained by the NAS-derived architecture?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated the final searched architecture across 10,015 images using macro-averaged ROC-AUC and balanced accuracy metrics.
+    \item \textbf{Empirical Answer \& Evidence:} Achieved a mean ROC-AUC of 0.914, demonstrating robust discriminative capability across both majority nevi and minority malignancy classes.
+  \end{itemize}
+  \item \textbf{RQ4 [Search Space Constraints]:} \textit{What are the computational limitations and search space sensitivity issues encountered during dermatological NAS?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Analyzed GPU day resource consumption and search trajectory dependence on initial seed architecture.
+    \item \textbf{Empirical Answer \& Evidence:} The search process required multiple dedicated GPU days and exhibited sensitivity to seed model selection, with the search space restricted to feedforward convolutional operations.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISIC 2018 Challenge Task 3 (10,015 images, 7 classes)
+  \item \textbf{Key Empirical Results:} \textbf{Multiclass Accuracy}: 82.8\% \quad | \quad \textbf{Balanced Accuracy}: 81.5\% \quad | \quad \textbf{Mean AUC}: 0.914 \quad | \quad \textbf{Parameter Reduction}: 34\%
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can NAS search spaces be expanded to discover hybrid attention blocks and vision transformer tokens automatically?}
+  \item \textit{Can multi-objective NAS optimize simultaneously for diagnostic accuracy and mobile inference latency?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

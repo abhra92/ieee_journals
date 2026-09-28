@@ -1,0 +1,51 @@
+\subsection{Paper 2: Region-of-Interest Based Transfer Learning Assisted Framework for Skin Cancer Detection}
+\label{sec:paper_2}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} R. Ashraf; S. Afzal; A. U. Rehman; S. Gul; J. Baber; M. Bakhtyar; I. Mehmood; O. -Y. Song; M. Maqsood \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2020) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2020.3014701}{10.1109/ACCESS.2020.3014701} \quad | \quad \textbf{IEEE Article Number:} 9160933 \\
+\textbf{Thematic Category:} \textsc{ROI Localization \& Transfer Learning} \quad | \quad \textbf{Citation:} \cite{9160933}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Surrounding healthy skin, lighting variations, and hair artifacts introduce confounding background noise when deep networks process full unsegmented dermoscopic images.
+
+\paragraph{Literature Synthesis:} This research targets the diagnostic challenge of differentiating malignant melanoma from visually similar benign melanocytic nevi in dermatoscopic imagery. The authors developed an automated Region-of-Interest (ROI) transfer learning framework evaluated on two clinical benchmarks: the DermIS dataset (705 images: 448 benign and 257 melanoma) and the DermQuest dataset (667 images: 434 nevus and 233 melanoma). Preprocessing employed an improved k-means clustering segmentation algorithm to localize and isolate lesion boundaries from healthy background skin, coupled with offline data augmentation including random rotations, flipping, zooming, and contrast adjustments. Feature extraction and classification were conducted using transfer learning with pre-trained Convolutional Neural Network (CNN) architectures, primarily AlexNet and VGG-16, fine-tuned exclusively on the segmented lesion patches. Quantitative evaluation revealed high diagnostic capability, achieving 97.9\% accuracy, 96.3\% sensitivity, 98.7\% specificity, 96.3\% precision, 96.3\% F1-score, and an AUC of 0.97 on DermIS. On DermQuest, the model yielded 97.4\% accuracy, 95.8\% sensitivity, 98.1\% specificity, 95.8\% precision, 95.8\% F1-score, and an AUC of 0.96. The principal strengths lie in eliminating extraneous skin artifacts through localized ROI modeling. However, the study is explicitly limited to binary categorization, relies on moderately sized datasets, and depends on k-means segmentation that may degrade in the presence of severe hair occlusion or diffuse, irregular borders.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Preprocessing \& ROI Segmentation]:} \textit{Does isolating the lesion Region of Interest (ROI) via an improved k-means clustering segmentation algorithm improve transfer learning feature discrimination over using full unsegmented images?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Implemented improved k-means clustering to segment lesion borders, followed by ROI cropping and offline data augmentation (rotations, flips, zooming, contrast adjustments).
+    \item \textbf{Empirical Answer \& Evidence:} Yes. Eliminating healthy skin artifacts allowed feature extraction networks to focus exclusively on lesion texture, boosting accuracy to 97.9\% on DermIS and 97.4\% on DermQuest.
+  \end{itemize}
+  \item \textbf{RQ2 [Architectural Backbone Evaluation]:} \textit{How do deep pre-trained CNN backbones (AlexNet vs. VGG-16) compare in feature transferability when fine-tuned strictly on segmented dermatoscopic lesion ROIs?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Fine-tuned pre-trained AlexNet and VGG-16 architectures on isolated lesion patches across two clinical benchmark datasets under identical training protocols.
+    \item \textbf{Empirical Answer \& Evidence:} Both architectures demonstrated strong transferability; VGG-16 captured finer textural details, yielding 96.3\% sensitivity and 98.7\% specificity on DermIS and 95.8\% sensitivity and 98.1\% specificity on DermQuest.
+  \end{itemize}
+  \item \textbf{RQ3 [Benchmark Generalization]:} \textit{Can an ROI-based transfer learning framework achieve robust, consistent diagnostic performance across independent clinical benchmark datasets?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated the pipeline on DermIS (705 images: 448 benign, 257 melanoma) and DermQuest (667 images: 434 nevus, 233 melanoma) using AUC, precision, and F1-score.
+    \item \textbf{Empirical Answer \& Evidence:} Demonstrated exceptional consistency across datasets: AUC reached 0.97 on DermIS and 0.96 on DermQuest, with F1-scores of 96.3\% and 95.8\% respectively.
+  \end{itemize}
+  \item \textbf{RQ4 [Methodological Limitations]:} \textit{Under what clinical conditions does k-means ROI segmentation fail, and how does this affect downstream melanoma detection?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Error analysis of segmentation failures on difficult border topologies and dense hair artifacts.
+    \item \textbf{Empirical Answer \& Evidence:} k-means clustering degrades in the presence of severe hair occlusion and diffuse, poorly demarcated lesion margins, leading to border over-clipping or under-segmentation.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} DermIS (705 images), DermQuest (667 images)
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy (DermIS)}: 97.9\% \quad | \quad \textbf{Sensitivity}: 96.3\% \quad | \quad \textbf{Specificity}: 98.7\% \quad | \quad \textbf{AUC (DermIS)}: 0.97 \quad | \quad \textbf{Accuracy (DermQuest)}: 97.4\% \quad | \quad \textbf{AUC (DermQuest)}: 0.96
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can automated deep semantic segmentation replace k-means to eliminate manual tuning in the presence of dense hair?}
+  \item \textit{Can the framework scale to multi-class classification beyond binary melanoma vs. nevus distinction?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

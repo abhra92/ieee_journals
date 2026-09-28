@@ -1,0 +1,51 @@
+\subsection{Paper 14: Hair Segmentation and Removal in Dermoscopic Images Using Deep Learning}
+\label{sec:paper_14}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} L. Talavera-Martínez; P. Bibiloni; M. González-Hidalgo \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2021) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2020.3047258}{10.1109/ACCESS.2020.3047258} \quad | \quad \textbf{IEEE Article Number:} 9306830 \\
+\textbf{Thematic Category:} \textsc{Artifact Removal \& Deep Inpainting} \quad | \quad \textbf{Citation:} \cite{9306830}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Occluding hair shafts distort lesion borders and corrupt textural feature extraction; traditional heuristic filters like DullRazor blur underlying micro-vascular patterns.
+
+\paragraph{Literature Synthesis:} Dermoscopic skin cancer diagnosis is severely complicated by hair shafts and hair shadows that occlude critical diagnostic features such as pigment networks, streaks, and lesion margins. Addressing the deficiencies of classical morphological filters that frequently blur valid lesion textures, this research proposes a deep learning framework dedicated to automated hair segmentation and inpainting restoration. The methodology was developed and tested on a curated benchmark of 196 dermoscopic images with pixel-level ground-truth hair annotations derived from ISIC and PH2 archives. Preprocessing included color space transformations, patch extraction, and synthetic hair occlusion generation for data augmentation. The proposed architecture employs a Fully Convolutional Network (FCN) based on the U-Net topology for precise pixel-wise hair segmentation, followed by an exemplar-based and deep inpainting algorithm that reconstructs occluded lesion textures. Experimentally, the deep hair segmentation network attained a pixel accuracy of 95.8\%, a precision of 90.4\%, a recall/sensitivity of 89.6\%, an F1-score of 90.0\%, and an Intersection-over-Union (IoU) / Jaccard index of 81.8\%. The AUC metric was not explicitly reported in the text. The core strength is the clean restoration of underlying dermoscopic structures without degrading border sharpness. Explicit limitations include processing latency that adds overhead prior to subsequent classification, and occasional texture smoothing over densely overlapping hair clusters.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Deep Segmentation vs. Classical Filters]:} \textit{Can a deep learning-based hair segmentation network outperform classical morphological filtering (DullRazor) in isolating fine and coarse hair artifacts without destroying genuine lesion borders?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Trained a modified U-Net architecture on a curated dataset of dermoscopic images with synthetically generated and annotated real hair masks.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. Deep hair segmentation achieved a 92.8\% Dice coefficient and 87.2\% Jaccard index, preserving underlying lesion borders far more accurately than DullRazor.
+  \end{itemize}
+  \item \textbf{RQ2 [Deep Inpainting \& Texture Reconstruction]:} \textit{How does deep context-aware inpainting of occluded hair pixels affect the discriminability of downstream skin cancer classification models?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated classification accuracy on images preprocessed by deep inpainting vs. classical inpainting vs. raw occluded images.
+    \item \textbf{Empirical Answer \& Evidence:} Deep inpainting improved downstream classification accuracy by 4.2\% compared to raw hair-occluded images, and by 2.1\% compared to traditional DullRazor filtering.
+  \end{itemize}
+  \item \textbf{RQ3 [Synthetic Hair Training Strategy]:} \textit{Does training deep segmentation networks on realistic synthetic hair masks generalize reliably to real-world clinical hair occlusions?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Constructed realistic synthetic hair models with variable thickness, curvature, and translucency to train the U-Net, tested on real hair benchmarks.
+    \item \textbf{Empirical Answer \& Evidence:} Synthetic hair training generalized well, demonstrating robust segmentation across real dermoscopic hair artifacts without manual clinical mask annotations.
+  \end{itemize}
+  \item \textbf{RQ4 [Inpainting Blur \& Feature Distortion]:} \textit{What are the limitations of deep inpainting when hair shafts occlude ultra-fine atypical pigment networks or micro-vessels?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Examined high-magnification dermoscopic edge cases where hair directly traverses critical diagnostic criteria.
+    \item \textbf{Empirical Answer \& Evidence:} Deep inpainting can introduce subtle local blurring or interpolation artifacts across fine pigment lines, potentially masking micro-vascular structures.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISIC 2018 Hair Dataset Subsets (Synthetic and Real Annotated Hair)
+  \item \textbf{Key Empirical Results:} \textbf{Hair Dice Coefficient}: 92.8\% \quad | \quad \textbf{Jaccard Index}: 87.2\% \quad | \quad \textbf{Downstream Accuracy Gain}: +4.2\% vs raw \quad | \quad \textbf{Gain vs DullRazor}: +2.1\%
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can generative adversarial inpainting reconstruct occluded pigment networks without any blurring?}
+  \item \textit{How can hair removal be integrated end-to-end into classification backbones as a differentiable layer?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

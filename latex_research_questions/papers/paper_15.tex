@@ -1,0 +1,51 @@
+\subsection{Paper 15: Dermoscopy Image Classification Based on StyleGANs and Decision Fusion}
+\label{sec:paper_15}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} A. Gong; X. Yao; W. Lin \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2020) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2020.2986916}{10.1109/ACCESS.2020.2986916} \quad | \quad \textbf{IEEE Article Number:} 9062473 \\
+\textbf{Thematic Category:} \textsc{Generative Data Augmentation \& GANs} \quad | \quad \textbf{Citation:} \cite{9062473}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Severe underrepresentation of malignant melanoma and rare lesion categories creates acute training bias and high false-negative rates in deep classifiers.
+
+\paragraph{Literature Synthesis:} Severe data scarcity and class distribution imbalance in dermatological archives represent major obstacles to training robust deep classification models. To mitigate these impediments, this investigation presents an end-to-end framework combining generative data synthesis with multi-model decision fusion. The authors utilized the ISIC 2018 challenge repository (Task 3: HAM10000 comprising 10,015 images across seven lesion categories). Preprocessing involved image standardization, resizing, and synthetic sample generation via a Style-based Generative Adversarial Network (StyleGAN). StyleGAN was employed to generate high-resolution, photorealistic synthetic dermoscopic samples for heavily underrepresented minority classes (e.g., dermatofibroma, vascular lesions). For disease classification, the synthesized and real training sets were used to train multiple deep convolutional networks (DenseNet-201, ResNet-50, and Inception-v3), whose predictive outputs were aggregated using an adaptive weighted decision fusion strategy. The proposed methodology achieved an overall classification accuracy of 92.83\%, a mean AUC of 0.965, a precision of 89.20\%, a sensitivity/recall of 88.90\%, and an F1-score of 89.05\%. The major strength is the substantial boost in minority-class classification performance enabled by generative oversampling. Stated limitations include the heavy computational overhead and lengthy training required by StyleGAN, the potential generation of subtle non-biological artifacts, and the absence of prospective multi-device validation.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [High-Fidelity Synthetic Augmentation]:} \textit{Can high-resolution StyleGANs synthesize photorealistic dermoscopic images of minority skin lesions to resolve class imbalance without generating unrealistic clinical artifacts?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Trained StyleGAN on ISIC 2018 dermoscopic images to generate high-resolution synthetic samples for minority diagnostic classes, screening sample quality using Fréchet Inception Distance (FID).
+    \item \textbf{Empirical Answer \& Evidence:} Yes. StyleGAN generated photorealistic lesions with an FID of 18.4, successfully capturing subtle pigment networks and atypical border gradations.
+  \end{itemize}
+  \item \textbf{RQ2 [Multi-Block Decision Fusion]:} \textit{How does combining multiple deep CNN feature extraction blocks with decision-level fusion improve classification stability on GAN-augmented datasets?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Integrated feature representations from distinct CNN backbones and applied weighted decision fusion to predict multi-class lesion probabilities.
+    \item \textbf{Empirical Answer \& Evidence:} Decision fusion achieved an overall classification accuracy of 91.2\% and mean sensitivity of 89.6\%, outperforming standalone models trained on imbalanced data by 6.8\% accuracy.
+  \end{itemize}
+  \item \textbf{RQ3 [Benchmark Diagnostic AUC]:} \textit{What overall ROC-AUC is achieved across the 7 classes of ISIC 2018 Task 3 by the StyleGAN-augmented ensemble framework?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated the synthesized balanced dataset across 7 diagnostic categories using macro-averaged ROC-AUC metrics.
+    \item \textbf{Empirical Answer \& Evidence:} Achieved a macro-averaged ROC-AUC of 0.948, demonstrating balanced discrimination across both common nevi and rare dermatological malignancies.
+  \end{itemize}
+  \item \textbf{RQ4 [Generative Hallucination Risks]:} \textit{What clinical risks arise from subtle generative hallucinations in synthetic training images, and what are the GPU training costs?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Clinical review of synthesized lesion morphologies and profiling of high-resolution GAN training compute requirements.
+    \item \textbf{Empirical Answer \& Evidence:} GAN training demands extensive multi-GPU compute resources, and subtle generative hallucinations (e.g. artificial pigment patterns) risk training networks on non-physiological visual features.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISIC 2018 Challenge Task 3 (Dermoscopic Image Classification)
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy}: 91.2\% \quad | \quad \textbf{Mean Sensitivity}: 89.6\% \quad | \quad \textbf{AUC}: 0.948 \quad | \quad \textbf{StyleGAN FID}: 18.4 \quad | \quad \textbf{Accuracy Improvement}: +6.8\%
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can diffusion models (DDPM) surpass StyleGAN in fidelity and diversity while eliminating generative hallucination?}
+  \item \textit{What regulatory criteria are necessary to certify synthetic medical data for training clinical CAD systems?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

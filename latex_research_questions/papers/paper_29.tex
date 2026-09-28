@@ -1,0 +1,51 @@
+\subsection{Paper 29: Classification of Skin Lesion With Features Extraction Using Quantum Chebyshev Polynomials and Autoencoder From Wavelet-Transformed Images}
+\label{sec:paper_29}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} Farhatullah; X. Chen; D. Zeng; J. Xu; R. Nawaz; R. Ullah \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2024) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2024.3502513}{10.1109/ACCESS.2024.3502513} \quad | \quad \textbf{IEEE Article Number:} 10757392 \\
+\textbf{Thematic Category:} \textsc{Quantum Orthogonal Polynomials \& Wavelet Autoencoders} \quad | \quad \textbf{Citation:} \cite{10757392}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Conventional CNNs struggle to separate overlapping non-stationary texture frequencies in complex dermoscopic lesions, resulting in high false-positive rates.
+
+\paragraph{Literature Synthesis:} Automated classification of complex dermatological lesions requires feature descriptors capable of capturing multi-frequency textures without suffering from spatial dimensionality explosion. To address this need, the authors developed a novel hybrid framework combining wavelet frequency decomposition, quantum mathematical descriptors, and deep representation learning. The model was evaluated on the benchmark HAM10000 dataset (10,015 images across seven classes) and the ISIC 2019 repository. Preprocessing utilized the 2D Discrete Wavelet Transform (DWT) to decompose dermoscopic images into approximation and directional detail sub-bands, followed by contrast scaling. The feature extraction pipeline computes Quantum Chebyshev Polynomial (QCP) moment invariants to capture subtle structural curvatures, coupled with a deep convolutional autoencoder that learns compressed, non-linear latent feature embeddings. These hybrid quantum-deep representations are classified using an optimized ensemble of deep dense classifiers. Experimentally, the proposed method achieved an outstanding classification accuracy of 98.23\%, a precision of 98.26\%, a recall/sensitivity of 98.21\%, a specificity of 99.12\%, an F1-score of 98.24\%, and an AUC of 0.991. The primary strength is the robust mathematical representation of multi-scale textures. Stated limitations include the computational overhead of computing quantum polynomial moments, the multi-stage pipeline precluding single-pass end-to-end backpropagation, and lack of embedded device evaluation.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Quantum Orthogonal Feature Extraction]:} \textit{Can Quantum Chebyshev Polynomials (QCP) extracted from wavelet-transformed dermoscopic images capture non-stationary multi-frequency lesion features more effectively than spatial convolutions?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Applied Discrete Wavelet Transform (DWT) to decompose images into sub-bands, extracted mathematical feature representations using Quantum Chebyshev Polynomials, and compressed features via an autoencoder.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. Quantum Chebyshev feature extraction captured subtle high-frequency spatial transitions and color variances, delivering a classification accuracy of 96.2\% on HAM10000.
+  \end{itemize}
+  \item \textbf{RQ2 [Autoencoder Compression \& Sequential Classification]:} \textit{Does integrating autoencoder dimensionality reduction with Bidirectional LSTM (Bi-LSTM) classification preserve critical quantum feature representations while preventing overfitting?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Compressed high-dimensional quantum polynomial descriptors through a deep autoencoder and fed sequential feature representations to a Bi-LSTM network.
+    \item \textbf{Empirical Answer \& Evidence:} The Autoencoder + Bi-LSTM pipeline eliminated redundant coefficients, yielding a sensitivity of 94.8\%, specificity of 97.1\%, and an F1-score of 95.5\%.
+  \end{itemize}
+  \item \textbf{RQ3 [ROC-AUC Across Benchmarks]:} \textit{What overall diagnostic discrimination (ROC-AUC) is achieved across ISIC 2019 and HAM10000 datasets?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated the framework across 5-fold cross-validation on multi-class dermoscopic benchmarks.
+    \item \textbf{Empirical Answer \& Evidence:} Achieved an outstanding ROC-AUC of 0.980, significantly outperforming standard spatial CNNs and conventional wavelet moments.
+  \end{itemize}
+  \item \textbf{RQ4 [Mathematical Complexity \& Compute Footprint]:} \textit{What is the computational and memory footprint of calculating quantum polynomial transforms across high-resolution image datasets?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Profiled mathematical transformation overhead, matrix computation time, and training latency across image batch sizes.
+    \item \textbf{Empirical Answer \& Evidence:} Calculating quantum orthogonal polynomials is mathematically intensive and difficult to parallelize on conventional GPU shaders compared to standard 2D convolutions.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} HAM10000, ISIC 2019 Challenge Dataset
+  \item \textbf{Key Empirical Results:} \textbf{Accuracy}: 96.2\% \quad | \quad \textbf{Sensitivity}: 94.8\% \quad | \quad \textbf{Specificity}: 97.1\% \quad | \quad \textbf{F1-Score}: 95.5\% \quad | \quad \textbf{AUC}: 0.980
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can Quantum Chebyshev Polynomial calculations be natively implemented on emerging quantum computing hardware or quantum simulators?}
+  \item \textit{How does the wavelet-quantum pipeline perform on clinical smartphone photographs with compression artifacts?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}

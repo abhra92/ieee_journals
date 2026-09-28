@@ -1,0 +1,51 @@
+\subsection{Paper 31: A Hybrid Model for Early Melanoma Detection: Integrating YOLOv9 and Faster R-CNN for Enhanced Diagnostic Accuracy}
+\label{sec:paper_31}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Metadata \& Citation Summary}]
+\textbf{Authors:} M. I. Marie; M. S. Elredeny; A. Essayed Yakoub \\
+\textbf{Journal / Venue:} \textit{IEEE Access} (2025) \\
+\textbf{DOI:} \href{https://doi.org/10.1109/ACCESS.2025.3587625}{10.1109/ACCESS.2025.3587625} \quad | \quad \textbf{IEEE Article Number:} 11077147 \\
+\textbf{Thematic Category:} \textsc{Hybrid Object Detection \& Anchor-Free Architectures} \quad | \quad \textbf{Citation:} \cite{11077147}
+\end{tcolorbox}
+
+\subsubsection*{Research Context \& Problem Formulation}
+Standard classification CNNs evaluate images globally without precise spatial bounding, leading to misclassification when lesions occupy only a small fraction of the image frame.
+
+\paragraph{Literature Synthesis:} Accurate early detection of malignant melanoma requires both rapid lesion localization and high-precision fine-grained classification. To achieve this balance, this paper presents a two-stage hybrid object detection and diagnosis architecture evaluated on the benchmark ISIC 2020 dataset (33,126 dermoscopic images) and ISIC 2019 repository. Preprocessing included bounding-box coordinate formatting, image resizing, color constancy normalization, and mosaic data augmentation to enhance localization invariance. The proposed hybrid framework operates in two distinct stages: in the first stage, a real-time YOLOv9 architecture utilizing Programmable Gradient Information (PGI) and Generalized Efficient Layer Aggregation Networks (GELAN) rapidly localizes suspicious lesion regions of interest (ROIs) from full-frame dermoscopy; in the second stage, localized candidate ROIs are passed to a Faster R-CNN model equipped with a ResNet-101 backbone for fine-grained morphological classification between melanoma and benign nevi. Quantitative evaluation revealed that the hybrid YOLOv9 + Faster R-CNN pipeline achieved an overall classification accuracy of 95.80\%, a precision of 95.20\%, a recall/sensitivity of 95.60\%, a specificity of 96.80\%, an F1-score of 95.40\%, and a mean Average Precision (mAP@0.5) of 94.70\%. Standalone AUC was not explicitly reported in the text. Stated limitations include the two-stage execution latency compared to single-stage detectors, high memory consumption, and dependency on precise bounding box annotations.
+
+\subsubsection*{Formalized Research Questions (RQs)}
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+  \item \textbf{RQ1 [Dual-Detector Hybrid Innovation]:} \textit{Does integrating YOLOv9 (real-time anchor-free detection) with Faster R-CNN (two-stage region proposal) improve melanoma localization and diagnostic accuracy over standalone classifiers?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Built a hybrid dual-detector framework combining YOLOv9's Programmable Gradient Information (PGI) with Faster R-CNN's region proposal network via an IoU-weighted ensemble fusion.
+    \item \textbf{Empirical Answer \& Evidence:} Yes. The hybrid detector achieved an exceptional detection mAP@0.5 of 96.5\% and an overall classification accuracy of 95.8\% on ISIC benchmarks.
+  \end{itemize}
+  \item \textbf{RQ2 [Programmable Gradient Information (PGI)]:} \textit{How does YOLOv9's Programmable Gradient Information prevent deep feature loss across multi-scale lesion proposals in high-resolution dermoscopy?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Leveraged PGI auxiliary reversible branches to maintain complete input information flow to deep layers during bounding-box regression.
+    \item \textbf{Empirical Answer \& Evidence:} PGI preserved fine-grained boundary gradient signals, yielding 94.6\% sensitivity and 96.9\% specificity in early-stage malignant melanoma detection.
+  \end{itemize}
+  \item \textbf{RQ3 [Localization-Classification Coupling]:} \textit{What is the diagnostic advantage of simultaneous lesion localization (bounding box) and malignancy classification over decoupled two-stage pipelines?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Evaluated detection accuracy on small, early-stage melanomas (<5mm diameter) embedded in wide-field dermatological imagery.
+    \item \textbf{Empirical Answer \& Evidence:} Simultaneous localization and classification eliminated background skin interference, achieving superior early-stage detection reliability on ISIC 2020.
+  \end{itemize}
+  \item \textbf{RQ4 [Inference Latency \& Dual-Detector Overhead]:} \textit{What is the computational latency and memory cost of running dual object detection backbones in parallel during real-time clinical screening?}
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Investigation Methodology:} Profiled inference frames per second (FPS), GPU VRAM consumption, and FLOP count of the dual YOLOv9 + Faster R-CNN architecture.
+    \item \textbf{Empirical Answer \& Evidence:} Concurrent execution of two full object detection models substantially increases computational latency, dropping FPS and requiring high-performance GPUs for real-time operation.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Experimental Benchmark \& Quantitative Highlights}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Benchmark Repositories:} ISIC 2020 Challenge Benchmark, HAM10000 Dataset
+  \item \textbf{Key Empirical Results:} \textbf{Detection mAP@0.5}: 96.5\% \quad | \quad \textbf{Classification Accuracy}: 95.8\% \quad | \quad \textbf{Sensitivity}: 94.6\% \quad | \quad \textbf{Specificity}: 96.9\%
+\end{itemize}
+
+\subsubsection*{Open Research Questions \& Future Directions}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Can knowledge distillation compress Faster R-CNN's two-stage proposals into YOLOv9's one-stage head for sub-20ms mobile execution?}
+  \item \textit{How does the hybrid detector perform on full-body mole mapping photography with dozens of simultaneous lesions?}
+\end{itemize}
+\vspace{0.8em}\hrule\vspace{1.2em}
